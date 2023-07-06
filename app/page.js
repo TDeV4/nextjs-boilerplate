@@ -7,7 +7,6 @@ export default function Home() {
       <div className={styles.description}>
         <p>
           Login to view profile info and Course Builder&nbsp;
-          <code className={styles.code}>app/page.js</code>
         </p>
         <div>
           <a
@@ -18,9 +17,6 @@ export default function Home() {
             <Image
               src="/UPenn_Logo_WhiteText.png"
               alt="University of Pennsylvania Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
               priority
             />
           </a>
