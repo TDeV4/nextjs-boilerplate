@@ -17,6 +17,8 @@ export default function Home() {
             <Image
               src="/UPenn_Logo_WhiteText.png"
               alt="University of Pennsylvania Logo"
+              width={180}
+              height={37}
               priority
             />
           </a>
@@ -41,9 +43,9 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2>
-            Docs <span>-&gt;</span>
+            General Resources <span>-&gt;</span>
           </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
+          <p>Find a centralized hub of general resources for the MCIT Online Program.</p>
         </a>
 
         <a
@@ -53,9 +55,9 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2>
-            Learn <span>-&gt;</span>
+            Courses <span>-&gt;</span>
           </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
+          <p>View course information and reviews to inform your class decision-making!</p>
         </a>
 
         <a
@@ -65,9 +67,9 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2>
-            Templates <span>-&gt;</span>
+            MCITConnect <span>-&gt;</span>
           </h2>
-          <p>Explore the Next.js 13 playground.</p>
+          <p>Join MCITConnect to meet your fellow classmates and develop your network while at Penn.</p>
         </a>
 
         <a
@@ -77,10 +79,10 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2>
-            Deploy <span>-&gt;</span>
+            Program Feedback <span>-&gt;</span>
           </h2>
           <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
+            Vote for courses you wish were offered and leave program feedback for the school.
           </p>
         </a>
       </div>
