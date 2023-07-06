@@ -18,7 +18,7 @@ export default function Home() {
               src="/UPenn_Logo_WhiteText.png"
               alt="University of Pennsylvania Logo"
               width={180}
-              height={37}
+              height={50}
               priority
             />
           </a>
@@ -43,7 +43,7 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2>
-            General Resources <span>-&gt;</span>
+            Resources <span>-&gt;</span>
           </h2>
           <p>Find a centralized hub of general resources for the MCIT Online Program.</p>
         </a>
@@ -79,10 +79,10 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2>
-            Program Feedback <span>-&gt;</span>
+            Feedback <span>-&gt;</span>
           </h2>
           <p>
-            Vote for courses you wish were offered and leave program feedback for the school.
+            Vote for courses you wish were offered and leave feedback for MCITCentral.
           </p>
         </a>
       </div>
