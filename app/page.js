@@ -11,11 +11,10 @@ export default function Home() {
         </p>
         <div>
           <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+            href="https://online.seas.upenn.edu/degrees/mcit-online/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            By{' '}
             <Image
               src="/UPenn_Logo_WhiteText.png"
               alt="University of Pennsylvania Logo"
@@ -27,7 +26,6 @@ export default function Home() {
           </a>
         </div>
       </div>
-/Users/tannerdevore/Downloads/UPenn_Logo_WhiteText.png /Users/tannerdevore/Downloads/UPenn_Logo_BlueText.png
       <div className={styles.center}>
         <Image
           className={styles.logo}
