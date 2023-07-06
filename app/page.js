@@ -6,7 +6,7 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.description}>
         <p>
-          Get started by editing&nbsp;
+          Login to view profile info and Course Builder&nbsp;
           <code className={styles.code}>app/page.js</code>
         </p>
         <div>
@@ -17,8 +17,8 @@ export default function Home() {
           >
             By{' '}
             <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
+              src="/UPenn_Logo_WhiteText.png"
+              alt="University of Pennsylvania Logo"
               className={styles.vercelLogo}
               width={100}
               height={24}
@@ -27,12 +27,12 @@ export default function Home() {
           </a>
         </div>
       </div>
-
+/Users/tannerdevore/Downloads/UPenn_Logo_WhiteText.png /Users/tannerdevore/Downloads/UPenn_Logo_BlueText.png
       <div className={styles.center}>
         <Image
           className={styles.logo}
           src="/next.svg"
-          alt="Next.js Logo"
+          alt="NextJS Logo"
           width={180}
           height={37}
           priority
