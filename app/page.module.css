@@ -50,7 +50,6 @@ UPenn Colors:
 }
 
 .grid {
-  position: fixed;
   display: grid;
   grid-template-columns: repeat(4, minmax(25%, auto));
   width: var(--max-width);
