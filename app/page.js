@@ -29,8 +29,6 @@ export default function Home() {
           className={styles.logo}
           src="/MCITCentral_Logo.png"
           alt="MCIT Central Logo"
-          width={180}
-          height={180}
           priority
         />
       </div>
