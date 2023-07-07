@@ -6,10 +6,7 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.description}>
         <p>
-          Login&nbsp;
-        </p>
-        <div>
-          <a
+        <a
             href="https://online.seas.upenn.edu/degrees/mcit-online/"
             target="_blank"
             rel="noopener noreferrer"
@@ -17,6 +14,19 @@ export default function Home() {
             <Image
               src="/MCITCentral_Logo2.png"
               alt="MCIT Central Logo"
+              priority
+            />
+          </a>
+        </p>
+        <div>
+          <a
+            href=""
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src="/profile.svg"
+              alt="Profile"
               priority
             />
           </a>
