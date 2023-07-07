@@ -1,10 +1,21 @@
+/*
+UPenn Colors:
+#011F5B Blue
+#990000 Red
+#82AFD3 Baby Blue
+#F7F7F7 White
+#333333 Drak Gray
+#CCCCCC Light Gray
+#4A0042 Purple
+*/
+
 .main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 6rem;
-  min-height: 100vh;
+  padding: 1rem;
+  min-height: 50vh;
 }
 
 .description {
