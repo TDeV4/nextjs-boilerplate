@@ -26,7 +26,7 @@ export default function Home() {
       </div>
       <div className={styles.center}>
         <Image
-          src="/MCITCentral_Logo.png"
+          src="/MCITCentral_Logo2.png"
           alt="MCIT Central Logo"
           priority
         />
