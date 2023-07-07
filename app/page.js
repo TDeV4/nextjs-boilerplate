@@ -27,6 +27,8 @@ export default function Home() {
             <Image
               src="/profile.svg"
               alt="Profile"
+              height="40"
+              width="40"
               priority
             />
           </a>
