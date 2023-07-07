@@ -6,7 +6,7 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.description}>
         <p>
-          Login to view profile info and Course Builder&nbsp;
+          Login&nbsp;
         </p>
         <div>
           <a
