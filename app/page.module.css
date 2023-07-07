@@ -56,7 +56,6 @@ UPenn Colors:
   width: var(--max-width);
   max-width: 100%;
   height: 150px;
-  bottom:0;
 }
 
 .card {
