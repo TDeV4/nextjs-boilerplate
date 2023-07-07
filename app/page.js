@@ -15,8 +15,8 @@ export default function Home() {
             rel="noopener noreferrer"
           >
             <Image
-              src="/UPenn_Logo_WhiteText.png"
-              alt="University of Pennsylvania Logo"
+              src="/MCITCentral_Logo2.png"
+              alt="MCIT Central Logo"
               width={180}
               height={50}
               priority
@@ -25,13 +25,7 @@ export default function Home() {
         </div>
       </div>
       <div className={styles.center}>
-        <Image
-          src="/MCITCentral_Logo2.png"
-          alt="MCIT Central Logo"
-          width={200}
-          height={200}
-          priority
-        />
+        
       </div>
 
       <div className={styles.grid}>
@@ -56,7 +50,7 @@ export default function Home() {
           <h2>
             Courses <span>-&gt;</span>
           </h2>
-          <p>View course information and reviews to inform your class decision-making!</p>
+          <p>View course information and reviews to inform your class decision-making.</p>
         </a>
 
         <a
