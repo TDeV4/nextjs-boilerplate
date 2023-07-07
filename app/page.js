@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-        <p>
+        <div>
         <a
             href="https://online.seas.upenn.edu/degrees/mcit-online/"
             target="_blank"
@@ -17,7 +17,7 @@ export default function Home() {
               priority
             />
           </a>
-        </p>
+        </div>
         <div>
           <a
             href=""
