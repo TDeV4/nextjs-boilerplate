@@ -14,8 +14,8 @@ export default function Home() {
             <Image
               src="/MCITCentral_Logo2.png"
               alt="MCIT Central Logo"
-              height="150"
-              width="150"
+              height="100"
+              width="100"
               priority
               overflow="hidden"
             />
