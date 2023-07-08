@@ -10,7 +10,7 @@ UPenn Colors:
 */
 
 .main {
-  height:auto;
+  height:200px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
