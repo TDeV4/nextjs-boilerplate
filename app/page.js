@@ -17,7 +17,6 @@ export default function Home() {
               height="150"
               width="150"
               priority
-              overflow="hidden"
             />
           </a>
         </div>

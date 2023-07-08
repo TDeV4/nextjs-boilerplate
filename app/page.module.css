@@ -19,7 +19,7 @@ UPenn Colors:
 
 .description {
   display: inherit;
-  justify-content: inherit;
+  justify-content: flex-start;
   align-items: inherit;
   font-size: 0.85rem;
   width: 100%;
