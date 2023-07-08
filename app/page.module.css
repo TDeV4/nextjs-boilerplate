@@ -11,7 +11,8 @@ UPenn Colors:
 
 .main {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: flex-end;
   align-items: center;
 }
 
