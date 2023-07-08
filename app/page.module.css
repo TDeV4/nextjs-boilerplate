@@ -52,6 +52,8 @@ UPenn Colors:
 
 .grid {
   display: grid;
+  text-decoration: none;
+  color: inherit;
   grid-template-columns: repeat(4, minmax(25%, auto));
   width: var(--max-width);
   max-width: 100%;
