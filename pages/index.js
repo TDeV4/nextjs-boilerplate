@@ -41,7 +41,7 @@ export default function Home() {
       <div className={styles.grid}>
         <Link
           href="/resources"
-          className={styles.card}
+          className={`${styles.card} ${styles.link}`}
           target="_self"
           rel="noopener noreferrer"
         >
