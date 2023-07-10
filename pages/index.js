@@ -9,7 +9,7 @@ export default function HomePage() {
       <Home />
 
       <div className={styles.grid}>
-        <a
+        <Link
           href="/resources"
           className={`${styles.card} ${styles.link}`}
           target="_self"
@@ -19,7 +19,7 @@ export default function HomePage() {
             Resources <span>-&gt;</span>
           </h2>
           <p>Find a centralized hub of general resources for the MCIT Online Program.</p>
-        </a>
+        </Link>
 
         <a
           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
