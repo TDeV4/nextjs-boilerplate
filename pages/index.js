@@ -1,45 +1,15 @@
 import Image from 'next/image'
-import styles from 'app/page.module.css'
+import styles from '../app/page.module.css'
 import Link from 'next/link'
+import Home from '../components/Home'
 
-export default function Home() {
+export default function HomePage() {
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <div>
-        <a
-            href="https://online.seas.upenn.edu/degrees/mcit-online/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              src="/MCITCentral_Logo2.png"
-              alt="MCIT Central Logo"
-              height="150"
-              width="150"
-              priority
-            />
-          </a>
-        </div>
-        <div>
-          <a
-            href=""
-            target="_self"
-            rel="noopener noreferrer"
-          >
-            <Image
-              src="/profile.svg"
-              alt="Profile"
-              height="40"
-              width="40"
-              priority
-            />
-          </a>
-        </div>
-      </div>
+      <Home />
 
       <div className={styles.grid}>
-        <Link
+        <a
           href="/resources"
           className={`${styles.card} ${styles.link}`}
           target="_self"
@@ -49,7 +19,7 @@ export default function Home() {
             Resources <span>-&gt;</span>
           </h2>
           <p>Find a centralized hub of general resources for the MCIT Online Program.</p>
-        </Link>
+        </a>
 
         <a
           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
@@ -89,6 +59,7 @@ export default function Home() {
           </p>
         </a>
       </div>
+      <hr width="100%" color= "#333333" />
     </main>
   )
 }

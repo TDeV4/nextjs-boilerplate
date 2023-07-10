@@ -8,6 +8,8 @@ UPenn Colors:
 #CCCCCC Light Gray
 #4A0042 Purple
 */
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap');
+
 
 .main {
   height:auto;
@@ -15,6 +17,7 @@ UPenn Colors:
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  font-family: 'EB Garamond', serif;
 }
 
 .description {
@@ -25,7 +28,7 @@ UPenn Colors:
   width: 100%;
   height: 100px;
   z-index: 2;
-  font-family: var(--font-mono);
+  font-family: 'EB Garamond', serif;
   background-color: #333333;
 }
 
@@ -47,7 +50,7 @@ UPenn Colors:
 
 .code {
   font-weight: 700;
-  font-family: var(--font-mono);
+  font-family: 'EB Garamond', serif;
 }
 
 .grid {
@@ -76,7 +79,7 @@ UPenn Colors:
 }
 
 .card h2 {
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 0.7rem;
 }
 
@@ -85,7 +88,7 @@ UPenn Colors:
   opacity: 0.6;
   font-size: 0.9rem;
   line-height: 1.5;
-  max-width: 30ch;
+  font-family: 'EB Garamond', serif;
 }
 
 .center {
