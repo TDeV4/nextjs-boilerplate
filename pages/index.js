@@ -1,12 +1,11 @@
-import Image from 'next/image'
 import styles from '../app/page.module.css'
 import Link from 'next/link'
-import Home from '../components/Home'
+import TopNavBar from '../components/TopNavBar';
 
 export default function HomePage() {
   return (
     <main className={styles.main}>
-      <Home />
+      <TopNavBar />
 
       <div className={styles.grid}>
         <Link

@@ -21,7 +21,8 @@ UPenn Colors:
 }
 
 .description {
-  display: inherit;
+  display: flex;
+  flex-direction: row;
   justify-content: inherit;
   align-items: inherit;
   font-size: 0.85rem;
@@ -29,7 +30,12 @@ UPenn Colors:
   height: 100px;
   z-index: 2;
   font-family: 'EB Garamond', serif;
-  background-color: #333333;
+  background-color: #011F5B;
+}
+
+
+.nav-link {
+  color: #CCCCCC !important;
 }
 
 .description a {
@@ -63,6 +69,10 @@ UPenn Colors:
 .link {
   text-decoration: none;
   color: inherit;
+}
+
+.profile {
+  align-items:flex-end;
 }
 
 .card {
