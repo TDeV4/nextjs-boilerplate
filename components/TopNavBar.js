@@ -25,10 +25,10 @@ export default function TopNavBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home" className="nav-link link-light">General Resources</Nav.Link>
-            <Nav.Link href="#link"className="nav-link link-light">Courses</Nav.Link>
-            <Nav.Link href="#link"className="nav-link link-light">MCITConnect</Nav.Link>
-            <Nav.Link href="#link"className="nav-link link-light">Feedback</Nav.Link>
+            <Nav.Link href="/resources" className="nav-link link-light">General Resources</Nav.Link>
+            <Nav.Link href="/courses"className="nav-link link-light">Courses</Nav.Link>
+            <Nav.Link href="/mcitconnect"className="nav-link link-light">MCITConnect</Nav.Link>
+            <Nav.Link href="/feedback"className="nav-link link-light">Feedback</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
