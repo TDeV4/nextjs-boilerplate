@@ -21,6 +21,7 @@ UPenn Colors:
 }
 
 .description {
+  background-color: #011F5B;
   display: flex;
   flex-direction: row;
   justify-content: inherit;
@@ -30,7 +31,6 @@ UPenn Colors:
   height: 100px;
   z-index: 2;
   font-family: 'EB Garamond', serif;
-  background-color: #011F5B;
 }
 
 .nav-link {
@@ -63,11 +63,17 @@ UPenn Colors:
   grid-template-columns: repeat(4, minmax(25%, auto));
   width: var(--max-width);
   max-width: 100%;
+  padding-left: 0%;
 }
 
 .link {
   text-decoration: none;
   color: inherit;
+  flex: 1;
+}
+
+.rightAlignButton {
+  float: right;
 }
 
 .container {
@@ -79,12 +85,14 @@ UPenn Colors:
 .leftpane {
   flex: 0 0 auto;
   /* Prevent the left pane from growing or shrinking */
-  width: 30%;
+  width: 350px;
   /* Adjust the width as needed */
 }
 
+
 .rightpane {
   flex: 1 1 auto;
+  max-width: 70%;
   /* Allow the right pane to grow and shrink */
   background-color: #ffffff;
   /* Set the background color of the right pane */
@@ -95,6 +103,41 @@ UPenn Colors:
   justify-content: center;
   align-items: center;
   text-decoration: underline;
+}
+
+.parentContainer {
+  height: 255px;
+  /* Adjust the height as needed */
+  overflow-x: auto;
+}
+
+.scrollableContainer {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+}
+
+.childContainer {
+  flex: 0 0 auto;
+  width: 200px;
+  /* Adjust the width of child containers as needed */
+  margin-right: 20px;
+  padding: 8px;
+  border: 1px solid #000000;
+  /* Adjust the margin between child containers as needed */
+  height:235px;
+  overflow-y: auto;
+}
+
+.columnSpacer {
+  width: 10px;
+  /* Adjust the desired space between columns */
+}
+
+.centerText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .borderBox {
@@ -115,6 +158,8 @@ UPenn Colors:
   border: 1px solid rgba(var(--card-border-rgb), 0);
   transition: background 200ms, border 200ms;
   background-color: #CCCCCC;
+  display: flex;
+  flex-direction: column;
 }
 
 .card span {

@@ -1,8 +1,8 @@
 import styles from 'app/page.module.css'
 import Link from 'next/link';
 
-export default function Resources() {
+export default function MCITConnect() {
     return (
-        <h2>General Resources</h2>
+        <h2>MCITConnect</h2>
     )
 }

@@ -1,16 +1,15 @@
 import React from 'react';
 import Image from 'next/image';
-import styles from '../app/page.module.css';
+import styles from '../app/topNavBar.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Link from 'next/link'
 
 export default function TopNavBar() {
   return (
-      <div className={styles.description}>
+      <div className="description">
       <div>
         <Navbar expand="lg">
       <Container>

@@ -1,12 +1,12 @@
-import styles from '../app/page.module.css';
+import styles from '../app/homepage.css';
 import Link from 'next/link'
 
 export default function TopHomeBar() {
   return (
-  <div className={styles.grid}>
+  <div className="grid">
         <Link
           href="/resources"
-          className={`${styles.card} ${styles.link}`}
+          className="card"
           target="_self"
           rel="noopener noreferrer"
         >
@@ -16,8 +16,8 @@ export default function TopHomeBar() {
           <p>Find a centralized hub of general resources for the MCIT Online Program.</p>
         </Link>
         <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={`${styles.card} ${styles.link}`}
+          href="/courses"
+          className="card"
           target="_self"
           rel="noopener noreferrer"
         >
@@ -28,8 +28,8 @@ export default function TopHomeBar() {
         </a>
 
         <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={`${styles.card} ${styles.link}`}
+          href="/mcitconnect"
+          className="card"
           target="_self"
           rel="noopener noreferrer"
         >
@@ -40,8 +40,8 @@ export default function TopHomeBar() {
         </a>
 
         <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={`${styles.card} ${styles.link}`}
+          href="/feedback"
+          className="card"
           target="_self"
           rel="noopener noreferrer"
         >
