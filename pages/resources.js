@@ -7,4 +7,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 export default function Resources() {
+    return (
+        <h2>General Resources</h2>
+    )
 }

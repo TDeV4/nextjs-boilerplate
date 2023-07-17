@@ -4,7 +4,7 @@ UPenn Colors:
 #990000 Red
 #82AFD3 Baby Blue
 #F7F7F7 White
-#333333 Drak Gray
+#333333 Dark Gray
 #CCCCCC Light Gray
 #4A0042 Purple
 */
@@ -32,7 +32,6 @@ UPenn Colors:
   font-family: 'EB Garamond', serif;
   background-color: #011F5B;
 }
-
 
 .nav-link {
   color: #CCCCCC !important;
@@ -71,6 +70,40 @@ UPenn Colors:
   color: inherit;
 }
 
+.container {
+  display: flex;
+  height: 100%;
+  width: 100%
+}
+
+.leftpane {
+  flex: 0 0 auto;
+  /* Prevent the left pane from growing or shrinking */
+  width: 30%;
+  /* Adjust the width as needed */
+}
+
+.rightpane {
+  flex: 1 1 auto;
+  /* Allow the right pane to grow and shrink */
+  background-color: #ffffff;
+  /* Set the background color of the right pane */
+}
+
+.centeredHeading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: underline;
+}
+
+.borderBox {
+  border: 1px solid #000000;
+  /* Border color and style */
+  padding: 10px;
+  /* Padding inside the border */
+}
+
 .profile {
   align-items:flex-end;
 }
@@ -81,6 +114,7 @@ UPenn Colors:
   background: rgba(var(--card-rgb), 0);
   border: 1px solid rgba(var(--card-border-rgb), 0);
   transition: background 200ms, border 200ms;
+  background-color: #CCCCCC;
 }
 
 .card span {
