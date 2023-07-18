@@ -23,7 +23,7 @@ const Account = () => {
     }
 };
 
-export default account 
+export default Account 
 
 export const getServerSideProps = async (context) => {
     const session = await getSession(context)
