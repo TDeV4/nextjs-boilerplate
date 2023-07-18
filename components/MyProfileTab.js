@@ -16,7 +16,7 @@ export default function MyProfileTab(props) {
       <p>Work Status: {props.userData.workStatusID == 2 ? "Full-Time" : "Part-Time"}</p>
       <p>Turtle or Non-turtle: {props.userData.inTurtleClub == true ? "Turle" : "Non-Turtle"}</p>
       <div>Courses Completed: 
-        <ul>{props.courseData.map((course) => {return <li>CIT {course.courseID} </li>})}</ul>
+        <ul>{props.courseData.map((course) => {return <li key={course.courseID}>CIT {course.courseID} </li>})}</ul>
       </div>
 
     </div>

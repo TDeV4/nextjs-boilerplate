@@ -15,7 +15,7 @@ export default function TopHomeBar() {
           </h2>
           <p>Find a centralized hub of general resources for the MCIT Online Program.</p>
         </Link>
-        <a
+        <Link
           href="/courses"
           className="card"
           target="_self"
@@ -25,9 +25,9 @@ export default function TopHomeBar() {
             Courses <span>-&gt;</span>
           </h2>
           <p>View course information and reviews to inform your class decision-making.</p>
-        </a>
+        </Link>
 
-        <a
+        <Link
           href="/mcitconnect"
           className="card"
           target="_self"
@@ -37,9 +37,9 @@ export default function TopHomeBar() {
             MCITConnect <span>-&gt;</span>
           </h2>
           <p>Join MCITConnect to meet your fellow classmates and develop your network while at Penn.</p>
-        </a>
+        </Link>
 
-        <a
+        <Link
           href="/feedback"
           className="card"
           target="_self"
@@ -51,7 +51,7 @@ export default function TopHomeBar() {
           <p>
             Vote for courses you wish were offered and leave feedback for MCITCentral.
           </p>
-        </a>
+        </Link>
       </div>
       )
 }

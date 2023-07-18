@@ -26,7 +26,7 @@ export default class Column extends React.Component {
                     let semesterColumn = parseInt(this.props.semesterID, 10);
 
                     if(plannedSemester == semesterColumn) {
-                        return <CourseBubble><Button variant='success'>CIT {course.courseID}</ Button></CourseBubble>
+                        return <CourseBubble key={course.courseID}><Button variant='success'>CIT {course.courseID}</ Button></CourseBubble>
                     }
                 } )   
             }</CourseList>
