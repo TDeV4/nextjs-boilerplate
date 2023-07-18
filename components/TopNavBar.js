@@ -35,7 +35,7 @@ export default function TopNavBar() {
       </div>
         <div className={styles.profile}>
           <Link
-            href="/myProfile"
+            href="/login"
             target="_self"
             rel="noopener noreferrer"
           >
