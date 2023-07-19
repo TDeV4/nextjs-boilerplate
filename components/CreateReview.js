@@ -154,7 +154,7 @@ export default function CreateReview(props) {
                 Select Professor{" "}
               </option>
               {relatedProfs.map((prof) => {
-                return <option>{prof}</option>;
+                return <option key={prof}>{prof}</option>;
               })}
             </Form.Select>
 
@@ -336,7 +336,7 @@ export default function CreateReview(props) {
             <Form.Text className="text-muted">
               If you mistakenly select a course, you can simply switch the
               choice back to "Taken with..." to accurately reflect your
-              experience and don't need to worry about your Recommendation
+              experience and do not need to worry about your Recommendation
               selection.
             </Form.Text>
 
