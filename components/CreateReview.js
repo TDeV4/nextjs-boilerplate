@@ -83,7 +83,7 @@ export default function CreateReview(props) {
         Create a Review
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} backdrop="static">
         <Modal.Header closeButton>
           <Modal.Title>Create New Review</Modal.Title>
         </Modal.Header>
