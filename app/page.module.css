@@ -66,6 +66,15 @@ UPenn Colors:
   padding-left: 0%;
 }
 
+.overlay {
+  backdrop-filter: blur(5px);
+  position: fixed;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
 .link {
   text-decoration: none;
   color: inherit;

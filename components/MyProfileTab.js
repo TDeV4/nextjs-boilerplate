@@ -1,11 +1,17 @@
 import { Button } from 'react-bootstrap'
 import styles from '../app/page.module.css'
+import Link from 'next/link'
 
 export default function MyProfileTab(props) {
 
   return (
   <div>
-    <Button className={styles.rightAlignButton}>Edit Profile</Button>
+    <Link
+          href="/editProfile"
+          className="card"
+          target="_self"
+          rel="noopener noreferrer"
+        ><Button className={styles.rightAlignButton}>Edit Profile</Button></Link>
     <div>
       <h5 className={styles.centerText}>Hello, {props.userData.name}!</h5>
       <h7 className={styles.centerText}>AKA (your anonymous name):</h7>
