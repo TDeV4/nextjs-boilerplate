@@ -241,7 +241,7 @@ export default function CreateReview(props) {
                   </option>
                   {otherCourseOptions.map((course) => {
                     return (
-                      <option>
+                      <option key={course.courseID}>
                         {course.courseID}: {course.courseName}
                       </option>
                     );
@@ -276,7 +276,7 @@ export default function CreateReview(props) {
                   </option>
                   {otherCourseOptions.map((course) => {
                     return (
-                      <option>
+                      <option key={course.courseID}>
                         {course.courseID}: {course.courseName}
                       </option>
                     );
@@ -311,7 +311,7 @@ export default function CreateReview(props) {
                   </option>
                   {otherCourseOptions.map((course) => {
                     return (
-                      <option>
+                      <option key={course.courseID}>
                         {course.courseID}: {course.courseName}
                       </option>
                     );
