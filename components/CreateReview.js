@@ -335,8 +335,8 @@ export default function CreateReview(props) {
             </Row>
             <Form.Text className="text-muted">
               If you mistakenly select a course, you can simply switch the
-              choice back to Taken with... to accurately reflect your experience
-              and do not need to worry about your Recommendation selection.
+              course back to Taken with... and do not need to worry about the
+              Recommendation that is selection.
             </Form.Text>
 
             <Form.Control
