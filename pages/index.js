@@ -4,6 +4,8 @@ import TopNavBar from '../components/TopNavBar';
 import MyProfileTab from '@/components/MyProfileTab';
 import CoursePlanningTab from '@/components/CoursePlanningTab';
 import MyReviewsTab from '@/components/MyReviewsTab';
+import React from 'react';
+import {useSession, signIn, signOut} from 'next-auth/react';
 
 const DUMMY_USER_DATA = 
   { 
@@ -47,26 +49,36 @@ const DUMMY_COURSE_DATA = [
 
 
 export default function HomePage() {
-  return (
-    <main className={styles.main}>
-      <TopNavBar />
-      <HomeTopBar />
-      <div class={styles.container}>
-        <div class={styles.leftpane}>
-          <div class={styles.borderBox}>
-            <MyProfileTab userData={DUMMY_USER_DATA} courseData={DUMMY_COURSE_DATA} />
+  const {data: session}  = useSession()
+  console.log(session);
+  if (session) {
+    return (
+      <main className={styles.main}>
+        <TopNavBar />
+        <HomeTopBar />
+        <div class={styles.container}>
+          <div class={styles.leftpane}>
+            <div class={styles.borderBox}>
+              <MyProfileTab userData={DUMMY_USER_DATA} courseData={DUMMY_COURSE_DATA} />
+            </div>
+          </div>
+          <div class={styles.rightpane}>
+            <div class={styles.borderBox}>
+              <CoursePlanningTab />
+            </div>
+            <div class={styles.borderBox}>
+              <MyReviewsTab />
+            </div>
           </div>
         </div>
-        <div class={styles.rightpane}>
-          <div class={styles.borderBox}>
-            <CoursePlanningTab />
-          </div>
-          <div class={styles.borderBox}>
-            <MyReviewsTab />
-          </div>
-        </div>
+      </main>
+    )
+  } else {
+    return (
+      <div>
+      <p>You are not signed in.</p>
+      <button onClick = {() => signIn()}>Sign in</button>
       </div>
-    </main>
-
-  )
+    );
+  }
 }
