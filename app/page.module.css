@@ -112,7 +112,7 @@ UPenn Colors:
 }
 
 .parentContainer {
-  height: 255px;
+  height: 295px;
   /* Adjust the height as needed */
   overflow-x: auto;
 }
@@ -132,6 +132,18 @@ UPenn Colors:
   border: 1px solid #000000;
   /* Adjust the margin between child containers as needed */
   height: 235px;
+  overflow-y: auto;
+}
+
+.reviewCardContainer {
+  flex: 0 0 auto;
+  width: 100%;
+  /* Adjust the width of child containers as needed */
+  margin-right: 20px;
+  padding: 8px;
+  border: 1px solid #000000;
+  /* Adjust the margin between child containers as needed */
+  height: auto;
   overflow-y: auto;
 }
 

@@ -1,5 +1,6 @@
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
 import { useState } from "react";
+import styles from "../app/page.module.css";
 
 export default function CreateReview(props) {
   const [show, setShow] = useState(false);
@@ -79,7 +80,11 @@ export default function CreateReview(props) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button
+        variant="primary"
+        onClick={handleShow}
+        className={styles.rightAlignButton}
+      >
         Create a Review
       </Button>
 

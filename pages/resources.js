@@ -1,8 +1,9 @@
-import styles from 'app/page.module.css'
-import Link from 'next/link';
+import styles from "app/page.module.css";
+import Link from "next/link";
+import { useSession, signOut, getSession } from "next-auth/react";
 
 export default function Resources() {
-    return (
-        <h2>General Resources</h2>
-    )
+  const { data: session } = useSession();
+  console.log(session.user.email);
+  return <h2>General Resources</h2>;
 }
