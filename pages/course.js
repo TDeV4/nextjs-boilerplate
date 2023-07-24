@@ -3,6 +3,8 @@ import styles from 'app/page.module.css'
 import Link from 'next/link'
 import TopNavBar from '../components/TopNavBar';
 import HomeTopBar from '../components/HomeTopBar';
+import {getSession} from 'next-auth/react'
+
 
 const DUMMY_COURSE_DATA = 
   { 
@@ -30,3 +32,16 @@ const DUMMY_COURSE_DATA =
     )
   }
   
+  export const getServerSideProps = async (context) => {
+    const session = await getSession(context)
+    if (!session) {
+        return {
+            redirect : {
+                destination : '/login'
+            }
+        }
+    }
+    return {
+        props: {session}
+    }
+}
