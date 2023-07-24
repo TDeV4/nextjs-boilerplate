@@ -23,7 +23,9 @@ export default function ReviewCard(props) {
           {checkForFinalGrade(props.reviewData.finalGrade)}
         </Stack>
       </div>
+      <br />
       <div>{props.review.content}</div>
+      <br />
       <div style={{ marginTop: "auto" }}>
         <Stack direction="horizontal" gap={2}>
           <Badge bg="primary">
