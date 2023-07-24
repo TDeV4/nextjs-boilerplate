@@ -5,7 +5,7 @@ import MyProfileTab from "@/components/MyProfileTab";
 import CoursePlanningTab from "@/components/CoursePlanningTab";
 import MyReviewsTab from "@/components/MyReviewsTab";
 import React from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signIn, signOut, getSession} from "next-auth/react";
 
 const DUMMY_USER_DATA = {
   userID: "1",

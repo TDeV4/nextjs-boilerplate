@@ -25,7 +25,7 @@ const Login = () => {
     } else {
         return (
             <div>
-            <p>YPlease sign in to use MCIT Community Hub.</p>
+            <p>Please sign in to use MCIT Community Hub.</p>
             <button onClick = {() => signIn()}>Sign in</button>
             </div>
         );
