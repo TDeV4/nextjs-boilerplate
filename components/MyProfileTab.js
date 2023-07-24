@@ -1,4 +1,4 @@
-import { Button } from "react-bootstrap";
+import { Button, Badge, Col, Row } from "react-bootstrap";
 import styles from "../app/page.module.css";
 import Link from "next/link";
 
@@ -25,11 +25,30 @@ export default function MyProfileTab(props) {
         </p>
         <div>
           Courses Completed:
-          <ul>
+          <Row xs={1} md={5}>
             {props.courseData.map((course) => {
-              return <li key={course.courseID}>CIT {course.courseID} </li>;
+              return (
+                <Col>
+                  <h5>
+                    <Badge bg="success" key={course.courseID}>
+                      {course.courseID}
+                    </Badge>
+                  </h5>
+                </Col>
+              );
             })}
-          </ul>
+            {props.currentCourseData.map((course) => {
+              return (
+                <Col>
+                  <h5>
+                    <Badge bg="warning" key={course.courseID}>
+                      {course.courseID}
+                    </Badge>
+                  </h5>
+                </Col>
+              );
+            })}
+          </Row>
         </div>
       </div>
     </div>

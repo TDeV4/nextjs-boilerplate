@@ -5,7 +5,7 @@ import MyProfileTab from "@/components/MyProfileTab";
 import CoursePlanningTab from "@/components/CoursePlanningTab";
 import MyReviewsTab from "@/components/MyReviewsTab";
 import React from "react";
-import { useSession, signIn, signOut, getSession} from "next-auth/react";
+import { useSession, signIn, signOut, getSession } from "next-auth/react";
 
 const DUMMY_USER_DATA = {
   userID: "1",
@@ -31,18 +31,37 @@ const DUMMY_USER_DATA = {
   marketOutcome: null,
 };
 
-const DUMMY_COURSE_DATA = [
+const DUMMY_COURSES_TAKEN_DATA = [
   {
-    userID: "1",
-    courseID: "591",
+    userID: 1,
+    courseID: 591,
   },
   {
-    userID: "1",
-    courseID: "592",
+    userID: 1,
+    courseID: 592,
   },
   {
-    userID: "1",
-    courseID: "593",
+    userID: 1,
+    courseID: 593,
+  },
+  {
+    userID: 1,
+    courseID: 594,
+  },
+  {
+    userID: 1,
+    courseID: 595,
+  },
+  {
+    userID: 1,
+    courseID: 596,
+  },
+];
+
+const DUMMY_CURRENT_COURSES_DATA = [
+  {
+    userID: 1,
+    courseID: 521,
   },
 ];
 
@@ -59,7 +78,8 @@ export default function HomePage() {
             <div class={styles.borderBox}>
               <MyProfileTab
                 userData={DUMMY_USER_DATA}
-                courseData={DUMMY_COURSE_DATA}
+                courseData={DUMMY_COURSES_TAKEN_DATA}
+                currentCourseData={DUMMY_CURRENT_COURSES_DATA}
               />
             </div>
           </div>
@@ -83,21 +103,21 @@ export default function HomePage() {
           <h3>Please sign in to use MCIT Community Hub.</h3>
           <button onClick={() => signIn()}>Sign in</button>
         </div>
-    </main>
+      </main>
     );
   }
 }
 
 export const getServerSideProps = async (context) => {
-  const session = await getSession(context)
+  const session = await getSession(context);
   if (!session) {
-      return {
-          redirect : {
-              destination : '/login'
-          }
-      }
+    return {
+      redirect: {
+        destination: "/login",
+      },
+    };
   }
   return {
-      props: {session}
-  }
-}
+    props: { session },
+  };
+};
