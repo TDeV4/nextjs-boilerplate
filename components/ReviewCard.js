@@ -33,7 +33,7 @@ export default function ReviewCard(props) {
           </Badge>
           <Badge bg="primary">Rating: {props.reviewData.rating}/5</Badge>
           <Badge bg="primary">
-            Rating: {props.reviewData.workload} hours per week
+            Rating: {props.reviewData.weeklyHours} hours per week
           </Badge>
         </Stack>
       </div>
