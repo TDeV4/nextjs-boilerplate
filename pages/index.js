@@ -76,10 +76,14 @@ export default function HomePage() {
     );
   } else {
     return (
-      <div>
-        <p>Please sign in to use MCIT Community Hub.</p>
-        <button onClick={() => signIn()}>Sign in</button>
-      </div>
+      <main className={styles.main}>
+        <TopNavBar />
+        <HomeTopBar />
+        <div>
+          <h3>Please sign in to use MCIT Community Hub.</h3>
+          <button onClick={() => signIn()}>Sign in</button>
+        </div>
+    </main>
     );
   }
 }

@@ -5,8 +5,6 @@ import styles from '../app/page.module.css'
 import HomeTopBar from '../components/HomeTopBar';
 import TopNavBar from '../components/TopNavBar';
 import MyProfileTab from '@/components/MyProfileTab';
-import CoursePlanningTab from '@/components/CoursePlanningTab';
-import MyReviewsTab from '@/components/MyReviewsTab';
 
 const Login = () => {
     const {data: session}  = useSession()
@@ -24,10 +22,14 @@ const Login = () => {
         );
     } else {
         return (
-            <div>
-            <p>Please sign in to use MCIT Community Hub.</p>
-            <button onClick = {() => signIn()}>Sign in</button>
-            </div>
+            <main className={styles.main}>
+                <TopNavBar />
+                <HomeTopBar />
+                <div>
+                    <h3>Please sign in to use MCIT Community Hub.</h3>
+                    <button onClick={() => signIn()}>Sign in</button>
+                </div>
+          </main>
         );
     }
 }
