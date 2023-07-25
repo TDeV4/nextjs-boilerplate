@@ -75,7 +75,7 @@ const DUMMY_SUP_DATA =
             <div class={styles.borderBox}>
               <h7 className={styles.centerText}>CIT 591: Introduction to Software Development</h7>
               <Table striped bordered hover>
-                <thead>
+                <thead class={styles.centerText}>
                   <tr>
                     <th>Difficulty:</th>
                     <th>Workload:</th>
