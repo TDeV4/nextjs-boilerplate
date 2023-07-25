@@ -125,11 +125,14 @@ export default function MyReviewsTab(props) {
             }
           });
           return (
-            <ReviewCard
-              key={review.reviewID}
-              review={review}
-              reviewData={reviewDataPassThrough}
-            />
+            <div>
+              <ReviewCard
+                key={review.reviewID}
+                review={review}
+                reviewData={reviewDataPassThrough}
+              />
+              <Button>Edit Review</Button>
+            </div>
           );
         }
       })}

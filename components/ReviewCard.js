@@ -15,7 +15,6 @@ export default function ReviewCard(props) {
       <h3 style={{ display: "inline", marginLeft: "10px" }}>
         {props.reviewData.courseNumber}: {props.reviewData.courseName}
       </h3>
-      <Button style={{ float: "right" }}>Edit Review</Button>
       <div>
         <Stack direction="horizontal" gap={2}>
           <Badge bg="secondary">{props.reviewData.semester}</Badge>

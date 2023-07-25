@@ -1,6 +1,7 @@
 import styles from "../app/page.module.css";
 import Column from "./column";
 import { DragDropContext, onDragEnd } from "react-beautiful-dnd";
+import { Col, Row } from "react-bootstrap";
 
 const DUMMY_DATA = [
   {
@@ -71,6 +72,20 @@ function formatData(courseBuilderData) {
 export default function CoursePlanningTab(props) {
   var dataToUse = {};
   dataToUse = formatData(props.courseBuilderData);
-  console.log(dataToUse);
-  return <h1>Course Planning</h1>;
+
+  return (
+    <div>
+      <h1>Course Planning</h1>
+      <Row>
+        {dataToUse["columnOrder"].map((columnId) => {
+          const column = dataToUse["columns"][columnId];
+          const courses = column["courseIDs"];
+
+          console.log(column["title"]);
+
+          return <Column key={columnId} column={column} courses={courses} />;
+        })}
+      </Row>
+    </div>
+  );
 }

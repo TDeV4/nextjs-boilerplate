@@ -147,6 +147,22 @@ UPenn Colors:
   overflow-y: auto;
 }
 
+.courseColumnContainer {
+  flex: 0 0 auto;
+  width: 100%;
+  /* Adjust the width of child containers as needed */
+  margin-right: 20px;
+  padding: 8px;
+  border: 1px solid #000000;
+  /* Adjust the margin between child containers as needed */
+  height: auto;
+  overflow-y: auto;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 200px;
+}
+
 .columnSpacer {
   width: 10px;
   /* Adjust the desired space between columns */
