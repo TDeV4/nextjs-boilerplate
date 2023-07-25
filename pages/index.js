@@ -31,6 +31,34 @@ const DUMMY_USER_DATA = {
   marketOutcome: null,
 };
 
+const DUMMY_COURSE_BUILDER_DATA = [
+  {
+    userID: 1,
+    semesterID: 1,
+    courseID: 591,
+  },
+  {
+    userID: 1,
+    semesterID: 1,
+    courseID: 592,
+  },
+  {
+    userID: 1,
+    semesterID: 2,
+    courseID: 593,
+  },
+  {
+    userID: 1,
+    semesterID: 4,
+    courseID: 594,
+  },
+  {
+    userID: 1,
+    semesterID: 5,
+    courseID: 596,
+  },
+];
+
 const DUMMY_COURSES_TAKEN_DATA = [
   {
     userID: 1,
@@ -85,7 +113,9 @@ export default function HomePage() {
           </div>
           <div class={styles.rightpane}>
             <div class={styles.borderBox}>
-              <CoursePlanningTab />
+              <CoursePlanningTab
+                courseBuilderData={DUMMY_COURSE_BUILDER_DATA}
+              />
             </div>
             <div class={styles.borderBox}>
               <MyReviewsTab userData={DUMMY_USER_DATA} />
