@@ -28,22 +28,18 @@ export default function MyProfileTab(props) {
           <Row xs={1} md={5}>
             {props.courseData.map((course) => {
               return (
-                <Col>
+                <Col key={course.courseID}>
                   <h5>
-                    <Badge bg="success" key={course.courseID}>
-                      {course.courseID}
-                    </Badge>
+                    <Badge bg="success">{course.courseID}</Badge>
                   </h5>
                 </Col>
               );
             })}
             {props.currentCourseData.map((course) => {
               return (
-                <Col>
+                <Col key={course.courseID}>
                   <h5>
-                    <Badge bg="warning" key={course.courseID}>
-                      {course.courseID}
-                    </Badge>
+                    <Badge bg="warning">{course.courseID}</Badge>
                   </h5>
                 </Col>
               );
