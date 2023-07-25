@@ -8,13 +8,38 @@ import {getSession} from 'next-auth/react'
 
 const DUMMY_COURSE_DATA = 
   { 
-    courseID: '1',
+    courseID: 591,
     courseName: 'Introduction to Software Development',
     syllabus: null,
     description: "This course is an introduction to fundamental concepts of programming and computer science.",
     textbooks: null,
     summaryReview: null
   }
+
+const DUMMY_PREREQ_DATA = 
+  {
+    courseID: 591,
+    prereqID: null,
+    isCoreq: null
+  }
+
+const DUMMY_SUP_DATA = 
+  {
+    courseID: 591,
+    resourceType: 1,
+    resource: 'Textbook',
+    resourceURL: 'https://www.amazon.com/Python-easy-steps-Mike-McGrath/dp/1840785969'
+  } 
+  const DUMMY_PROF_DATA = 
+  {
+    courseID: 591,
+    professor: 'Brandon Krakowsky'
+  } 
+  const DUMMY_SEM_DATA = 
+  {
+    courseID: 591,
+    semester: 'Fall 2023'
+  } 
 
   export default function coursePage() {
     return (
@@ -24,7 +49,12 @@ const DUMMY_COURSE_DATA =
         <div class={styles.container}>
         <div class={styles.leftpane}>
             <div class={styles.borderBox}>
-            <IndividualCourseInfo courseData={DUMMY_COURSE_DATA} />
+            <IndividualCourseInfo 
+            courseData={DUMMY_COURSE_DATA}
+            preReqData={DUMMY_PREREQ_DATA}
+            supData={DUMMY_SUP_DATA}
+            profData={DUMMY_PROF_DATA}
+            semData={DUMMY_SEM_DATA} />
             </div>
         </div>
         </div>

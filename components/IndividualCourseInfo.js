@@ -9,6 +9,10 @@ export default function IndividualCourseInfo(props) {
         <br></br>
         <p>Description: {props.courseData.description}</p>
         <p>Syllabus: {props.courseData.syllabus}</p>
+        <p>Prerequisites: {props.preReqData.prereqID}</p>
+        <p>Professors: {props.profData.professor}</p>
+        <p>Textbooks: {props.courseData.textbooks}</p>
+        <p>Supplemental Resources: {props.supData.resource}</p>
       </div>
     </div>
   );
