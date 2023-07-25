@@ -12,7 +12,7 @@ const DUMMY_COURSE_DATA =
     courseName: 'Introduction to Software Development',
     syllabus: null,
     description: "This course is an introduction to fundamental concepts of programming and computer science.",
-    textbooks: null,
+    textbooks: "None",
     summaryReview: null
   }
 
@@ -45,7 +45,6 @@ const DUMMY_SUP_DATA =
     return (
     <main className={styles.main}>
         <TopNavBar />
-        <HomeTopBar />
         <div class={styles.container}>
         <div class={styles.leftpane}>
             <div class={styles.borderBox}>
