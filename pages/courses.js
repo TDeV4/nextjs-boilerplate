@@ -26,7 +26,6 @@ export default function CoursesHome() {
     return (
         <main className={styles.main}>
         <TopNavBar />
-        <HomeTopBar />
         <div class={styles.container}>
         </div>
         <br></br>
