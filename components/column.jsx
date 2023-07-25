@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Button from "react-bootstrap/Button";
 import styles from "../app/page.module.css";
 import courseSelection from "./courseSelection";
+import { Droppable } from "react-beautiful-dnd";
 
 const Container = styled.div`
   flex: 0 0 auto;

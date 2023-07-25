@@ -63,12 +63,14 @@ function formatData(courseBuilderData) {
 
   finalData["courses"] = courses;
   finalData["columns"] = columns;
+  finalData["columnOrder"] = columnOrder;
 
   return finalData;
 }
 
 export default function CoursePlanningTab(props) {
-  var dataToUse = formatData(props.courseBuilderData);
+  var dataToUse = {};
+  dataToUse = formatData(props.courseBuilderData);
   console.log(dataToUse);
-  return <DragDropContext onDragEnd={onDragEnd}></DragDropContext>;
+  return <h1>Course Planning</h1>;
 }
