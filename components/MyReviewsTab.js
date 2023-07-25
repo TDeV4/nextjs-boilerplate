@@ -125,7 +125,7 @@ export default function MyReviewsTab(props) {
             }
           });
           return (
-            <div>
+            <div key={review.reviewID}>
               <ReviewCard
                 key={review.reviewID}
                 review={review}

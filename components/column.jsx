@@ -27,7 +27,7 @@ export default class Column extends React.Component {
           <Stack direction="vertical" gap={2}>
             {this.props.courses.map((course) => {
               return (
-                <h2>
+                <h2 key={course}>
                   <CourseSelection key={course} course={course}>
                     {course}
                   </CourseSelection>
