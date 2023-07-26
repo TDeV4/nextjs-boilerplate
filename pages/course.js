@@ -66,6 +66,33 @@ const DUMMY_SUP_DATA =
     semester: 'Fall 2023'
   } 
 
+  const DUMMY_REVIEW_DATA = [
+    {
+      courseID: 591,
+      courseNumber: "591",
+      courseName: "Introduction to Software Development",
+      reviewID: 1,
+      semester: "Fall 2020",
+      professor: "Brandon Krakowsky",
+      finalGrade: "A",
+      difficulty: 2,
+      rating: 4,
+      weeklyHours: 10,
+    },
+    {
+      courseID: 591,
+      courseNumber: "591",
+      courseName: "Introduction to Software Development",
+      reviewID: 1,
+      semester: "Fall 2020",
+      professor: "Brandon Krakowsky",
+      finalGrade: "A",
+      difficulty: 4,
+      rating: 6,
+      weeklyHours: 12,
+    },
+  ];
+
   export default function coursePage() {
     return (
     <main className={styles.main}>
@@ -82,6 +109,13 @@ const DUMMY_SUP_DATA =
                     <th>Rating:</th>
                   </tr>
                 </thead>
+                <tbody class={styles.centerText}>
+                  <tr>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>11</td>
+                  </tr>
+                </tbody>
               </Table>
             <IndividualCourseInfo 
             courseData={DUMMY_COURSE_DATA}
