@@ -88,8 +88,8 @@ const DUMMY_SUP_DATA =
       professor: "Brandon Krakowsky",
       finalGrade: "A",
       difficulty: 4,
-      rating: 6,
-      weeklyHours: 12,
+      rating: 3,
+      weeklyHours: 22,
     },
   ];
 
@@ -114,9 +114,10 @@ const DUMMY_SUP_DATA =
               <Table striped bordered hover>
                 <thead class={styles.centerText}>
                   <tr>
-                    <th>Difficulty: {diffcultyAvg}</th>
-                    <th>Workload: {ratingAvg}</th>
-                    <th>Rating: {weeklyHoursAvg}</th>
+                    <th><h9>Difficulty: {diffcultyAvg}</h9></th>
+                    <th><h9>Workload: {ratingAvg}</h9></th>
+                    <th><h9>Rating: {weeklyHoursAvg}</h9></th>
+                    <th><h9># of Reviews: {difficulty.length}</h9></th>
                   </tr>
                 </thead>
               </Table>
