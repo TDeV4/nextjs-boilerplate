@@ -94,6 +94,16 @@ const DUMMY_SUP_DATA =
   ];
 
   export default function coursePage() {
+
+    const difficulty = DUMMY_REVIEW_DATA.map((review) => review.difficulty);
+    const diffcultyAvg = difficulty.reduce((sum, current) => sum + current, 0) / difficulty.length;
+
+    const rating = DUMMY_REVIEW_DATA.map((review) => review.rating);
+    const ratingAvg = rating.reduce((sum, current) => sum + current, 0) / rating.length;
+
+    const weeklyHours = DUMMY_REVIEW_DATA.map((review) => review.weeklyHours);
+    const weeklyHoursAvg = weeklyHours.reduce((sum, current) => sum + current, 0) / weeklyHours.length;
+
     return (
     <main className={styles.main}>
         <TopNavBar />
@@ -104,18 +114,11 @@ const DUMMY_SUP_DATA =
               <Table striped bordered hover>
                 <thead class={styles.centerText}>
                   <tr>
-                    <th>Difficulty:</th>
-                    <th>Workload:</th>
-                    <th>Rating:</th>
+                    <th>Difficulty: {diffcultyAvg}</th>
+                    <th>Workload: {ratingAvg}</th>
+                    <th>Rating: {weeklyHoursAvg}</th>
                   </tr>
                 </thead>
-                <tbody class={styles.centerText}>
-                  <tr>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>11</td>
-                  </tr>
-                </tbody>
               </Table>
             <IndividualCourseInfo 
             courseData={DUMMY_COURSE_DATA}
