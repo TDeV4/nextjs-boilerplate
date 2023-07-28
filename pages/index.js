@@ -57,6 +57,36 @@ const DUMMY_COURSE_BUILDER_DATA = [
     semesterID: 5,
     courseID: 596,
   },
+  {
+    userID: 1,
+    semesterID: 0,
+    courseID: 595,
+  },
+  {
+    userID: 1,
+    semesterID: 0,
+    courseID: 545,
+  },
+  {
+    userID: 1,
+    semesterID: 0,
+    courseID: 521,
+  },
+  {
+    userID: 1,
+    semesterID: 0,
+    courseID: 551,
+  },
+  {
+    userID: 1,
+    semesterID: 0,
+    courseID: 555,
+  },
+  {
+    userID: 1,
+    semesterID: 5,
+    courseID: 599,
+  },
 ];
 
 const DUMMY_COURSES_TAKEN_DATA = [

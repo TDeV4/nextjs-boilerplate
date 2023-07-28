@@ -25,15 +25,26 @@ export default class Column extends React.Component {
         <div className={styles.courseColumnContainer}>
           <h3>{this.props.column.title}</h3>
           <Stack direction="vertical" gap={2}>
-            {this.props.courses.map((course) => {
-              return (
-                <h2 key={course}>
-                  <CourseSelection key={course} course={course}>
-                    {course}
-                  </CourseSelection>
-                </h2>
-              );
-            })}
+            <Droppable droppableId={this.props.column.id.toString()}>
+              {(provided) => (
+                <div
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  style={{ flexGrow: 1, minHeight: "100px" }}
+                >
+                  {this.props.courses.map((course, index) => (
+                    <h2>
+                      <CourseSelection
+                        index={index}
+                        key={course}
+                        course={course}
+                      />
+                    </h2>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
           </Stack>
         </div>
       </Col>

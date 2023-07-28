@@ -5,6 +5,22 @@ import { Badge } from "react-bootstrap";
 
 export default class CourseSelection extends React.Component {
   render() {
-    return <Badge bg="info">{this.props.course}</Badge>;
+    return (
+      <Draggable
+        draggableId={this.props.course.toString()}
+        index={this.props.index}
+      >
+        {(provided) => (
+          <Badge
+            bg="info"
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            ref={provided.innerRef}
+          >
+            {this.props.course}
+          </Badge>
+        )}
+      </Draggable>
+    );
   }
 }
