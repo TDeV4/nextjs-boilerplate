@@ -105,6 +105,9 @@ export default function MyReviewsTab(props) {
     setCreateReviewIsOpen(true);
   }
 
+  var reviewReplyData = DUMMY_REVIEW_REPLY_DATA;
+  var reviewData = DUMMY_REVIEW_DATA;
+
   return (
     <div>
       <h1 style={{ display: "inline", marginLeft: "10px", flex: "1" }}>
@@ -116,10 +119,10 @@ export default function MyReviewsTab(props) {
           profData={DUMMY_PROF_DATA}
         />
       </div>
-      {DUMMY_REVIEW_REPLY_DATA.map((review) => {
+      {reviewReplyData.map((review) => {
         if (review.parentID === null) {
           var reviewDataPassThrough;
-          DUMMY_REVIEW_DATA.map((reviewData) => {
+          reviewData.map((reviewData) => {
             if (review.reviewID === reviewData.reviewID) {
               reviewDataPassThrough = reviewData;
             }
@@ -130,8 +133,12 @@ export default function MyReviewsTab(props) {
                 key={review.reviewID}
                 review={review}
                 reviewData={reviewDataPassThrough}
+                userData={props.userData}
               />
-              <Button>Edit Review</Button>
+              <div className={styles.rightAlignButton}>
+                <Button>Edit Review</Button>
+              </div>
+              <br />
             </div>
           );
         }

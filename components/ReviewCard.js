@@ -1,5 +1,6 @@
 import styles from "../app/page.module.css";
 import { Badge, Button, Stack } from "react-bootstrap";
+import AnonProfileModal from "./AnonProfileModal";
 
 function checkForFinalGrade(finalGrade) {
   if (finalGrade != null) {
@@ -15,6 +16,10 @@ export default function ReviewCard(props) {
       <h3 style={{ display: "inline", marginLeft: "10px" }}>
         {props.reviewData.courseNumber}: {props.reviewData.courseName}
       </h3>
+      <div>
+        Review By: <AnonProfileModal userData={props.userData} />
+      </div>
+      <br />
       <div>
         <Stack direction="horizontal" gap={2}>
           <Badge bg="secondary">{props.reviewData.semester}</Badge>
