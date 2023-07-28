@@ -108,7 +108,7 @@ export default function MyReviewsTab(props) {
   return (
     <div>
       <h1 style={{ display: "inline", marginLeft: "10px", flex: "1" }}>
-        My Reviews
+        Reviews
       </h1>
       <div style={{ float: "right" }}>
         <CreateReview

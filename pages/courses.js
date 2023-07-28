@@ -5,6 +5,7 @@ import HomeTopBar from '../components/HomeTopBar';
 import {getSession} from 'next-auth/react';
 import Table from 'react-bootstrap/Table';
 
+
 const DUMMY_COURSE_DATA = [
   {
     courseID: 591,
@@ -32,7 +33,6 @@ export default function CoursesHome() {
         <Table striped bordered hover>
         <thead>
           <tr>
-            <th>#</th>
             <th>Course Number</th>
             <th>Course Name</th>
             <th>Difficulty</th>

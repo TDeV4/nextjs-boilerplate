@@ -5,7 +5,7 @@ export default function IndividualCourseInfo(props) {
   return (
     <div>
       <div>
-        <h5 className={styles.centerText}>Quick Facts and Resources</h5>
+        <h5 className={styles.centeredHeading}>Quick Facts and Resources</h5>
         <br></br>
         <p>Description: {props.courseData.description}</p>
         <p>Syllabus: {props.courseData.syllabus}</p>
