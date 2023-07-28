@@ -33,12 +33,8 @@ export default class Column extends React.Component {
                   style={{ flexGrow: 1, minHeight: "100px" }}
                 >
                   {this.props.courses.map((course, index) => (
-                    <h2>
-                      <CourseSelection
-                        index={index}
-                        key={course}
-                        course={course}
-                      />
+                    <h2 key={course}>
+                      <CourseSelection index={index} course={course} />
                     </h2>
                   ))}
                   {provided.placeholder}
