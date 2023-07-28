@@ -3,44 +3,49 @@ import Link from 'next/link';
 import TopNavBar from '../components/TopNavBar';
 import HomeTopBar from '../components/HomeTopBar';
 import {getSession} from 'next-auth/react';
-import Table from 'react-bootstrap/Table';
+import CourseSummary from '@/components/CourseSummary';
 
 
-const DUMMY_COURSE_DATA = [
+const DUMMY_REVIEW_DATA = [
   {
     courseID: 591,
+    courseNumber: "591",
     courseName: "Introduction to Software Development",
-    difficulty: 3.64,
-    workload: 13.82,
-    rating: 3,
+    reviewID: 1,
+    semester: "Fall 2020",
+    professor: "Brandon Krakowsky",
+    finalGrade: "A",
+    difficulty: 2,
+    rating: 4,
+    weeklyHours: 10,
   },
   {
     courseID: 592,
+    courseNumber: "592",
     courseName: "Mathematical Foundations of Computer Science",
-    difficulty: 3.88,
-    workload: 15.3,
-    rating: 3.35,
+    reviewID: 10,
+    semester: "Spring 2021",
+    professor: "Val Tannen",
+    finalGrade: null,
+    difficulty: 4,
+    rating: 3,
+    weeklyHours: 22,
   },
-]
+];
 
 export default function CoursesHome() {
+  // var temp = JSON.stringify(Object.assign({},DUMMY_COURSE_DATA));
+  // var arr = JSON.parse(temp)
+  // console.log(arr)
     return (
         <main className={styles.main}>
         <TopNavBar />
         <div class={styles.container}>
         </div>
         <br></br>
-        <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Course Number</th>
-            <th>Course Name</th>
-            <th>Difficulty</th>
-            <th>Workload</th>
-            <th>Rating</th>
-          </tr>
-        </thead>
-        </Table>
+        <CourseSummary
+          courseData={DUMMY_REVIEW_DATA}
+        />
       </main>
     )
 }
