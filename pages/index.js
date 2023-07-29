@@ -161,7 +161,7 @@ export default function HomePage() {
         <HomeTopBar />
         <div>
           <h3>Please sign in to use MCIT Community Hub.</h3>
-          <button onClick={() => signIn()}>Sign in</button>
+          <button onClick={() => signIn('google')}>Sign in</button>
         </div>
       </main>
     );
