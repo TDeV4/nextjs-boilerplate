@@ -126,6 +126,7 @@ export default function EditProfile(props) {
                 return (
                   <Form.Check
                     inline
+                    key={course.courseID}
                     label={course.courseID}
                     name="classesTaken"
                     type="checkbox"
@@ -141,6 +142,7 @@ export default function EditProfile(props) {
                 return (
                   <Form.Check
                     inline
+                    key={course.courseID}
                     label={course.courseID}
                     name="classesTaken"
                     type="checkbox"
