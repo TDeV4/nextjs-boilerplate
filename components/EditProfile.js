@@ -123,10 +123,11 @@ export default function EditProfile(props) {
             <Form.Label>Courses Taken</Form.Label>
             <div key={`inline-checks`} className="mb-3">
               {props.allCourses.map((course) => {
+                var keyValue = course.courseID + "taken"
                 return (
                   <Form.Check
                     inline
-                    key={course.courseID}
+                    key={keyValue}
                     label={course.courseID}
                     name="classesTaken"
                     type="checkbox"
@@ -139,10 +140,11 @@ export default function EditProfile(props) {
             <Form.Label>Courses Currently Being Taken</Form.Label>
             <div key={`inline-checks`} className="mb-3">
               {props.allCourses.map((course) => {
+                var keyValue = course.courseID + "currentlyTaking"
                 return (
                   <Form.Check
                     inline
-                    key={course.courseID}
+                    key={keyValue}
                     label={course.courseID}
                     name="classesTaken"
                     type="checkbox"
