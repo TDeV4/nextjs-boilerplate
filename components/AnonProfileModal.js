@@ -1,4 +1,4 @@
-import { Modal, Button, Badge, Row, Col } from "react-bootstrap";
+import { Modal, Button, Badge, Row, Col, Accordion } from "react-bootstrap";
 import { useState } from "react";
 import ReviewCard from "./ReviewCard";
 import styles from "../app/page.module.css";
@@ -89,7 +89,7 @@ export default function AnonProfileModal(props) {
   const handleShow = () => setShow(true);
 
   var courseData = DUMMY_COURSES_TAKEN_DATA;
-  var reviewReplyData = DUMMY_REVIEW_REPLY_DATA;
+  var reviewReplyData = props.reviewReplyData;
   var reviewData = DUMMY_REVIEW_DATA;
 
   return (
@@ -107,7 +107,10 @@ export default function AnonProfileModal(props) {
           <h3 className={styles.centerText}>Name: {props.userData.anonName}</h3>
           <div className={styles.borderBox}>
             <h4 className={styles.centerText}>Profile Info</h4>
-            <p>Expected Graduation: {props.userData.expectedGraduation}</p>
+            <p>
+              Expected Graduation: {props.userData.graduationSemester}{" "}
+              {props.userData.graduationYear}
+            </p>
             <p>Industry: {props.userData.industry}</p>
             <p>
               Work Status:{" "}
@@ -149,6 +152,7 @@ export default function AnonProfileModal(props) {
                       review={review}
                       reviewData={reviewDataPassThrough}
                       userData={props.userData}
+                      reviewReplyData={props.reviewReplyData}
                     />
                   </div>
                 );

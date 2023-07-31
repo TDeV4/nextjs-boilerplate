@@ -1,5 +1,5 @@
 import styles from "../app/page.module.css";
-import { Badge, Button, Stack } from "react-bootstrap";
+import { Badge, Button, Stack, Accordion } from "react-bootstrap";
 import AnonProfileModal from "./AnonProfileModal";
 
 function checkForFinalGrade(finalGrade) {
@@ -9,7 +9,6 @@ function checkForFinalGrade(finalGrade) {
 }
 
 export default function ReviewCard(props) {
-  console.log("Review Card made");
   return (
     <div className={styles.reviewCardContainer}>
       <img src="/Review.png" height={50} width={50} alt="Review Card" />
@@ -17,7 +16,11 @@ export default function ReviewCard(props) {
         {props.reviewData.courseNumber}: {props.reviewData.courseName}
       </h3>
       <div>
-        Review By: <AnonProfileModal userData={props.userData} />
+        Review By:{" "}
+        <AnonProfileModal
+          userData={props.userData}
+          reviewReplyData={props.reviewReplyData}
+        />
       </div>
       <br />
       <div>
@@ -40,6 +43,32 @@ export default function ReviewCard(props) {
             Rating: {props.reviewData.weeklyHours} hours per week
           </Badge>
         </Stack>
+      </div>
+      <br />
+      <div>
+        <Accordion>
+          <Accordion.Item eventKey="0">
+            <Accordion.Header>Replies</Accordion.Header>
+            {props.reviewReplyData.map((reply) => {
+              if (reply.parentID === null) {
+                return;
+              }
+
+              if (reply.parentID === props.reviewData.reviewID) {
+                return (
+                  <Accordion.Body>
+                    <div className={styles.borderbox}>
+                      <h5>
+                        {reply.userID} - {reply.dateOfReviewReply}
+                      </h5>
+                      <p>{reply.content}</p>
+                    </div>
+                  </Accordion.Body>
+                );
+              }
+            })}
+          </Accordion.Item>
+        </Accordion>
       </div>
     </div>
   );

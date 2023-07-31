@@ -82,11 +82,18 @@ const DUMMY_REVIEW_REPLY_DATA = [
     content: "Review content goes here",
   },
   {
-    reviewID: 3,
-    parentID: 2,
-    userID: 1,
+    reviewID: 2,
+    parentID: 1,
+    userID: 2,
     dateOfReviewReply: "2021-01-07",
-    content: "Here is a response to a first layer reply.",
+    content: "Here is a response to a review.",
+  },
+  {
+    reviewID: 3,
+    parentID: 1,
+    userID: 1,
+    dateOfReviewReply: "2021-01-09",
+    content: "Here is a response to a reply",
   },
   {
     reviewID: 10,
@@ -134,6 +141,7 @@ export default function MyReviewsTab(props) {
                 review={review}
                 reviewData={reviewDataPassThrough}
                 userData={props.userData}
+                reviewReplyData={reviewReplyData}
               />
               <div className={styles.rightAlignButton}>
                 <Button>Edit Review</Button>

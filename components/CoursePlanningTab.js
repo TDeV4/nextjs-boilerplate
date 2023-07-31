@@ -43,45 +43,48 @@ const DUMMY_DATA = [
   },
 ];
 
-function formatData(courseBuilderData) {
+function formatData(courseBuilderData, userData) {
   var finalData = {};
   var courses = {};
   var columns = {};
   var columnOrder = [];
 
-  courseBuilderData.map((course) => {
-    courses[course.courseID] = course.courseID;
-
+  for (
+    let i = 0;
+    i <
+    (parseInt(userData.graduationYear) - parseInt(userData.startYear)) * 3 + 2;
+    i++
+  ) {
     var term;
-    if (course.semesterID == 0) {
+    if (i == 0) {
       term = "Course List";
-    } else if (course.semesterID % 3 == 0) {
+    } else if (i % 3 == 0) {
       term = "Summer ";
-    } else if (course.semesterID % 3 == 1) {
+    } else if (i % 3 == 1) {
       term = "Fall ";
     } else {
       term = "Spring ";
     }
-    if (course.semesterID != 0) {
+    if (i != 0) {
       var columnTitle =
-        term + (2020 + parseInt((course.semesterID + 1) / 3)).toString();
+        term +
+        (parseInt(userData.startYear) + parseInt((i + 1) / 3)).toString();
     } else {
       var columnTitle = term;
     }
 
-    var courseIDs = [course.courseID];
+    var newDict = {};
+    newDict["id"] = i;
+    newDict["title"] = columnTitle;
+    newDict["courseIDs"] = [];
 
-    if (course.semesterID in columns) {
-      columns[course.semesterID]["courseIDs"].push(course.courseID);
-    } else {
-      var newDict = {};
-      newDict["id"] = course.semesterID;
-      newDict["title"] = columnTitle;
-      newDict["courseIDs"] = courseIDs;
+    columns[i] = newDict;
+    columnOrder.push(i);
+  }
 
-      columns[course.semesterID] = newDict;
-      columnOrder.push(course.semesterID);
-    }
+  courseBuilderData.map((course) => {
+    courses[course.courseID] = course.courseID;
+    columns[course.semesterID]["courseIDs"].push(course.courseID);
   });
 
   columnOrder.sort(function (a, b) {
@@ -97,7 +100,7 @@ function formatData(courseBuilderData) {
 
 export default function CoursePlanningTab(props) {
   var dataToUse = {};
-  dataToUse = formatData(props.courseBuilderData);
+  dataToUse = formatData(props.courseBuilderData, props.userData);
 
   const [data, setData] = useState(dataToUse);
 

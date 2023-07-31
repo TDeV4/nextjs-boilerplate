@@ -12,7 +12,9 @@ const DUMMY_USER_DATA = {
   name: "Tanner DeVore",
   anonName: "Purple Panda",
   timeZone: "CST",
-  expectedGraduation: "Spring 2025",
+  startYear: "2022",
+  graduationYear: "2025",
+  graduationSemester: "Spring",
   workStatusID: 2,
   industry: "Cyber-Security",
   fullTimeStudentStatus: false,
@@ -123,6 +125,29 @@ const DUMMY_CURRENT_COURSES_DATA = [
   },
 ];
 
+const DUMMY_ALL_COURSES_DATA = [
+  {
+    courseID: 591,
+    courseName: "Introduction to Software Development",
+  },
+  {
+    courseID: 592,
+    courseName: "Mathematical Foundations of Computer Science",
+  },
+  {
+    courseID: 593,
+    courseName: "Introduction to Computer Systems",
+  },
+  {
+    courseID: 594,
+    courseName: "Data Structures and Software Design",
+  },
+  {
+    courseID: 521,
+    courseName: "Artificial Intelligence",
+  },
+];
+
 export default function HomePage() {
   const { data: session } = useSession();
   console.log(session);
@@ -138,6 +163,7 @@ export default function HomePage() {
                 userData={DUMMY_USER_DATA}
                 courseData={DUMMY_COURSES_TAKEN_DATA}
                 currentCourseData={DUMMY_CURRENT_COURSES_DATA}
+                allCourses={DUMMY_ALL_COURSES_DATA}
               />
             </div>
           </div>
@@ -145,6 +171,7 @@ export default function HomePage() {
             <div class={styles.borderBox}>
               <CoursePlanningTab
                 courseBuilderData={DUMMY_COURSE_BUILDER_DATA}
+                userData={DUMMY_USER_DATA}
               />
             </div>
             <div class={styles.borderBox}>
@@ -161,7 +188,7 @@ export default function HomePage() {
         <HomeTopBar />
         <div>
           <h3>Please sign in to use MCIT Community Hub.</h3>
-          <button onClick={() => signIn('google')}>Sign in</button>
+          <button onClick={() => signIn("google")}>Sign in</button>
         </div>
       </main>
     );
