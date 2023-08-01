@@ -57,12 +57,10 @@ export default function ReviewCard(props) {
               if (reply.parentID === props.reviewData.reviewID) {
                 return (
                   <Accordion.Body key={reply.reviewID}>
-                    <div className={styles.borderbox}>
-                      <h5>
-                        {reply.userID} - {reply.dateOfReviewReply}
-                      </h5>
-                      <p>{reply.content}</p>
-                    </div>
+                    <h5>
+                      {reply.userID} - {reply.dateOfReviewReply}
+                    </h5>
+                    <p>{reply.content}</p>
                   </Accordion.Body>
                 );
               }

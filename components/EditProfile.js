@@ -30,7 +30,7 @@ export default function EditProfile(props) {
         Edit Profile
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>Edit Profile</Modal.Title>
         </Modal.Header>
@@ -43,7 +43,6 @@ export default function EditProfile(props) {
               className="mb-3"
             >
               <Form.Control
-                required
                 type="text"
                 placeholder="Name"
                 defaultValue={props.userData.name}
@@ -123,7 +122,7 @@ export default function EditProfile(props) {
             <Form.Label>Courses Taken</Form.Label>
             <div key={`inline-checks`} className="mb-3">
               {props.allCourses.map((course) => {
-                var keyValue = course.courseID + "taken"
+                var keyValue = course.courseID + "taken";
                 return (
                   <Form.Check
                     inline
@@ -140,7 +139,7 @@ export default function EditProfile(props) {
             <Form.Label>Courses Currently Being Taken</Form.Label>
             <div key={`inline-checks`} className="mb-3">
               {props.allCourses.map((course) => {
-                var keyValue = course.courseID + "currentlyTaking"
+                var keyValue = course.courseID + "currentlyTaking";
                 return (
                   <Form.Check
                     inline
