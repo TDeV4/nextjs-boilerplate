@@ -11,9 +11,9 @@ const DUMMY_REVIEW_DATA = [
     semester: "Fall 2020",
     professor: "Brandon Krakowsky",
     finalGrade: "A",
-    difficulty: 2,
-    rating: 4,
-    weeklyHours: 10,
+    averageDifficulty: 2,
+    averageRating: 4,
+    averageWorkload: 10,
   },
   {
     courseID: 592,
@@ -23,9 +23,9 @@ const DUMMY_REVIEW_DATA = [
     semester: "Spring 2021",
     professor: "Val Tannen",
     finalGrade: null,
-    difficulty: 4,
-    rating: 3,
-    weeklyHours: 22,
+    averageDifficulty: 4,
+    averageRating: 3,
+    averageWorkload: 22,
   },
 ];
 
@@ -49,9 +49,9 @@ export default function CourseSummary(props) {
           <tr key={item.courseID}>
             <td>{item.courseNumber}</td>
             <td>{item.courseName}</td>
-            <td>{item.difficulty}</td>
-            <td>{item.weeklyHours}</td>
-            <td>{item.rating}</td>
+            <td>{item.averageDifficulty}</td>
+            <td>{item.averageWorkload}</td>
+            <td>{item.averageRating}</td>
             <td>
               <Link href="/course">Link</Link>
             </td>
