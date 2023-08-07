@@ -4,7 +4,7 @@ import Table from "react-bootstrap/Table";
 
 const DUMMY_REVIEW_DATA = [
   {
-    courseID: 591,
+    courseID: 1,
     courseNumber: "591",
     courseName: "Introduction to Software Development",
     reviewID: 1,
@@ -16,7 +16,7 @@ const DUMMY_REVIEW_DATA = [
     averageWorkload: 10,
   },
   {
-    courseID: 592,
+    courseID: 2,
     courseNumber: "592",
     courseName: "Mathematical Foundations of Computer Science",
     reviewID: 10,
@@ -30,7 +30,7 @@ const DUMMY_REVIEW_DATA = [
 ];
 
 export default function CourseSummary(props) {
-  var data = DUMMY_REVIEW_DATA;
+  var data = props.courseData;
 
   return (
     <Table striped bordered hover>

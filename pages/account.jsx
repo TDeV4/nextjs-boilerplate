@@ -4,7 +4,7 @@ import {useSession, signOut, getSession} from 'next-auth/react'
 
 //when access account but not signed in, redirect page automatically to sign in page
 const Account = () => {
-    const {data: session, status } = useSession();
+    const {data: session, status } = useSession();    
 
     if (status === 'authenticated') {
         return (

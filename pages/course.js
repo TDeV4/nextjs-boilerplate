@@ -31,40 +31,32 @@ const DUMMY_USER_DATA = {
   marketOutcome: null,
 };
 
+const DUMMY_NEW_COURSE_DATA = 
+  {
+    courseID: 5,
+    coursenumber: 5950,
+    coursename: "Computer Systems Programming",
+    syllabus: "https://online.seas.upenn.edu/wp-content/uploads/2023/05/Summer-23-CIT-5950-Computer-Systems-Programming-Syllabus.pdf",
+    description:"This course is a continuation of CIT 5930 and introduces students to fundamental concepts in computing systems. The course is divided into two parts. The first half of the course introduces important concepts in modern operating systems: processes, scheduling, caching, and virtual memory. The second half of the course provides an introduction to fundamental concepts in the design and implementation of networked systems, their protocols, and applications. The course will use the C program language, and will develop your knowledge on C system calls, and libraries for process/thread creation and manipulation, synchronization, and network communication.",
+    textbooks:"idk",
+    summaryreview:"Class was great 595",
+    prereqid:[3],
+    coreq:[false],
+    semester:null,
+    professor:null,
+    resource: "Textbooks",
+  }
+
 const DUMMY_COURSE_DATA = 
   { 
-    courseID: 591,
-    courseName: 'Introduction to Software Development',
-    syllabus: null,
-    description: "This course is an introduction to fundamental concepts of programming and computer science.",
+    courseID: 5,
+    coursenumber: 5950,
+    coursename: "Computer Systems Programming",
+    syllabus: "https://online.seas.upenn.edu/wp-content/uploads/2023/05/Summer-23-CIT-5950-Computer-Systems-Programming-Syllabus.pdf",
+    description:"This course is a continuation of CIT 5930 and introduces students to fundamental concepts in computing systems. The course is divided into two parts. The first half of the course introduces important concepts in modern operating systems: processes, scheduling, caching, and virtual memory. The second half of the course provides an introduction to fundamental concepts in the design and implementation of networked systems, their protocols, and applications. The course will use the C program language, and will develop your knowledge on C system calls, and libraries for process/thread creation and manipulation, synchronization, and network communication.",
     textbooks: "None",
-    summaryReview: null
+    summaryReview: null,
   }
-
-const DUMMY_PREREQ_DATA = 
-  {
-    courseID: 591,
-    prereqID: null,
-    isCoreq: null
-  }
-
-const DUMMY_SUP_DATA = 
-  {
-    courseID: 591,
-    resourceType: 1,
-    resource: 'Textbook',
-    resourceURL: 'https://www.amazon.com/Python-easy-steps-Mike-McGrath/dp/1840785969'
-  } 
-  const DUMMY_PROF_DATA = 
-  {
-    courseID: 591,
-    professor: 'Brandon Krakowsky'
-  } 
-  const DUMMY_SEM_DATA = 
-  {
-    courseID: 591,
-    semester: 'Fall 2023'
-  } 
 
   const DUMMY_REVIEW_DATA = [
     {
@@ -94,39 +86,17 @@ const DUMMY_SUP_DATA =
   ];
 
   export default function coursePage() {
-
-    const difficulty = DUMMY_REVIEW_DATA.map((review) => review.difficulty);
-    const diffcultyAvg = difficulty.reduce((sum, current) => sum + current, 0) / difficulty.length;
-
-    const rating = DUMMY_REVIEW_DATA.map((review) => review.rating);
-    const ratingAvg = rating.reduce((sum, current) => sum + current, 0) / rating.length;
-
-    const weeklyHours = DUMMY_REVIEW_DATA.map((review) => review.weeklyHours);
-    const weeklyHoursAvg = weeklyHours.reduce((sum, current) => sum + current, 0) / weeklyHours.length;
-
+    //make a fetch request and pass in the course id in the url (get request) to get all the reviews for that course and the course info for that course
     return (
     <main className={styles.main}>
         <TopNavBar />
         <div class={styles.container}>
           <div class={styles.leftpane}>
             <div class={styles.borderBox}>
-              <h7 className={styles.centerText}>CIT 591: Introduction to Software Development</h7>
-              <Table striped bordered hover>
-                <thead class={styles.centerText}>
-                  <tr>
-                    <th><h9>Difficulty: {diffcultyAvg}</h9></th>
-                    <th><h9>Workload: {ratingAvg}</h9></th>
-                    <th><h9>Rating: {weeklyHoursAvg}</h9></th>
-                    <th><h9># of Reviews: {difficulty.length}</h9></th>
-                  </tr>
-                </thead>
-              </Table>
-            <IndividualCourseInfo 
-            courseData={DUMMY_COURSE_DATA}
-            preReqData={DUMMY_PREREQ_DATA}
-            supData={DUMMY_SUP_DATA}
-            profData={DUMMY_PROF_DATA}
-            semData={DUMMY_SEM_DATA} />
+            <IndividualCourseInfo
+            reviewData={DUMMY_REVIEW_DATA}
+            courseData={DUMMY_NEW_COURSE_DATA}
+            />
             </div>
           </div>
           <div class={styles.rightpane}>

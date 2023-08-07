@@ -6,27 +6,27 @@ import {getSession} from 'next-auth/react';
 import CourseSummary from '@/components/CourseSummary';
 
 
-const DUMMY_REVIEW_DATA = [
+const DUMMY_COURSE_SUMMARY_DATA = [
   {
-    courseID: 591,
+    courseID: 1,
     courseNumber: "591",
     courseName: "Introduction to Software Development",
-    reviewID: 1,
-    semester: "Fall 2020",
-    professor: "Brandon Krakowsky",
-    finalGrade: "A",
+    // reviewID: 1,
+    // semester: "Fall 2020",
+    // professor: "Brandon Krakowsky",
+    // // finalGrade: "A",
     averageDifficulty: 2,
     averageRating: 4,
     averageWorkload: 10,
   },
   {
-    courseID: 592,
+    courseID: 2,
     courseNumber: "592",
     courseName: "Mathematical Foundations of Computer Science",
-    reviewID: 10,
-    semester: "Spring 2021",
-    professor: "Val Tannen",
-    finalGrade: null,
+    // reviewID: 10,
+    // semester: "Spring 2021",
+    // professor: "Val Tannen",
+    // // finalGrade: null,
     averageDifficulty: 4,
     averageRating: 3,
     averageWorkload: 22,
@@ -44,7 +44,7 @@ export default function CoursesHome() {
         </div>
         <br></br>
         <CourseSummary
-          courseData={DUMMY_REVIEW_DATA}
+          courseData={DUMMY_COURSE_SUMMARY_DATA}
         />
       </main>
     )
