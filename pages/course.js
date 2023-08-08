@@ -7,6 +7,7 @@ import { getSession } from "next-auth/react";
 import MyReviewsTab from "@/components/MyReviewsTab";
 import Table from "react-bootstrap/Table";
 import { useRouter } from "next/router";
+import React from "react";
 
 const DUMMY_USER_DATA = {
   userID: "1",
@@ -91,8 +92,8 @@ const DUMMY_REVIEW_DATA = [
 export default function coursePage() {
   //make a fetch request and pass in the course id in the url (get request) to get all the reviews for that course and the course info for that course
 
-  const router = useRouter();
-  const query = router.query;
+  const Router = useRouter();
+  const query = Router.query;
   const courseInfo = query.info;
 
   return (
