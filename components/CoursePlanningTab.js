@@ -52,23 +52,23 @@ function formatData(courseBuilderData, userData) {
   for (
     let i = 0;
     i <
-    (parseInt(userData.graduationYear) - parseInt(userData.startYear)) * 3 + 2;
+    (parseInt(userData.graduationYear) - parseInt(userData.startYear)) * 3 + 4;
     i++
   ) {
     var term;
     if (i == 0) {
       term = "Course List";
     } else if (i % 3 == 0) {
-      term = "Summer ";
-    } else if (i % 3 == 1) {
       term = "Fall ";
-    } else {
+    } else if (i % 3 == 1) {
       term = "Spring ";
+    } else {
+      term = "Summer ";
     }
     if (i != 0) {
       var columnTitle =
         term +
-        (parseInt(userData.startYear) + parseInt((i + 1) / 3)).toString();
+        (parseInt(userData.startYear) + parseInt((i - 1) / 3)).toString();
     } else {
       var columnTitle = term;
     }
