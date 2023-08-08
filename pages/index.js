@@ -18,7 +18,7 @@ const DUMMY_USER_DATA = {
   workStatusID: 2,
   industry: "Cyber-Security",
   fullTimeStudentStatus: false,
-  inTurtleClub: false,
+  inTurtleClub: true,
   alumniStatus: false,
   mcitCentralEmailNotifications: true,
   mcitConnectEmailNotifications: true,
@@ -187,7 +187,10 @@ export default function HomePage() {
         <TopNavBar />
         <HomeTopBar />
         <div>
-          <h3>Please sign in with your Penn Engineering email to access and use MCIT Community Hub.</h3>
+          <h3>
+            Please sign in with your Penn Engineering email to access and use
+            MCIT Community Hub.
+          </h3>
           <button onClick={() => signIn("google")}>Sign in</button>
         </div>
       </main>

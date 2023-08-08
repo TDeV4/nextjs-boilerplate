@@ -1,10 +1,24 @@
 import styles from "../app/page.module.css";
 import { Badge, Button, Stack, Accordion } from "react-bootstrap";
 import AnonProfileModal from "./AnonProfileModal";
+import AccordionBody from "react-bootstrap/AccordionBody";
+import CommentButton from "./CommentButton";
 
 function checkForFinalGrade(finalGrade) {
   if (finalGrade != null) {
     return <Badge bg="secondary">Final Grade: {finalGrade}</Badge>;
+  }
+}
+
+function checkForTurtleClubStatus(inTurtleClub) {
+  if (inTurtleClub) {
+    return <Badge bg="info">In Turtle Club</Badge>;
+  }
+}
+
+function checkForFullTimeStatus(fullTimeStatus) {
+  if (fullTimeStatus) {
+    return <Badge bg="info">Full Time Student</Badge>;
   }
 }
 
@@ -28,6 +42,8 @@ export default function ReviewCard(props) {
           <Badge bg="secondary">{props.reviewData.semester}</Badge>
           <Badge bg="secondary">{props.reviewData.professor}</Badge>
           {checkForFinalGrade(props.reviewData.finalGrade)}
+          {checkForTurtleClubStatus(props.userData.inTurtleClub)}
+          {checkForFullTimeStatus(props.userData.fullTimeStudentStatus)}
         </Stack>
       </div>
       <br />
@@ -65,6 +81,9 @@ export default function ReviewCard(props) {
                 );
               }
             })}
+            <AccordionBody>
+              <CommentButton reviewID={props.reviewData.reviewID} />
+            </AccordionBody>
           </Accordion.Item>
         </Accordion>
       </div>

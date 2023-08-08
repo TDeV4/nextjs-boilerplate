@@ -144,7 +144,7 @@ export default function MyReviewsTab(props) {
                 reviewReplyData={reviewReplyData}
               />
               <div className={styles.rightAlignButton}>
-                <Button>Edit Review</Button>
+                <Button reviewID={review.reviewID}>Edit Review</Button>
               </div>
               <br />
             </div>
