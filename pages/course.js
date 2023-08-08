@@ -92,10 +92,6 @@ const DUMMY_REVIEW_DATA = [
 export default function coursePage() {
   //make a fetch request and pass in the course id in the url (get request) to get all the reviews for that course and the course info for that course
 
-  const Router = useRouter();
-  const query = Router.query;
-  const courseInfo = query.info;
-
   return (
     <main className={styles.main}>
       <TopNavBar />
