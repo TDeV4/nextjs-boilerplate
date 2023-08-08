@@ -36,25 +36,25 @@ export default function CourseSummary(props) {
     <Table striped bordered hover>
       <thead>
         <tr>
-          <th>Course Number</th>
+          <th className={styles.centeredText}>Course Number</th>
           <th>Course Name</th>
           <th>Difficulty</th>
           <th>Workload</th>
           <th>Rating</th>
-          <th>Link to Course Page</th>
         </tr>
       </thead>
       <tbody>
         {data.map((item) => (
           <tr key={item.courseID}>
-            <td>{item.courseNumber}</td>
-            <td>{item.courseName}</td>
+            <td className={styles.centeredText}>{item.courseNumber}</td>
+            <td>
+              <Link href={{ pathname: "/course", query: { item } }}>
+                {item.courseName}
+              </Link>
+            </td>
             <td>{item.averageDifficulty}</td>
             <td>{item.averageWorkload}</td>
             <td>{item.averageRating}</td>
-            <td>
-              <Link href="/course">Link</Link>
-            </td>
           </tr>
         ))}
       </tbody>

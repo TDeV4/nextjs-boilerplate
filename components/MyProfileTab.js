@@ -34,7 +34,7 @@ export default function MyProfileTab(props) {
         </p>
         <p>
           Turtle or Non-turtle:{" "}
-          {props.userData.inTurtleClub == true ? "Turle" : "Non-Turtle"}
+          {props.userData.inTurtleClub == true ? "Turtle" : "Non-Turtle"}
         </p>
         <div>
           Courses Completed:

@@ -111,6 +111,12 @@ UPenn Colors:
   text-decoration: underline;
 }
 
+.centeredText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .parentContainer {
   height: 295px;
   /* Adjust the height as needed */

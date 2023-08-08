@@ -1,40 +1,39 @@
-//page that is protect - from client side 
-import React from 'react'
-import {useSession, signOut, getSession} from 'next-auth/react'
+//page that is protect - from client side
+import React from "react";
+import { useSession, signOut, getSession } from "next-auth/react";
 
 //when access account but not signed in, redirect page automatically to sign in page
 const Account = () => {
-    const {data: session, status } = useSession();    
+  const { data: session, status } = useSession();
 
-    if (status === 'authenticated') {
-        return (
-            <div>
-                <p>Welcome {session.user.name}.</p>
-                <button onClick={() => signOut()}>Sign out</button>
-
-            </div>
-        )       
-    } else {
-        return (
-            <div>
-                <p>You are not signed in.</p>
-            </div>
-        )
-    }
+  if (status === "authenticated") {
+    return (
+      <div>
+        <p>Welcome {session.user.name}.</p>
+        <button onClick={() => signOut()}>Sign out</button>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <p>You are not signed in.</p>
+      </div>
+    );
+  }
 };
 
-export default Account 
+export default Account;
 
 export const getServerSideProps = async (context) => {
-    const session = await getSession(context)
-    if (!session) {
-        return {
-            redirect : {
-                destination : '/login'
-            }
-        }
-    }
+  const session = await getSession(context);
+  if (!session) {
     return {
-        props: {session}
-    }
-}
+      redirect: {
+        destination: "/login",
+      },
+    };
+  }
+  return {
+    props: { session },
+  };
+};

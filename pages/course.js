@@ -1,11 +1,12 @@
-import IndividualCourseInfo from "@/components/IndividualCourseInfo"
-import styles from 'app/page.module.css'
-import Link from 'next/link'
-import TopNavBar from '../components/TopNavBar';
-import HomeTopBar from '../components/HomeTopBar';
-import {getSession} from 'next-auth/react';
+import IndividualCourseInfo from "@/components/IndividualCourseInfo";
+import styles from "app/page.module.css";
+import Link from "next/link";
+import TopNavBar from "../components/TopNavBar";
+import HomeTopBar from "../components/HomeTopBar";
+import { getSession } from "next-auth/react";
 import MyReviewsTab from "@/components/MyReviewsTab";
-import Table from 'react-bootstrap/Table';
+import Table from "react-bootstrap/Table";
+import { useRouter } from "next/router";
 
 const DUMMY_USER_DATA = {
   userID: "1",
@@ -31,94 +32,101 @@ const DUMMY_USER_DATA = {
   marketOutcome: null,
 };
 
-const DUMMY_NEW_COURSE_DATA = 
+const DUMMY_NEW_COURSE_DATA = {
+  courseID: 5,
+  coursenumber: 5950,
+  coursename: "Computer Systems Programming",
+  syllabus:
+    "https://online.seas.upenn.edu/wp-content/uploads/2023/05/Summer-23-CIT-5950-Computer-Systems-Programming-Syllabus.pdf",
+  description:
+    "This course is a continuation of CIT 5930 and introduces students to fundamental concepts in computing systems. The course is divided into two parts. The first half of the course introduces important concepts in modern operating systems: processes, scheduling, caching, and virtual memory. The second half of the course provides an introduction to fundamental concepts in the design and implementation of networked systems, their protocols, and applications. The course will use the C program language, and will develop your knowledge on C system calls, and libraries for process/thread creation and manipulation, synchronization, and network communication.",
+  textbooks: "idk",
+  summaryreview: "Class was great 595",
+  prereqid: [3],
+  coreq: [false],
+  semester: null,
+  professor: null,
+  resource: "Textbooks",
+};
+
+const DUMMY_COURSE_DATA = {
+  courseID: 5,
+  coursenumber: 5950,
+  coursename: "Computer Systems Programming",
+  syllabus:
+    "https://online.seas.upenn.edu/wp-content/uploads/2023/05/Summer-23-CIT-5950-Computer-Systems-Programming-Syllabus.pdf",
+  description:
+    "This course is a continuation of CIT 5930 and introduces students to fundamental concepts in computing systems. The course is divided into two parts. The first half of the course introduces important concepts in modern operating systems: processes, scheduling, caching, and virtual memory. The second half of the course provides an introduction to fundamental concepts in the design and implementation of networked systems, their protocols, and applications. The course will use the C program language, and will develop your knowledge on C system calls, and libraries for process/thread creation and manipulation, synchronization, and network communication.",
+  textbooks: "None",
+  summaryReview: null,
+};
+
+const DUMMY_REVIEW_DATA = [
   {
-    courseID: 5,
-    coursenumber: 5950,
-    coursename: "Computer Systems Programming",
-    syllabus: "https://online.seas.upenn.edu/wp-content/uploads/2023/05/Summer-23-CIT-5950-Computer-Systems-Programming-Syllabus.pdf",
-    description:"This course is a continuation of CIT 5930 and introduces students to fundamental concepts in computing systems. The course is divided into two parts. The first half of the course introduces important concepts in modern operating systems: processes, scheduling, caching, and virtual memory. The second half of the course provides an introduction to fundamental concepts in the design and implementation of networked systems, their protocols, and applications. The course will use the C program language, and will develop your knowledge on C system calls, and libraries for process/thread creation and manipulation, synchronization, and network communication.",
-    textbooks:"idk",
-    summaryreview:"Class was great 595",
-    prereqid:[3],
-    coreq:[false],
-    semester:null,
-    professor:null,
-    resource: "Textbooks",
-  }
+    courseID: 591,
+    courseNumber: "591",
+    courseName: "Introduction to Software Development",
+    reviewID: 1,
+    semester: "Fall 2020",
+    professor: "Brandon Krakowsky",
+    finalGrade: "A",
+    difficulty: 2,
+    rating: 4,
+    weeklyHours: 10,
+  },
+  {
+    courseID: 591,
+    courseNumber: "591",
+    courseName: "Introduction to Software Development",
+    reviewID: 1,
+    semester: "Fall 2020",
+    professor: "Brandon Krakowsky",
+    finalGrade: "A",
+    difficulty: 4,
+    rating: 3,
+    weeklyHours: 22,
+  },
+];
 
-const DUMMY_COURSE_DATA = 
-  { 
-    courseID: 5,
-    coursenumber: 5950,
-    coursename: "Computer Systems Programming",
-    syllabus: "https://online.seas.upenn.edu/wp-content/uploads/2023/05/Summer-23-CIT-5950-Computer-Systems-Programming-Syllabus.pdf",
-    description:"This course is a continuation of CIT 5930 and introduces students to fundamental concepts in computing systems. The course is divided into two parts. The first half of the course introduces important concepts in modern operating systems: processes, scheduling, caching, and virtual memory. The second half of the course provides an introduction to fundamental concepts in the design and implementation of networked systems, their protocols, and applications. The course will use the C program language, and will develop your knowledge on C system calls, and libraries for process/thread creation and manipulation, synchronization, and network communication.",
-    textbooks: "None",
-    summaryReview: null,
-  }
+export default function coursePage() {
+  //make a fetch request and pass in the course id in the url (get request) to get all the reviews for that course and the course info for that course
 
-  const DUMMY_REVIEW_DATA = [
-    {
-      courseID: 591,
-      courseNumber: "591",
-      courseName: "Introduction to Software Development",
-      reviewID: 1,
-      semester: "Fall 2020",
-      professor: "Brandon Krakowsky",
-      finalGrade: "A",
-      difficulty: 2,
-      rating: 4,
-      weeklyHours: 10,
-    },
-    {
-      courseID: 591,
-      courseNumber: "591",
-      courseName: "Introduction to Software Development",
-      reviewID: 1,
-      semester: "Fall 2020",
-      professor: "Brandon Krakowsky",
-      finalGrade: "A",
-      difficulty: 4,
-      rating: 3,
-      weeklyHours: 22,
-    },
-  ];
+  const router = useRouter();
+  const query = router.query;
+  const courseInfo = query.info;
 
-  export default function coursePage() {
-    //make a fetch request and pass in the course id in the url (get request) to get all the reviews for that course and the course info for that course
-    return (
+  return (
     <main className={styles.main}>
-        <TopNavBar />
-        <div class={styles.container}>
-          <div class={styles.leftpane}>
-            <div class={styles.borderBox}>
+      <TopNavBar />
+      <div class={styles.container}>
+        <div class={styles.leftpane}>
+          <div class={styles.borderBox}>
             <IndividualCourseInfo
-            reviewData={DUMMY_REVIEW_DATA}
-            courseData={DUMMY_NEW_COURSE_DATA}
+              reviewData={DUMMY_REVIEW_DATA}
+              courseData={DUMMY_NEW_COURSE_DATA}
             />
-            </div>
-          </div>
-          <div class={styles.rightpane}>
-            <div class={styles.borderBox}>
-              <MyReviewsTab userData={DUMMY_USER_DATA} />
-            </div>
           </div>
         </div>
+        <div class={styles.rightpane}>
+          <div class={styles.borderBox}>
+            <MyReviewsTab userData={DUMMY_USER_DATA} />
+          </div>
+        </div>
+      </div>
     </main>
-    )
-  }
-  
-  export const getServerSideProps = async (context) => {
-    const session = await getSession(context)
-    if (!session) {
-        return {
-            redirect : {
-                destination : '/login'
-            }
-        }
-    }
-    return {
-        props: {session}
-    }
+  );
 }
+
+export const getServerSideProps = async (context) => {
+  const session = await getSession(context);
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+      },
+    };
+  }
+  return {
+    props: { session },
+  };
+};
