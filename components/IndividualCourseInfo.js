@@ -24,8 +24,8 @@ export default function IndividualCourseInfo(props) {
           <thead class={styles.centerText}>
             <tr>
               <th><h9>Difficulty: {diffcultyAvg}</h9></th>
-              <th><h9>Workload: {ratingAvg}</h9></th>
-              <th><h9>Rating: {weeklyHoursAvg}</h9></th>
+              <th><h9>Workload: {weeklyHoursAvg}</h9></th>
+              <th><h9>Rating: {ratingAvg}</h9></th>
               <th><h9># of Reviews: {difficulty.length}</h9></th>
             </tr>
           </thead>
