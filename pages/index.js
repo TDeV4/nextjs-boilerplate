@@ -11,7 +11,7 @@ const DUMMY_USER_DATA = {
   userID: "1",
   name: "Tanner DeVore",
   anonName: "Purple Panda",
-  timeZone: "CST",
+  timeZone: "(GMT-06:00) Central Time",
   startYear: "2022",
   graduationYear: "2025",
   graduationSemester: "Spring",

@@ -1,6 +1,8 @@
 import { Modal, Button, Form, Row, Col, FloatingLabel } from "react-bootstrap";
 import { useState } from "react";
 import styles from "../app/page.module.css";
+import TimezonePicker from "react-bootstrap-timezone-picker";
+import "react-bootstrap-timezone-picker/dist/react-bootstrap-timezone-picker.min.css";
 
 export default function EditProfile(props) {
   const [show, setShow] = useState(false);
@@ -19,6 +21,24 @@ export default function EditProfile(props) {
   props.currentCourseData.map((course) => {
     currentCourses.push(course.courseID);
   });
+
+  const startYearOptions = [];
+  for (let i = 2020; i <= new Date().getFullYear(); i++) {
+    startYearOptions.push(
+      <option key={i} value={i}>
+        {i}
+      </option>
+    );
+  }
+
+  const endYearOptions = [];
+  for (let i = 2020; i <= new Date().getFullYear() + 5; i++) {
+    endYearOptions.push(
+      <option key={i} value={i}>
+        {i}
+      </option>
+    );
+  }
 
   return (
     <>
@@ -61,6 +81,51 @@ export default function EditProfile(props) {
                 readOnly
               />
             </FloatingLabel>
+            <TimezonePicker
+              absolute={false}
+              defaultValue={props.userData.timeZone}
+              placeholder="Select timezone..."
+            />
+            <Row>
+              <Col>
+                <FloatingLabel
+                  controlId="startYear"
+                  label="Start Year"
+                  className="mb-3"
+                >
+                  <Form.Select>
+                    <option key="blankChoice" hidden value="" />
+                    {startYearOptions}
+                  </Form.Select>
+                </FloatingLabel>
+              </Col>
+              <Col>
+                <FloatingLabel
+                  controlId="expectedGraduationSemester"
+                  label="Expected Graduation Semester"
+                  className="mb-3"
+                >
+                  <Form.Select>
+                    <option key="blankChoice" hidden value="" />
+                    <option>Fall</option>
+                    <option>Spring</option>
+                    <option>Summer</option>
+                  </Form.Select>
+                </FloatingLabel>
+              </Col>
+              <Col>
+                <FloatingLabel
+                  controlId="expectedGraduationYear"
+                  label="Expected Graduation Year"
+                  className="mb-3"
+                >
+                  <Form.Select>
+                    <option key="blankChoice" hidden value="" />
+                    {endYearOptions}
+                  </Form.Select>
+                </FloatingLabel>
+              </Col>
+            </Row>
             <FloatingLabel
               controlId="floatingIndustry"
               label="Industry"
@@ -71,6 +136,17 @@ export default function EditProfile(props) {
                 type="text"
                 placeholder="Industry"
                 defaultValue={props.userData.industry}
+              />
+            </FloatingLabel>
+            <FloatingLabel
+              controlId="floatingEducation"
+              label="Education"
+              className="mb-3"
+            >
+              <Form.Control
+                type="text"
+                placeholder="Education"
+                defaultValue={props.userData.education}
               />
             </FloatingLabel>
             <Form.Label>Work Status</Form.Label>
