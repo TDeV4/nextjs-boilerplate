@@ -3,6 +3,7 @@ import styles from "../app/page.module.css";
 import CreateReview from "./CreateReview";
 import React, { Component, useState } from "react";
 import ReviewCard from "./ReviewCard";
+import EditReview from "./EditReview";
 
 const DUMMY_COURSE_DATA = [
   {
@@ -52,7 +53,8 @@ const DUMMY_REVIEW_DATA = [
     courseNumber: "591",
     courseName: "Introduction to Software Development",
     reviewID: 1,
-    semester: "Fall 2020",
+    semester: "Fall",
+    year: "2021",
     professor: "Brandon Krakowsky",
     finalGrade: "A",
     difficulty: 2,
@@ -64,7 +66,8 @@ const DUMMY_REVIEW_DATA = [
     courseNumber: "592",
     courseName: "Mathematical Foundations of Computer Science",
     reviewID: 10,
-    semester: "Spring 2021",
+    semester: "Spring",
+    year: "2022",
     professor: "Val Tannen",
     finalGrade: null,
     difficulty: 4,
@@ -105,6 +108,36 @@ const DUMMY_REVIEW_REPLY_DATA = [
   },
 ];
 
+const DUMMY_USER_COURSE_PAIRING = [
+  {
+    courseID: 592,
+    reviewID: 1,
+    pairingRec: 1,
+  },
+  {
+    courseID: 593,
+    reviewID: 1,
+    pairingRec: -1,
+  },
+  {
+    courseID: 595,
+    reviewID: 10,
+    pairingRec: 0,
+  },
+];
+
+function findRelevantCoursePairings(reviewID) {
+  var coursePairings = [];
+
+  DUMMY_USER_COURSE_PAIRING.map((pairing) => {
+    if (pairing.reviewID == reviewID) {
+      coursePairings.push(pairing);
+    }
+  });
+
+  return coursePairings;
+}
+
 export default function MyReviewsTab(props) {
   const [createReviewIsOpen, setCreateReviewIsOpen] = useState(false);
 
@@ -142,9 +175,15 @@ export default function MyReviewsTab(props) {
                 reviewData={reviewDataPassThrough}
                 userData={props.userData}
                 reviewReplyData={reviewReplyData}
+                coursePairings={findRelevantCoursePairings(review.reviewID)}
               />
               <div className={styles.rightAlignButton}>
-                <Button reviewID={review.reviewID}>Edit Review</Button>
+                <EditReview
+                  review={review}
+                  reviewData={reviewDataPassThrough}
+                  coursePairings={findRelevantCoursePairings(review.reviewID)}
+                  courseData={DUMMY_COURSE_DATA}
+                />
               </div>
               <br />
             </div>

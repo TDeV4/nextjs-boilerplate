@@ -39,7 +39,9 @@ export default function ReviewCard(props) {
       <br />
       <div>
         <Stack direction="horizontal" gap={2}>
-          <Badge bg="secondary">{props.reviewData.semester}</Badge>
+          <Badge bg="secondary">
+            {props.reviewData.semester} {props.reviewData.year}
+          </Badge>
           <Badge bg="secondary">{props.reviewData.professor}</Badge>
           {checkForFinalGrade(props.reviewData.finalGrade)}
           {checkForTurtleClubStatus(props.userData.inTurtleClub)}
@@ -51,13 +53,27 @@ export default function ReviewCard(props) {
       <br />
       <div style={{ marginTop: "auto" }}>
         <Stack direction="horizontal" gap={2}>
-          <Badge bg="primary">
-            Difficulty: {props.reviewData.difficulty}/5
-          </Badge>
-          <Badge bg="primary">Rating: {props.reviewData.rating}/5</Badge>
-          <Badge bg="primary">
-            Rating: {props.reviewData.weeklyHours} hours per week
-          </Badge>
+          <div className="p-2">
+            <Badge bg="primary">
+              Difficulty: {props.reviewData.difficulty}/5
+            </Badge>
+            <Badge bg="primary">Rating: {props.reviewData.rating}/5</Badge>
+            <Badge bg="primary">
+              Rating: {props.reviewData.weeklyHours} hours per week
+            </Badge>
+          </div>
+          <div className="p-2 ms-auto">
+            Course Pairings:
+            {props.coursePairings.map((pairing) => {
+              if (pairing.pairingRec == -1) {
+                return <Badge bg="danger"> {pairing.courseID} </Badge>;
+              } else if (pairing.pairingRec == 0) {
+                return <Badge bg="warning"> {pairing.courseID} </Badge>;
+              } else {
+                return <Badge bg="success"> {pairing.courseID} </Badge>;
+              }
+            })}
+          </div>
         </Stack>
       </div>
       <br />
