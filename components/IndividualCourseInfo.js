@@ -38,6 +38,7 @@ export default function IndividualCourseInfo(props) {
         <p>Professors: {props.courseData.professor}</p>
         <p>Textbooks: {props.courseData.textbooks}</p>
         <p>Supplemental Resources: {props.courseData.resource}</p>
+        <p>Course Pairings: </p>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import styles from "../app/page.module.css";
 import Link from "next/link";
 import Table from "react-bootstrap/Table";
+import { useState } from 'react';
 
 const DUMMY_REVIEW_DATA = [
   {
@@ -36,8 +37,8 @@ export default function CourseSummary(props) {
     <Table striped bordered hover>
       <thead>
         <tr>
-          <th className={styles.centeredText}>Course Number</th>
-          <th>Course Name</th>
+          <th className={styles.centeredHeading}>Course Number</th>
+          <th >Course Name</th>
           <th>Difficulty</th>
           <th>Workload</th>
           <th>Rating</th>
@@ -45,10 +46,11 @@ export default function CourseSummary(props) {
       </thead>
       <tbody>
         {data.map((item) => (
-          <tr key={item.courseID}>
+          <tr key={item.courseID}
+          >
             <td className={styles.centeredText}>{item.courseNumber}</td>
             <td>
-              <Link href={{ pathname: "/course", query: { item } }}>
+              <Link href={{ pathname: "/course", query: item}}>
                 {item.courseName}
               </Link>
             </td>
