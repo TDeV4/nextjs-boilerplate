@@ -1,6 +1,7 @@
 import styles from "../app/page.module.css";
 import Link from "next/link";
 import Table from 'react-bootstrap/Table';
+import { Badge } from "react-bootstrap";
 
 
 export default function IndividualCourseInfo(props) {
@@ -38,7 +39,17 @@ export default function IndividualCourseInfo(props) {
         <p>Professors: {props.courseData.professor}</p>
         <p>Textbooks: {props.courseData.textbooks}</p>
         <p>Supplemental Resources: {props.courseData.resource}</p>
-        <p>Course Pairings: </p>
+        <p>Course Pairings: 
+          {props.coursePairings.map((pairing) => {
+            if (pairing.pairingRec == -1) {
+              return <Badge bg="danger"> {pairing.coursenumber} </Badge>;
+            } else if (pairing.pairingRec == 0) {
+              return <Badge bg="warning"> {pairing.coursenumber} </Badge>;
+            } else {
+              return <Badge bg="success"> {pairing.coursenumber} </Badge>;
+            }
+          })}
+        </p>
       </div>
     </div>
   );

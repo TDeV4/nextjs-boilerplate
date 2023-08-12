@@ -89,6 +89,40 @@ const DUMMY_REVIEW_DATA = [
   },
 ];
 
+//get all the course pairings for all the reviews from that specified course
+const DUMMY_USER_COURSE_PAIRING = [
+  {
+    courseID: 4,
+    coursenumber: 594,
+    reviewID: 1,
+    pairingRec: 1,
+  },
+  {
+    courseID: 6,
+    coursenumber: 596,
+    reviewID: 2,
+    pairingRec: -1,
+  },
+  {
+    courseID: 2,
+    coursenumber: 592,
+    reviewID: 3,
+    pairingRec: 0,
+  },
+];
+
+// function findRelevantCoursePairings(reviewID) {
+//   var coursePairings = [];
+
+//   DUMMY_USER_COURSE_PAIRING.map((pairing) => {
+//     if (pairing.reviewID == reviewID) {
+//       coursePairings.push(pairing);
+//     }
+//   });
+
+//   return coursePairings;
+// }
+
 export default function coursePage() {
   //make a fetch request and pass in the course id in the url (get request) to get all the reviews for that course and the course info for that course
   const router = useRouter();
@@ -104,6 +138,7 @@ export default function coursePage() {
             <IndividualCourseInfo
               reviewData={DUMMY_REVIEW_DATA}
               courseData={DUMMY_NEW_COURSE_DATA}
+              coursePairings={DUMMY_USER_COURSE_PAIRING}
             />
           </div>
         </div>
