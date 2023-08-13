@@ -3,10 +3,38 @@ import Link from "next/link";
 import Table from 'react-bootstrap/Table';
 import { Badge } from "react-bootstrap";
 
+//group an array by property 
+function groupBy(arr, property) {
+  return arr.reduce(function(memo, x) {
+    if (!memo[x[property]]) {
+      memo[x[property]] = [];
+    }
+    memo[x[property]].push(x);
+    return memo;
+  }, {});
+}
 
 export default function IndividualCourseInfo(props) {
   //const data = props.DUMMY_REVIEW_DATA;
+  //group by name
+  const grouped = groupBy(props.coursePairings, "coursenumber");
+  const keys = Object.keys(grouped);
+  var output = [];
+  // console.log(grouped);
 
+  //loop keys
+  keys.forEach(key => {
+    //merge using reduce
+    const out = grouped[key].reduce((acc, current) => {
+      return {
+        courseID: current.courseID,
+        coursenumber: current.coursenumber,
+        pairingRec: acc.pairingRec + current.pairingRec
+      }
+    });
+    output.push(out);
+  });
+  // console.log(output);
   //calculate the averages of all the reviews for a given course
   const difficulty = props.reviewData.map((review) => review.difficulty);
   const diffcultyAvg = difficulty.reduce((sum, current) => sum + current, 0) / difficulty.length;
@@ -40,8 +68,8 @@ export default function IndividualCourseInfo(props) {
         <p>Textbooks: {props.courseData.textbooks}</p>
         <p>Supplemental Resources: {props.courseData.resource}</p>
         <p>Course Pairings: 
-          {props.coursePairings.map((pairing) => {
-            if (pairing.pairingRec == -1) {
+          {output.map((pairing) => {
+            if (pairing.pairingRec < 0) {
               return <Badge bg="danger"> {pairing.coursenumber} </Badge>;
             } else if (pairing.pairingRec == 0) {
               return <Badge bg="warning"> {pairing.coursenumber} </Badge>;

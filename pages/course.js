@@ -89,7 +89,7 @@ const DUMMY_REVIEW_DATA = [
   },
 ];
 
-//get all the course pairings for all the reviews from that specified course
+//get all the course pairings from all the reviews from that specified course
 const DUMMY_USER_COURSE_PAIRING = [
   {
     courseID: 4,
@@ -107,7 +107,19 @@ const DUMMY_USER_COURSE_PAIRING = [
     courseID: 2,
     coursenumber: 592,
     reviewID: 3,
-    pairingRec: 0,
+    pairingRec: 1,
+  },
+  {
+    courseID: 2,
+    coursenumber: 592,
+    reviewID: 4,
+    pairingRec: 1,
+  },
+  {
+    courseID: 2,
+    coursenumber: 592,
+    reviewID: 5,
+    pairingRec: -1,
   },
 ];
 
