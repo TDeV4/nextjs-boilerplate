@@ -8,6 +8,7 @@ import MyReviewsTab from "@/components/MyReviewsTab";
 import Table from "react-bootstrap/Table";
 import { useRouter } from "next/router";
 import React from "react";
+import CourseReviewsTab from "@/components/CourseReviewsTab";
 
 const DUMMY_USER_DATA = {
   userID: "1",
@@ -156,7 +157,7 @@ export default function coursePage() {
         </div>
         <div class={styles.rightpane}>
           <div class={styles.borderBox}>
-            <MyReviewsTab userData={DUMMY_USER_DATA} />
+            <CourseReviewsTab userData={DUMMY_USER_DATA} />
           </div>
         </div>
       </div>

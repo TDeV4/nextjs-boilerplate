@@ -52,9 +52,9 @@ export default function IndividualCourseInfo(props) {
         <Table striped bordered hover>
           <thead class={styles.centerText}>
             <tr>
-              <th><h9>Difficulty: {diffcultyAvg}</h9></th>
-              <th><h9>Workload: {weeklyHoursAvg}</h9></th>
-              <th><h9>Rating: {ratingAvg}</h9></th>
+              <th><h9>Difficulty: {diffcultyAvg}/5</h9></th>
+              <th><h9>Workload (hours per week): {weeklyHoursAvg}</h9></th>
+              <th><h9>Rating: {ratingAvg}/5</h9></th>
               <th><h9># of Reviews: {difficulty.length}</h9></th>
             </tr>
           </thead>
