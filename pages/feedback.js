@@ -1,11 +1,27 @@
 import styles from 'app/page.module.css'
 import Link from 'next/link';
-import {getSession} from 'next-auth/react'
+import {getSession} from 'next-auth/react';
+import TopNavBar from "@/components/TopNavBar";
 
 
 export default function Feedback() {
     return (
-        <h2>Feedback</h2>
+        <main className={styles.main}>
+            <TopNavBar />
+            <h1>Feedback Submission</h1>
+            <div>
+            <form action="/send-data-here" method="post">
+                <input 
+                type="text" 
+                placeholder='Enter feedback here.'
+                required
+                minlength = '10'
+                maxlength = '100'
+                />
+                <button type="submit">Submit</button>
+            </form>
+            </div>
+        </main>
     )
 }
 
