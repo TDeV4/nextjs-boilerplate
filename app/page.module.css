@@ -36,6 +36,10 @@ UPenn Colors:
   color: #cccccc !important;
 }
 
+.blueBackground {
+  background-color: #011f5b;
+}
+
 .description a {
   display: flex;
   justify-content: center;
