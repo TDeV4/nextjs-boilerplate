@@ -34,9 +34,6 @@ const DUMMY_COURSE_SUMMARY_DATA = [
 ];
 
 export default function CoursesHome() {
-  // var temp = JSON.stringify(Object.assign({},DUMMY_COURSE_DATA));
-  // var arr = JSON.parse(temp)
-  // console.log(arr)
     return (
         <main className={styles.main}>
         <TopNavBar />
