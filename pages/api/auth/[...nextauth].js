@@ -3,21 +3,21 @@ import GoogleProvider from "next-auth/providers/google";
 
 export default NextAuth({
   callbacks: {
-    async signIn({ account, profile }) {
+    async signIn({ account, profile}) { // Include idToken in the parameters
       if (account.provider === "google") {
         return profile.email.endsWith("@seas.upenn.edu");
       }
     },
-    async jwt({ token, account }) {
-      // Persist the OAuth access_token to the token right after signin
+    async jwt({ token, account, user}) {
       if (account) {
         token.accessToken = account.access_token;
+        token.idToken = account?.id_token;
       }
       return token;
     },
     async session({ session, token, user }) {
-      // Send properties to the client, like an access_token from a provider.
       session.accessToken = token.accessToken;
+      session.idToken = token.idToken; 
       return session;
     },
   },
@@ -29,3 +29,4 @@ export default NextAuth({
   ],
   secret: process.env.JWT_SECRET,
 });
+

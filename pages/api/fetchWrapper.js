@@ -10,6 +10,7 @@ const ApiClient = () => {
       const session = await getSession();
       if (session) {
         request.headers.Authorization = `Bearer ${session.idToken}`;
+        // request.headers['x-id-token'] = session.idToken;
       }
       return request;
     });
