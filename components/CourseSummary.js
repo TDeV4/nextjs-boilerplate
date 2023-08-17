@@ -37,7 +37,7 @@ export default function CourseSummary(props) {
     <Table striped bordered hover>
       <thead>
         <tr>
-          <th className={styles.centeredHeading}>Course Number</th>
+          <th className={styles.centeredText}>Course Number</th>
           <th >Course Name</th>
           <th>Difficulty</th>
           <th>Workload</th>

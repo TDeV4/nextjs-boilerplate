@@ -115,17 +115,17 @@ const DUMMY_REVIEW_REPLY_DATA = [
 
 const DUMMY_USER_COURSE_PAIRING = [
   {
-    courseID: 592,
+    courseID: 594,
     reviewID: 1,
     pairingRec: 1,
   },
   {
-    courseID: 593,
+    courseID: 592,
     reviewID: 1,
     pairingRec: -1,
   },
   {
-    courseID: 595,
+    courseID: 541,
     reviewID: 10,
     pairingRec: 0,
   },
@@ -172,6 +172,7 @@ export default function MyReviewsTab(props) {
               reviewDataPassThrough = reviewData;
             }
           });
+          //query and get the user data for that review which stored in reviewdatapassthrough, pass that in to userdata
           return (
             <div key={review.reviewID}>
               <ReviewCard

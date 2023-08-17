@@ -4,22 +4,19 @@ import { getSession } from "next-auth/react";
 import TopNavBar from "@/components/TopNavBar";
 import { Button, Form } from "react-bootstrap";
 
+function onSubmit() {}
+
 export default function Feedback() {
   return (
     <main className={styles.main}>
       <TopNavBar />
-      <h2>Site Feedback</h2>
+      <h1>Site Feedback</h1>
       <p>*Any feedback is welcome and all feedback is anonymous*</p>
       <Form>
-        <Form.Control
-          as="textarea"
-          size="lg"
-          cols={75}
-          rows={10}
-          placeholder="Feel free to leave us feedback on the site or additional features that you would like to see…
-"
-        />
-        <Button type="submit">Submit</Button>
+        <Form.Control as="textarea" rows={10} cols={50} required />
+        <Button type="sumbit" onSubmit={onSubmit}>
+          Submit
+        </Button>
       </Form>
     </main>
   );
