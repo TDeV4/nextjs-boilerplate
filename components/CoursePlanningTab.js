@@ -147,15 +147,18 @@ export default function CoursePlanningTab(props) {
   };
 
   return (
-    <DragDropContext onDragEnd={(result) => onDragEnd(result, dataToUse)}>
-      <Row>
-        {data["columnOrder"].map((columnId) => {
-          const column = data["columns"][columnId];
-          const courses = column["courseIDs"];
+    <div>
+      <h2>Course Planning</h2>
+      <DragDropContext onDragEnd={(result) => onDragEnd(result, dataToUse)}>
+        <Row>
+          {data["columnOrder"].map((columnId) => {
+            const column = data["columns"][columnId];
+            const courses = column["courseIDs"];
 
-          return <Column key={columnId} column={column} courses={courses} />;
-        })}
-      </Row>
-    </DragDropContext>
+            return <Column key={columnId} column={column} courses={courses} />;
+          })}
+        </Row>
+      </DragDropContext>
+    </div>
   );
 }

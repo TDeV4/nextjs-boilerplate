@@ -155,7 +155,6 @@ export default function HomePage() {
     return (
       <main className={styles.main}>
         <TopNavBar />
-        <HomeTopBar />
         <div class={styles.container}>
           <div class={styles.leftpane}>
             <div class={styles.borderBox}>

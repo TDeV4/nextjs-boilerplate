@@ -63,7 +63,7 @@ UPenn Colors:
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(25%, auto));
+  grid-template-columns: repeat(5, minmax(20%, auto));
   width: var(--max-width);
   max-width: 100%;
   padding-left: 0%;
@@ -91,6 +91,11 @@ UPenn Colors:
   display: flex;
   height: 100%;
   width: 100%;
+}
+
+.colHeight {
+  display: flex;
+  height: 50px;
 }
 
 .leftpane {
