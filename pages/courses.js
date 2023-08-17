@@ -18,6 +18,7 @@ const DUMMY_COURSE_SUMMARY_DATA = [
     averageDifficulty: 2,
     averageRating: 4,
     averageWorkload: 10,
+    reviews: 1,
   },
   {
     courseID: 2,
@@ -30,6 +31,7 @@ const DUMMY_COURSE_SUMMARY_DATA = [
     averageDifficulty: 4,
     averageRating: 3,
     averageWorkload: 22,
+    reviews: 2,
   },
 ];
 

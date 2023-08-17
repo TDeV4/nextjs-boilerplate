@@ -11,7 +11,7 @@ import React from "react";
 import CourseReviewsTab from "@/components/CourseReviewsTab";
 
 const DUMMY_USER_DATA = {
-  userID: "1",
+  userID: 1,
   name: "Tanner DeVore",
   anonName: "Purple Panda",
   timeZone: "CST",
@@ -147,7 +147,7 @@ export default function coursePage() {
         </div>
         <div class={styles.rightpane}>
           <div class={styles.borderBox}>
-            <CourseReviewsTab userData={DUMMY_USER_DATA} />
+            <CourseReviewsTab/>
           </div>
         </div>
       </div>

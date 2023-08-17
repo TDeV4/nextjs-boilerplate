@@ -38,7 +38,8 @@ export default function CourseSummary(props) {
       <thead>
         <tr>
           <th className={styles.centeredText}>Course Number</th>
-          <th >Course Name</th>
+          <th>Course Name</th>
+          <th>Reviews</th>
           <th>Difficulty</th>
           <th>Workload</th>
           <th>Rating</th>
@@ -54,6 +55,7 @@ export default function CourseSummary(props) {
                 {item.courseName}
               </Link>
             </td>
+            <td>{item.reviews}</td>
             <td>{item.averageDifficulty}</td>
             <td>{item.averageWorkload}</td>
             <td>{item.averageRating}</td>
