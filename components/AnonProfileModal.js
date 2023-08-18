@@ -82,6 +82,24 @@ const DUMMY_REVIEW_REPLY_DATA = [
   },
 ];
 
+const DUMMY_USER_COURSE_PAIRING = [
+  {
+    courseID: 592,
+    reviewID: 1,
+    pairingRec: 1,
+  },
+  {
+    courseID: 593,
+    reviewID: 1,
+    pairingRec: -1,
+  },
+  {
+    courseID: 595,
+    reviewID: 10,
+    pairingRec: 0,
+  },
+];
+
 export default function AnonProfileModal(props) {
   const [show, setShow] = useState(false);
 
@@ -91,6 +109,7 @@ export default function AnonProfileModal(props) {
   var courseData = DUMMY_COURSES_TAKEN_DATA;
   var reviewReplyData = props.reviewReplyData;
   var reviewData = DUMMY_REVIEW_DATA;
+  var pairingData = DUMMY_USER_COURSE_PAIRING;
 
   return (
     <>
@@ -153,6 +172,7 @@ export default function AnonProfileModal(props) {
                       reviewData={reviewDataPassThrough}
                       userData={props.userData}
                       reviewReplyData={props.reviewReplyData}
+                      coursePairings={pairingData}
                     />
                   </div>
                 );
