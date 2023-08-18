@@ -1,67 +1,70 @@
 import styles from "../app/page.module.css";
 import Link from "next/link";
 import Table from "react-bootstrap/Table";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+// import {useSession} from "next-auth/react";
 
-const DUMMY_REVIEW_DATA = [
-  {
-    courseID: 1,
-    courseNumber: "591",
-    courseName: "Introduction to Software Development",
-    reviewID: 1,
-    semester: "Fall 2020",
-    professor: "Brandon Krakowsky",
-    finalGrade: "A",
-    averageDifficulty: 2,
-    averageRating: 4,
-    averageWorkload: 10,
-  },
-  {
-    courseID: 2,
-    courseNumber: "592",
-    courseName: "Mathematical Foundations of Computer Science",
-    reviewID: 10,
-    semester: "Spring 2021",
-    professor: "Val Tannen",
-    finalGrade: null,
-    averageDifficulty: 4,
-    averageRating: 3,
-    averageWorkload: 22,
-  },
-];
+import fetchWrapper from "../pages/api/fetchWrapper"
 
-export default function CourseSummary(props) {
-  var data = props.courseData;
+const CourseSummary = () => {
+  //const { data: session, status } = useSession();
+  const [courses, setCourses] = useState([]);
 
+  // get and set the fetched data only once
+  // const [hasFetchedData, setHasFetchedData] = useState(false);
+
+  const getCourseStats = async() => {
+    try{
+      // const fetcher = fetchWrapper();
+      const response = await fetchWrapper.get("/courses/coursestats");
+      console.log(response)
+      const jsonData = response.data;
+      
+      setCourses(jsonData);
+      // mark that we got the data
+      // setHasFetchedData(true);
+
+    }catch (err){
+      console.error(err.message);
+    }
+  }
+  
+  useEffect(() => {  
+      console.log("Getting course stats");
+      getCourseStats();
+}, []);
+
+  // console.log(courses);
   return (
     <Table striped bordered hover>
       <thead>
         <tr>
-          <th className={styles.centeredText}>Course Number</th>
+          <th className={styles.centeredHeading}>Course Number</th>
           <th>Course Name</th>
-          <th>Reviews</th>
           <th>Difficulty</th>
           <th>Workload</th>
           <th>Rating</th>
         </tr>
       </thead>
       <tbody>
-        {data.map((item) => (
-          <tr key={item.courseID}
+        {courses.map((courseInfo) => (
+          <tr key={courseInfo.courseID}
           >
-            <td className={styles.centeredText}>{item.courseNumber}</td>
+            <td className={styles.centeredText}>{courseInfo.coursenumber}</td>
             <td>
-              <Link href={{ pathname: "/course", query: item}}>
-                {item.courseName}
+              <Link href={{ pathname: "/course", query: courseInfo}}>
+                {courseInfo.coursename}
               </Link>
             </td>
-            <td>{item.reviews}</td>
-            <td>{item.averageDifficulty}</td>
-            <td>{item.averageWorkload}</td>
-            <td>{item.averageRating}</td>
+
+            <td>{courseInfo.averageDifficulty}</td>
+            <td>{courseInfo.averageWorkload}</td>
+            <td>{courseInfo.averageRating}</td>
           </tr>
         ))}
       </tbody>
     </Table>
   );
 }
+
+export default CourseSummary;
