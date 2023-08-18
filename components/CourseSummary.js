@@ -56,6 +56,7 @@ const CourseSummary = () => {
                 {courseInfo.coursename}
               </Link>
             </td>
+
             <td>{courseInfo.averageDifficulty}</td>
             <td>{courseInfo.averageWorkload}</td>
             <td>{courseInfo.averageRating}</td>

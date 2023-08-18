@@ -18,6 +18,7 @@ const DUMMY_COURSE_SUMMARY_DATA = [
     averageDifficulty: 2,
     averageRating: 4,
     averageWorkload: 10,
+    reviews: 1,
   },
   {
     courseID: 2,
@@ -30,13 +31,11 @@ const DUMMY_COURSE_SUMMARY_DATA = [
     averageDifficulty: 4,
     averageRating: 3,
     averageWorkload: 22,
+    reviews: 2,
   },
 ];
 
 export default function CoursesHome() {
-  // var temp = JSON.stringify(Object.assign({},DUMMY_COURSE_DATA));
-  // var arr = JSON.parse(temp)
-  // console.log(arr)
     return (
         <main className={styles.main}>
         <TopNavBar />

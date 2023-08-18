@@ -15,12 +15,10 @@ function groupBy(arr, property) {
 }
 
 export default function IndividualCourseInfo(props) {
-  //const data = props.DUMMY_REVIEW_DATA;
   //group by name
   const grouped = groupBy(props.coursePairings, "coursenumber");
   const keys = Object.keys(grouped);
   var output = [];
-  // console.log(grouped);
 
   //loop keys
   keys.forEach(key => {
@@ -34,7 +32,6 @@ export default function IndividualCourseInfo(props) {
     });
     output.push(out);
   });
-  // console.log(output);
   //calculate the averages of all the reviews for a given course
   const difficulty = props.reviewData.map((review) => review.difficulty);
   const diffcultyAvg = difficulty.reduce((sum, current) => sum + current, 0) / difficulty.length;
@@ -52,9 +49,9 @@ export default function IndividualCourseInfo(props) {
         <Table striped bordered hover>
           <thead class={styles.centerText}>
             <tr>
-              <th><h9>Difficulty: {diffcultyAvg}</h9></th>
-              <th><h9>Workload: {weeklyHoursAvg}</h9></th>
-              <th><h9>Rating: {ratingAvg}</h9></th>
+              <th><h9>Difficulty: {diffcultyAvg}/5</h9></th>
+              <th><h9>Workload (hours per week): {weeklyHoursAvg}</h9></th>
+              <th><h9>Rating: {ratingAvg}/5</h9></th>
               <th><h9># of Reviews: {difficulty.length}</h9></th>
             </tr>
           </thead>

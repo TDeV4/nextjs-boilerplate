@@ -8,9 +8,10 @@ import MyReviewsTab from "@/components/MyReviewsTab";
 import Table from "react-bootstrap/Table";
 import { useRouter } from "next/router";
 import React from "react";
+import CourseReviewsTab from "@/components/CourseReviewsTab";
 
 const DUMMY_USER_DATA = {
-  userID: "1",
+  userID: 1,
   name: "Tanner DeVore",
   anonName: "Purple Panda",
   timeZone: "CST",
@@ -33,6 +34,7 @@ const DUMMY_USER_DATA = {
   marketOutcome: null,
 };
 
+//get the course data for that given course to fill out info
 const DUMMY_NEW_COURSE_DATA = {
   courseID: 5,
   coursenumber: 5950,
@@ -62,6 +64,7 @@ const DUMMY_COURSE_DATA = {
   summaryReview: null,
 };
 
+//get all the review for that given course id to calculate the averages 
 const DUMMY_REVIEW_DATA = [
   {
     courseID: 591,
@@ -89,7 +92,7 @@ const DUMMY_REVIEW_DATA = [
   },
 ];
 
-//get all the course pairings from all the reviews from that specified course
+//get all the course pairings from all the reviews from that specified course id
 const DUMMY_USER_COURSE_PAIRING = [
   {
     courseID: 4,
@@ -123,18 +126,6 @@ const DUMMY_USER_COURSE_PAIRING = [
   },
 ];
 
-// function findRelevantCoursePairings(reviewID) {
-//   var coursePairings = [];
-
-//   DUMMY_USER_COURSE_PAIRING.map((pairing) => {
-//     if (pairing.reviewID == reviewID) {
-//       coursePairings.push(pairing);
-//     }
-//   });
-
-//   return coursePairings;
-// }
-
 export default function coursePage() {
   //make a fetch request and pass in the course id in the url (get request) to get all the reviews for that course and the course info for that course
   const router = useRouter();
@@ -156,7 +147,7 @@ export default function coursePage() {
         </div>
         <div class={styles.rightpane}>
           <div class={styles.borderBox}>
-            <MyReviewsTab userData={DUMMY_USER_DATA} />
+            <CourseReviewsTab/>
           </div>
         </div>
       </div>
