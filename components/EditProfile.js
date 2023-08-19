@@ -157,7 +157,9 @@ export default function EditProfile(props) {
                 name="group1"
                 type="radio"
                 id="2"
-                defaultChecked={props.userData.workStatusID == 2}
+                defaultChecked={
+                  props.userData.workStatus === "currently part time"
+                }
               />
               <Form.Check
                 inline
@@ -165,7 +167,7 @@ export default function EditProfile(props) {
                 name="group1"
                 type="radio"
                 id="1"
-                defaultChecked={props.userData.workStatusID == 1}
+                defaultChecked={props.userData.workStatus == 1}
               />
               <Form.Check
                 inline
@@ -173,7 +175,7 @@ export default function EditProfile(props) {
                 name="group1"
                 type="radio"
                 id="0"
-                defaultChecked={props.userData.workStatusID == 0}
+                defaultChecked={props.userData.workStatus == 0}
               />
             </div>
             <Form.Label>Turtle Club Status</Form.Label>
@@ -203,7 +205,7 @@ export default function EditProfile(props) {
                   <Form.Check
                     inline
                     key={keyValue}
-                    label={course.courseID}
+                    label={course.coursenumber}
                     name="classesTaken"
                     type="checkbox"
                     id={course.courseID}
@@ -220,7 +222,7 @@ export default function EditProfile(props) {
                   <Form.Check
                     inline
                     key={keyValue}
-                    label={course.courseID}
+                    label={course.coursenumber}
                     name="classesTaken"
                     type="checkbox"
                     id={course.courseID}
@@ -235,21 +237,15 @@ export default function EditProfile(props) {
             </Form.Label>
             <Form.Check // prettier-ignore
               type="switch"
-              id="writeReviewReminder"
-              label="Enable reminders to write course reviews"
-              defaultChecked={props.userData.mcitCentralEmailNotifications}
-            />
-            <Form.Check // prettier-ignore
-              type="switch"
-              id="mcitConnectNotifications"
-              label="Enable email notifications to review replies"
-              defaultChecked={props.userData.commentEmailNotifications}
+              id="mcitEmailNotifications"
+              label="Enable email notifications from MCITCentral"
+              defaultChecked={props.userData.mcitEmailNotifications}
             />
             <Form.Check // prettier-ignore
               type="switch"
               id="mcitConnectEnabled"
               label="Enable MCIT Connect"
-              defaultChecked={props.userData.mcitConnectEnabled}
+              defaultChecked={props.userData.mcitConnectEnable}
             />
             <Form.Check // prettier-ignore
               type="switch"
