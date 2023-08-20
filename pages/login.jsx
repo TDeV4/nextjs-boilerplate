@@ -5,11 +5,40 @@ import styles from "../app/page.module.css";
 import HomeTopBar from "../components/HomeTopBar";
 import TopNavBar from "../components/TopNavBar";
 import MyProfileTab from "@/components/MyProfileTab";
+import fetchWrapper from "../pages/api/fetchWrapper";
+import EditProfile from "@/components/CommentButton";
 
 const Login = () => {
   const { data: session } = useSession();
   console.log(session);
+
+  const [userID, setUserID] = useState(null);
+
+  const getUserInfo = async () => {
+    try {
+      // const fetcher = fetchWrapper();
+      const response = await fetchWrapper.get("/users/getuserid");
+      
+      const jsonData = response.data;
+      console.log(jsonData);
+      setUserID(jsonData);
+      // mark that we got the data
+      // setHasFetchedData(true);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    console.log("Getting profile");
+    getUserInfo();
+  }, []);
+
   if (session) {
+    if (userID.userID === null) {
+      <EditProfile userData={null}/>
+    }
+    else {
     return (
       <main className={styles.main}>
         <TopNavBar />
@@ -20,6 +49,7 @@ const Login = () => {
         </div>
       </main>
     );
+  }
   } else {
     return (
       <main className={styles.main}>

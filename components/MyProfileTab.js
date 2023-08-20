@@ -63,7 +63,6 @@ export default function MyProfileTab(props) {
           userData={profile}
           coursesTaken={props.courseData}
           currentCourseData={props.currentCourseData}
-          allCourses={courses}
         />
       </div>
       <div>

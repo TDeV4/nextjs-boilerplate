@@ -3,6 +3,7 @@ import { useState } from "react";
 import styles from "../app/page.module.css";
 import TimezonePicker from "react-bootstrap-timezone-picker";
 import "react-bootstrap-timezone-picker/dist/react-bootstrap-timezone-picker.min.css";
+import fetchWrapper from "../pages/api/fetchWrapper";
 
 export default function EditProfile(props) {
   const [show, setShow] = useState(false);
@@ -23,7 +24,7 @@ export default function EditProfile(props) {
   });
 
   const startYearOptions = [];
-  for (let i = 2020; i <= new Date().getFullYear(); i++) {
+  for (let i = 2018; i <= new Date().getFullYear(); i++) {
     startYearOptions.push(
       <option key={i} value={i}>
         {i}
@@ -39,6 +40,27 @@ export default function EditProfile(props) {
       </option>
     );
   }
+
+  const [courses, setCourses] = useState([]);
+
+  const getCourseStats = async () => {
+    try {
+      
+      const response = await fetchWrapper.get("/courses/");
+      
+      const jsonData = response.data;
+      // console.log(jsonData);
+      setCourses(jsonData);
+      
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    console.log("Getting course stats");
+    getCourseStats();
+  }, []);
 
   return (
     <>
@@ -199,7 +221,7 @@ export default function EditProfile(props) {
             </div>
             <Form.Label>Courses Taken</Form.Label>
             <div key={`inline-checks`} className="mb-3">
-              {props.allCourses.map((course) => {
+              {courses.map((course) => {
                 var keyValue = course.courseID + "taken";
                 return (
                   <Form.Check
