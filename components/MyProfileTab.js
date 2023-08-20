@@ -92,9 +92,9 @@ export default function MyProfileTab(props) {
             })}
             {profile.coursetaking.map((course) => {
               return (
-                <Col key={course.courseID}>
+                <Col key={course}>
                   <h5>
-                    <Badge bg="warning">{course.courseID}</Badge>
+                    <Badge bg="warning">{course}</Badge>
                   </h5>
                 </Col>
               );
