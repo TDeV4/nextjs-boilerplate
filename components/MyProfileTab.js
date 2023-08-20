@@ -65,23 +65,23 @@ export default function MyProfileTab(props) {
     <div>
       <div className={styles.rightAlignButton}>
         <EditProfile
-          userData={profile[0]}
+          userData={profile}
           coursesTaken={props.courseData}
           currentCourseData={props.currentCourseData}
           allCourses={courses}
         />
       </div>
       <div>
-        <h5 className={styles.centerText}>Hello, {profile[0].name}!</h5>
+        <h5 className={styles.centerText}>Hello, {profile.name}!</h5>
         <h7 className={styles.centerText}>AKA (your anonymous name):</h7>
-        <h7 className={styles.centerText}>{profile[0].anonName}</h7>
+        <h7 className={styles.centerText}>{profile.anonName}</h7>
         <br></br>
-        <p>Expected Graduation: {profile[0].expectedGraduation} </p>
-        <p>Industry: {profile[0].industry}</p>
-        <p>Work Status: {profile[0].workStatus}</p>
+        <p>Expected Graduation: {profile.expectedGraduation} </p>
+        <p>Industry: {profile.industry}</p>
+        <p>Work Status: {profile.workStatus}</p>
         <p>
           Turtle or Non-turtle:{" "}
-          {profile[0].inTurtleClub == true ? "Turtle" : "Non-Turtle"}
+          {profile.inTurtleClub == true ? "Turtle" : "Non-Turtle"}
         </p>
         <div>
           Courses Completed:
