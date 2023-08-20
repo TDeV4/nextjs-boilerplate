@@ -3,12 +3,11 @@ import styles from "../app/page.module.css";
 import Link from "next/link";
 import EditProfile from "./EditProfile";
 import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
 
 import fetchWrapper from "../pages/api/fetchWrapper";
 
 export default function MyProfileTab(props) {
-  const { data: session } = useSession();
+  
   const [profile, setProfile] = useState([]);
 
   const getProfileInfo = async () => {
@@ -35,19 +34,15 @@ export default function MyProfileTab(props) {
 
   const [courses, setCourses] = useState([]);
 
-  // get and set the fetched data only once
-  // const [hasFetchedData, setHasFetchedData] = useState(false);
-
   const getCourseStats = async () => {
     try {
-      // const fetcher = fetchWrapper();
+      
       const response = await fetchWrapper.get("/courses/coursestats");
       console.log(response);
       const jsonData = response.data;
 
       setCourses(jsonData);
-      // mark that we got the data
-      // setHasFetchedData(true);
+      
     } catch (err) {
       console.error(err.message);
     }
