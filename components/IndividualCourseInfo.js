@@ -2,6 +2,9 @@ import styles from "../app/page.module.css";
 import Link from "next/link";
 import Table from 'react-bootstrap/Table';
 import { Badge } from "react-bootstrap";
+import fetchWrapper from "../pages/api/fetchWrapper";
+import { useEffect, useState } from "react";
+
 
 //group an array by property 
 function groupBy(arr, property) {
@@ -15,6 +18,34 @@ function groupBy(arr, property) {
 }
 
 export default function IndividualCourseInfo(props) {
+  //const { data: session, status } = useSession();
+  const [course, setCourse] = useState([]);
+
+  // get and set the fetched data only once
+  // const [hasFetchedData, setHasFetchedData] = useState(false);
+
+  const getCourseStats = async() => {
+    try{
+      // const fetcher = fetchWrapper();
+      const response = await fetchWrapper.get("/courses/"+ props.course);
+      console.log(response)
+      const jsonData = response.data;
+      
+      setCourse(jsonData);
+      // mark that we got the data
+      // setHasFetchedData(true);
+
+    }catch (err){
+      console.error(err.message);
+    }
+  }
+  
+  useEffect(() => {  
+      console.log("Getting course stats");
+      getCourseStats();
+  }, []);
+
+  // console.log(courses);
   //group by name
   const grouped = groupBy(props.coursePairings, "coursenumber");
   const keys = Object.keys(grouped);
