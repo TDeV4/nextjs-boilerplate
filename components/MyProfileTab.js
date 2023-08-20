@@ -14,9 +14,9 @@ export default function MyProfileTab(props) {
     try {
       // const fetcher = fetchWrapper();
       const response = await fetchWrapper.get("/users/1");
-      console.log(response);
+      
       const jsonData = response.data;
-
+      console.log(jsonData);
       setProfile(jsonData);
       // mark that we got the data
       // setHasFetchedData(true);
@@ -37,10 +37,10 @@ export default function MyProfileTab(props) {
   const getCourseStats = async () => {
     try {
       
-      const response = await fetchWrapper.get("/courses/coursestats");
-      console.log(response);
+      const response = await fetchWrapper.get("/courses/");
+      
       const jsonData = response.data;
-
+      // console.log(jsonData);
       setCourses(jsonData);
       
     } catch (err) {
@@ -81,16 +81,16 @@ export default function MyProfileTab(props) {
         <div>
           Courses Completed:
           <Row xs={1} md={5}>
-            {props.courseData.map((course) => {
+            {profile.coursetaken.map((course) => {
               return (
-                <Col key={course.courseID}>
+                <Col key={course}>
                   <h5>
-                    <Badge bg="success">{course.courseID}</Badge>
+                    <Badge bg="success">{course}</Badge>
                   </h5>
                 </Col>
               );
             })}
-            {props.currentCourseData.map((course) => {
+            {profile.coursetaking.map((course) => {
               return (
                 <Col key={course.courseID}>
                   <h5>
