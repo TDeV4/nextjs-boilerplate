@@ -130,7 +130,7 @@ export default function coursePage() {
   //make a fetch request and pass in the course id in the url (get request) to get all the reviews for that course and the course info for that course
   const router = useRouter();
   const query = router.query;
-  const course = query.coursenumber;
+  const course = query.courseID;
 
   return (
     <main className={styles.main}>
@@ -139,7 +139,7 @@ export default function coursePage() {
         <div class={styles.leftpane}>
           <div class={styles.borderBox}>
             <IndividualCourseInfo
-              coursenumber = {course}
+              courseID = {course}
               reviewData={DUMMY_REVIEW_DATA}
               courseData={DUMMY_NEW_COURSE_DATA}
               coursePairings={DUMMY_USER_COURSE_PAIRING}
