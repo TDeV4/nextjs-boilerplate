@@ -1,12 +1,14 @@
 import React from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { useState, useEffect } from "react";
 
 import styles from "../app/page.module.css";
 import HomeTopBar from "../components/HomeTopBar";
 import TopNavBar from "../components/TopNavBar";
 import MyProfileTab from "@/components/MyProfileTab";
 import fetchWrapper from "../pages/api/fetchWrapper";
-import EditProfile from "@/components/CommentButton";
+import CreateProfile from "@/components/CreateProfile";
+import { BrowserRouter } from "react-router-dom";
 
 const Login = () => {
   const { data: session } = useSession();
@@ -18,7 +20,7 @@ const Login = () => {
     try {
       // const fetcher = fetchWrapper();
       const response = await fetchWrapper.get("/users/getuserid");
-      
+
       const jsonData = response.data;
       console.log(jsonData);
       setUserID(jsonData);
@@ -35,21 +37,31 @@ const Login = () => {
   }, []);
 
   if (session) {
-    if (userID.userID === null) {
-      <EditProfile userData={null}/>
+    if (userID === null) {
+      const nullProfileInfo = {
+        coursetaken: [],
+        coursetaking: [],
+      };
+      return (
+        <main className={styles.main}>
+          <h1>Please create your profile to continue: </h1>
+          <BrowserRouter>
+            <CreateProfile />
+          </BrowserRouter>
+        </main>
+      );
+    } else {
+      return (
+        <main className={styles.main}>
+          <TopNavBar />
+          <HomeTopBar />
+          <div className={styles.borderBox}>
+            <MyProfileTab courseData={[]} currentCourseData={[]} />
+            <button onClick={() => signOut()}>Sign out</button>
+          </div>
+        </main>
+      );
     }
-    else {
-    return (
-      <main className={styles.main}>
-        <TopNavBar />
-        <HomeTopBar />
-        <div className={styles.borderBox}>
-          <MyProfileTab courseData={[]} currentCourseData={[]} />
-          <button onClick={() => signOut()}>Sign out</button>
-        </div>
-      </main>
-    );
-  }
   } else {
     return (
       <main className={styles.main}>

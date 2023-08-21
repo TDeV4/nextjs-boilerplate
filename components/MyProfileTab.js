@@ -7,14 +7,13 @@ import { useEffect, useState } from "react";
 import fetchWrapper from "../pages/api/fetchWrapper";
 
 export default function MyProfileTab(props) {
-  
   const [profile, setProfile] = useState([]);
 
   const getProfileInfo = async () => {
     try {
       // const fetcher = fetchWrapper();
       const response = await fetchWrapper.get("/users/1");
-      
+
       const jsonData = response.data;
       console.log(jsonData);
       setProfile(jsonData);
@@ -36,13 +35,11 @@ export default function MyProfileTab(props) {
 
   const getCourseStats = async () => {
     try {
-      
       const response = await fetchWrapper.get("/courses/");
-      
+
       const jsonData = response.data;
-      // console.log(jsonData);
+      console.log(jsonData);
       setCourses(jsonData);
-      
     } catch (err) {
       console.error(err.message);
     }
@@ -52,18 +49,10 @@ export default function MyProfileTab(props) {
     return <div></div>;
   }
 
-  if (courses.length < 1) {
-    return <div></div>;
-  }
-
   return (
     <div>
       <div className={styles.rightAlignButton}>
-        <EditProfile
-          userData={profile}
-          coursesTaken={props.courseData}
-          currentCourseData={props.currentCourseData}
-        />
+        <EditProfile userData={profile} />
       </div>
       <div>
         <h5 className={styles.centerText}>Hello, {profile.name}!</h5>

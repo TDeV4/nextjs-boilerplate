@@ -1,5 +1,5 @@
 import { Modal, Button, Form, Row, Col, FloatingLabel } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "../app/page.module.css";
 import TimezonePicker from "react-bootstrap-timezone-picker";
 import "react-bootstrap-timezone-picker/dist/react-bootstrap-timezone-picker.min.css";
@@ -12,16 +12,6 @@ export default function EditProfile(props) {
   const handleShow = () => setShow(true);
 
   const handleSubmit = (event) => {};
-
-  var coursesTaken = [];
-  props.coursesTaken.map((course) => {
-    coursesTaken.push(course.courseID);
-  });
-
-  var currentCourses = [];
-  props.currentCourseData.map((course) => {
-    currentCourses.push(course.courseID);
-  });
 
   const startYearOptions = [];
   for (let i = 2018; i <= new Date().getFullYear(); i++) {
@@ -45,13 +35,11 @@ export default function EditProfile(props) {
 
   const getCourseStats = async () => {
     try {
-      
       const response = await fetchWrapper.get("/courses/");
-      
+
       const jsonData = response.data;
       // console.log(jsonData);
       setCourses(jsonData);
-      
     } catch (err) {
       console.error(err.message);
     }
@@ -107,6 +95,7 @@ export default function EditProfile(props) {
               absolute={false}
               defaultValue={props.userData.timeZone}
               placeholder="Select timezone..."
+              required
             />
             <Row>
               <Col>
@@ -115,7 +104,7 @@ export default function EditProfile(props) {
                   label="Start Year"
                   className="mb-3"
                 >
-                  <Form.Select>
+                  <Form.Select required>
                     <option key="blankChoice" hidden value="" />
                     {startYearOptions}
                   </Form.Select>
@@ -141,7 +130,7 @@ export default function EditProfile(props) {
                   label="Expected Graduation Year"
                   className="mb-3"
                 >
-                  <Form.Select>
+                  <Form.Select required>
                     <option key="blankChoice" hidden value="" />
                     {endYearOptions}
                   </Form.Select>
@@ -154,7 +143,6 @@ export default function EditProfile(props) {
               className="mb-3"
             >
               <Form.Control
-                required
                 type="text"
                 placeholder="Industry"
                 defaultValue={props.userData.industry}
@@ -231,14 +219,16 @@ export default function EditProfile(props) {
                     name="classesTaken"
                     type="checkbox"
                     id={course.courseID}
-                    defaultChecked={coursesTaken.includes(course.courseID)}
+                    defaultChecked={props.userData.coursetaken.includes(
+                      course.courseID
+                    )}
                   />
                 );
               })}
             </div>
             <Form.Label>Courses Currently Being Taken</Form.Label>
             <div key={`inline-checks`} className="mb-3">
-              {props.allCourses.map((course) => {
+              {courses.map((course) => {
                 var keyValue = course.courseID + "currentlyTaking";
                 return (
                   <Form.Check
@@ -248,7 +238,9 @@ export default function EditProfile(props) {
                     name="classesTaken"
                     type="checkbox"
                     id={course.courseID}
-                    defaultChecked={currentCourses.includes(course.courseID)}
+                    defaultChecked={props.userData.coursetaking.includes(
+                      course.courseID
+                    )}
                   />
                 );
               })}
