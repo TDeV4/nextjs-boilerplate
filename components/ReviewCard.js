@@ -27,7 +27,7 @@ export default function ReviewCard(props) {
     <div className={styles.reviewCardContainer}>
       <img src="/Review.png" height={50} width={50} alt="Review Card" />
       <h3 style={{ display: "inline", marginLeft: "10px" }}>
-        {props.reviewData.courseNumber}: {props.reviewData.courseName}
+        {props.reviewData.coursenumber}: {props.reviewData.coursename}
       </h3>
       <div>
         Review By:{" "}

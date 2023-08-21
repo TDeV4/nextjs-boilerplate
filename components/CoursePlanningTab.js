@@ -2,7 +2,8 @@ import styles from "../app/page.module.css";
 import Column from "./column";
 import { DragDropContext } from "react-beautiful-dnd";
 import { Col, Row } from "react-bootstrap";
-import React, { Component, useState } from "react";
+import React, { Component, useState, useEffect } from "react";
+import fetchWrapper from "../pages/api/fetchWrapper";
 
 const DUMMY_DATA = [
   {
@@ -49,12 +50,12 @@ function formatData(courseBuilderData, userData) {
   var columns = {};
   var columnOrder = [];
 
-  for (
-    let i = 0;
-    i <
-    (parseInt(userData.graduationYear) - parseInt(userData.startYear)) * 3 + 4;
-    i++
-  ) {
+  const gradYear = userData.expectedGraduation.slice(-4);
+  console.log(gradYear);
+  const startYear = userData.startSemester.slice(-4);
+  console.log(startYear);
+
+  for (let i = 0; i < (parseInt(gradYear) - parseInt(startYear)) * 3 + 4; i++) {
     var term;
     if (i == 0) {
       term = "Course List";
@@ -67,8 +68,7 @@ function formatData(courseBuilderData, userData) {
     }
     if (i != 0) {
       var columnTitle =
-        term +
-        (parseInt(userData.startYear) + parseInt((i - 1) / 3)).toString();
+        term + (parseInt(startYear) + parseInt((i - 1) / 3)).toString();
     } else {
       var columnTitle = term;
     }
@@ -99,10 +99,39 @@ function formatData(courseBuilderData, userData) {
 }
 
 export default function CoursePlanningTab(props) {
-  var dataToUse = {};
-  dataToUse = formatData(props.courseBuilderData, props.userData);
+  const [profile, setProfile] = useState([]);
 
-  const [data, setData] = useState(dataToUse);
+  const getProfileInfo = async () => {
+    try {
+      // const fetcher = fetchWrapper();
+      const response = await fetchWrapper.get("/users/2");
+
+      const jsonData = response.data;
+      console.log(jsonData);
+      setProfile(jsonData);
+      // mark that we got the data
+      // setHasFetchedData(true);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const [data, setData] = useState({
+    columnOrder: [],
+  });
+
+  var dataToUse;
+
+  useEffect(() => {
+    console.log("Getting profile");
+    getProfileInfo();
+    if (profile.length < 1) {
+    } else {
+      dataToUse = formatData(props.courseBuilderData, profile);
+      console.log(dataToUse);
+      setData(dataToUse);
+    }
+  }, [profile.name]);
 
   const onDragEnd = (result, dataToUse) => {
     const { destination, source, draggableId } = result;
@@ -115,12 +144,12 @@ export default function CoursePlanningTab(props) {
       return;
     }
 
-    const column = dataToUse.columns[destination.droppableId];
+    const column = data.columns[destination.droppableId];
     const newCourseIds = Array.from(column["courseIDs"]);
 
     newCourseIds.push(draggableId);
 
-    const sourceColumn = dataToUse.columns[source.droppableId];
+    const sourceColumn = data.columns[source.droppableId];
     const newCourseIdsForSourceColumn = Array.from(sourceColumn["courseIDs"]);
     newCourseIdsForSourceColumn.splice(source.index, 1);
 
@@ -135,13 +164,24 @@ export default function CoursePlanningTab(props) {
     };
 
     const newDataToUse = {
-      ...dataToUse,
+      ...data,
       columns: {
-        ...dataToUse.columns,
+        ...data.columns,
         [newColumn.id]: newColumn,
         [sourceColumn.id]: updatedSourceColumn,
       },
     };
+
+    const values = {};
+    values["semesterID"] = parseInt(destination.droppableId);
+    values["courseID"] = parseInt(draggableId);
+    values["userID"] = profile.userID;
+    console.log(values);
+
+    //fetchWrapper
+    //  .put("/coursebuilder/", values)
+    //  .then((data) => console.log("Success", data))
+    //  .catch((error) => console.error("There was an error!", error));
 
     setData(newDataToUse);
   };

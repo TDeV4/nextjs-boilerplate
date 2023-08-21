@@ -151,28 +151,6 @@ const DUMMY_ALL_COURSES_DATA = [
 ];
 
 export default function HomePage() {
-  const [profile, setProfile] = useState([]);
-
-  const getProfileInfo = async () => {
-    try {
-      // const fetcher = fetchWrapper();
-      const response = await fetchWrapper.get("/users/1");
-      console.log(response);
-      const jsonData = response.data;
-
-      setProfile(jsonData);
-      // mark that we got the data
-      // setHasFetchedData(true);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
-  useEffect(() => {
-    console.log("Getting profile");
-    getProfileInfo();
-  }, []);
-
   const { data: session } = useSession();
   console.log(session);
   if (session) {
