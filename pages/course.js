@@ -139,6 +139,7 @@ export default function coursePage() {
         <div class={styles.leftpane}>
           <div class={styles.borderBox}>
             <IndividualCourseInfo
+              courseID = {course}
               reviewData={DUMMY_REVIEW_DATA}
               courseData={DUMMY_NEW_COURSE_DATA}
               coursePairings={DUMMY_USER_COURSE_PAIRING}
