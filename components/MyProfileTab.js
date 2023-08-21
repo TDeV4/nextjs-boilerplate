@@ -81,7 +81,7 @@ export default function MyProfileTab(props) {
         <div>
           Courses Completed:
           <Row xs={1} md={5}>
-            {profile.coursetaken.map((course) => {
+            {profile.coursesTaken.map((course) => {
               return (
                 <Col key={course}>
                   <h5>
@@ -90,7 +90,7 @@ export default function MyProfileTab(props) {
                 </Col>
               );
             })}
-            {profile.coursetaking.map((course) => {
+            {profile.coursesTaking.map((course) => {
               return (
                 <Col key={course}>
                   <h5>
