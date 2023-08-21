@@ -12,7 +12,7 @@ export default function MyProfileTab(props) {
   const getProfileInfo = async () => {
     try {
       // const fetcher = fetchWrapper();
-      const response = await fetchWrapper.get("/users/1");
+      const response = await fetchWrapper.get("/users/2");
 
       const jsonData = response.data;
       console.log(jsonData);
@@ -49,6 +49,10 @@ export default function MyProfileTab(props) {
     return <div></div>;
   }
 
+  if (courses.length < 1) {
+    return <div></div>;
+  }
+
   return (
     <div>
       <div className={styles.rightAlignButton}>
@@ -69,7 +73,7 @@ export default function MyProfileTab(props) {
         <div>
           Courses Completed:
           <Row xs={1} md={5}>
-            {profile.coursetaken.map((course) => {
+            {profile.coursesTaken.map((course) => {
               return (
                 <Col key={course}>
                   <h5>
@@ -78,7 +82,7 @@ export default function MyProfileTab(props) {
                 </Col>
               );
             })}
-            {profile.coursetaking.map((course) => {
+            {profile.coursesTaking.map((course) => {
               return (
                 <Col key={course}>
                   <h5>

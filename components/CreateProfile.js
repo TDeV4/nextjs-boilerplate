@@ -4,7 +4,6 @@ import styles from "../app/page.module.css";
 import "react-bootstrap-timezone-picker/dist/react-bootstrap-timezone-picker.min.css";
 import fetchWrapper from "../pages/api/fetchWrapper";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 export default function CreateProfile(props) {
   const [values, setValues] = useState({
@@ -17,8 +16,8 @@ export default function CreateProfile(props) {
     industry: null,
     workStatus: null,
     inTurtleClub: null,
-    coursetaken: [],
-    coursetaking: [],
+    coursesTaken: [],
+    coursesTaking: [],
     mcitEmailNotifications: false,
     mcitConnectEnable: false,
     mcitConnectEmailNotifications: false,
@@ -120,28 +119,28 @@ export default function CreateProfile(props) {
 
   const onCourseTakenChange = (e) => {
     const course = e.target.value;
-    if (values["coursetaken"].includes(course)) {
-      const index = values["coursetaken"].indexOf(course);
-      values["coursetaken"].splice(index, 1);
+    if (values["coursesTaken"].includes(course)) {
+      const index = values["coursesTaken"].indexOf(course);
+      values["coursesTaken"].splice(index, 1);
     } else {
-      const newArray = values["coursetaken"];
+      const newArray = values["coursesTaken"];
       newArray.push(course);
-      values["coursetaken"] = newArray;
+      values["coursesTaken"] = newArray;
     }
-    console.log(values["coursetaken"]);
+    console.log(values["coursesTaken"]);
   };
 
   const onCourseTakingChange = (e) => {
     const course = e.target.value;
-    if (values["coursetaking"].includes(course)) {
-      const index = values["coursetaking"].indexOf(course);
-      values["coursetaking"].splice(index, 1);
+    if (values["coursesTaking"].includes(course)) {
+      const index = values["coursesTaking"].indexOf(course);
+      values["coursesTaking"].splice(index, 1);
     } else {
-      const newArray = values["coursetaking"];
+      const newArray = values["coursesTaking"];
       newArray.push(course);
-      values["coursetaking"] = newArray;
+      values["coursesTaking"] = newArray;
     }
-    console.log(values["coursetaking"]);
+    console.log(values["coursesTaking"]);
   };
 
   const onFormChange = (e, updatedAt) => {
@@ -158,23 +157,21 @@ export default function CreateProfile(props) {
     try {
       const expectedGraduation =
         values["expectedGradSemester"] + " " + values["expectedGradYear"];
+      console.log(expectedGraduation);
       const startSemester = values["startSemester"] + " " + values["startYear"];
+      console.log(startSemester);
 
-      delete values["expectedGradSemester"];
-      delete values["expectedGradYear"];
-      delete values["startSemester"];
-      delete values["startYear"];
-      setValues({ ...values, ["expectedGraduation"]: expectedGraduation });
-      setValues({ ...values, ["startSemester"]: startSemester });
+      values["expectedGraduation"] = expectedGraduation;
+      values["startSemester"] = startSemester;
+
       console.log(values);
 
       fetchWrapper
         .post("/users/", values)
         .then((data) => console.log("Success", data))
         .catch((error) => console.error("There was an error!", error));
-      //axios.post("/users/", values);
-      //navigate("/");
-      //window.location.reload();
+      navigate("/");
+      window.location.reload();
     } catch (err) {
       console.log("Failed to create user");
       console.log(err);
@@ -391,10 +388,10 @@ export default function CreateProfile(props) {
                 inline
                 key={keyValue}
                 label={course.coursenumber}
-                name="coursetaken"
+                name="coursesTaken"
                 type="checkbox"
                 id={course.courseID}
-                value={course.courseID}
+                value={course.coursenumber}
                 onChange={onCourseTakenChange}
               />
             );
@@ -409,10 +406,10 @@ export default function CreateProfile(props) {
                 inline
                 key={keyValue}
                 label={course.coursenumber}
-                name="coursetaking"
+                name="coursesTaking"
                 type="checkbox"
-                id={course.courseID}
-                value={course.courseID}
+                id={course.coursenumber}
+                value={course.coursenumber}
                 onChange={onCourseTakingChange}
               />
             );

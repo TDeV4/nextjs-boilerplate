@@ -11,8 +11,7 @@ export default function EditProfile(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleSubmit = (event) => {};
-
+  //Generate start years
   const startYearOptions = [];
   for (let i = 2018; i <= new Date().getFullYear(); i++) {
     startYearOptions.push(
@@ -21,7 +20,7 @@ export default function EditProfile(props) {
       </option>
     );
   }
-
+  //Generate possible end years
   const endYearOptions = [];
   for (let i = 2020; i <= new Date().getFullYear() + 5; i++) {
     endYearOptions.push(
@@ -31,7 +30,135 @@ export default function EditProfile(props) {
     );
   }
 
+  const timeZones = [
+    "[GMT-12:00] International Date Line West",
+    "[GMT-11:00] Midway Island, Samoa",
+    "[GMT-10:00] Hawaii",
+    "[GMT-09:00] Alaska",
+    "[GMT-08:00] Pacific Time (US & Canada); Tijuana",
+    "[GMT-07:00] Arizona",
+    "[GMT-07:00] Chihuahua, La Paz, Mazatlan",
+    "[GMT-07:00] Mountain Time (US & Canada)",
+    "[GMT-06:00] Central America",
+    "[GMT-06:00] Central Time (US & Canada)",
+    "[GMT-06:00] Guadalajara, Mexico City, Monterrey",
+    "[GMT-06:00] Saskatchewan",
+    "[GMT-05:00] Bogota, Lima, Quito",
+    "[GMT-05:00] Eastern Time (US & Canada)",
+    "[GMT-05:00] Indiana (East)",
+    "[GMT-04:00] Atlantic Time (Canada)",
+    "[GMT-04:30] Caracas, La Paz",
+    "[GMT-04:00] Santiago",
+    "[GMT-03:30] Newfoundland",
+    "[GMT-03:00] Brasilia",
+    "[GMT-03:00] Buenos Aires, Georgetown",
+    "[GMT-03:00] Greenland",
+    "[GMT-02:00] Mid-Atlantic",
+    "[GMT-01:00] Azores",
+    "[GMT-01:00] Cape Verde Is.",
+    "[UTC] Coordinated Universal Time",
+    "[GMT] Greenwich Mean Time: Dublin, Edinburgh, Lisbon, London",
+    "[GMT+01:00] Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna",
+    "[GMT+01:00] Belgrade, Bratislava, Budapest, Ljubljana, Prague",
+    "[GMT+01:00] Brussels, Copenhagen, Madrid, Paris",
+    "[GMT+01:00] Sarajevo, Skopje, Warsaw, Zagreb",
+    "[GMT+01:00] West Central Africa",
+    "[GMT+02:00] Athens, Istanbul",
+    "[GMT+02:00] Bucharest",
+    "[GMT+02:00] Cairo",
+    "[GMT+02:00] Harare, Pretoria",
+    "[GMT+02:00] Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius",
+    "[GMT+02:00] Jerusalem",
+    "[GMT+03:00] Baghdad",
+    "[GMT+03:00] Kuwait, Riyadh",
+    "[GMT+03:00] Nairobi",
+    "[GMT+03:30] Tehran",
+    "[GMT+03:00] Moscow, St. Petersburg, Volgograd",
+    "[GMT+04:00] Abu Dhabi, Muscat",
+    "[GMT+04:00] Baku, Tbilisi, Yerevan",
+    "[GMT+04:30] Kabul",
+    "[GMT+05:00] Ekaterinburg",
+    "[GMT+05:00] Islamabad, Karachi, Tashkent",
+    "[GMT+05:30] Chennai, Kolkata, Mumbai, New Delhi",
+    "[GMT+05:45] Kathmandu",
+    "[GMT+06:00] Almaty, Novosibirsk",
+    "[GMT+06:00] Astana, Dhaka",
+    "[GMT+06:00] Sri Jayawardenepura",
+    "[GMT+06:30] Rangoon",
+    "[GMT+07:00] Bangkok, Hanoi, Jakarta",
+    "[GMT+07:00] Krasnoyarsk",
+    "[GMT+08:00] Beijing, Chongqing, Hong Kong, Urumqi",
+    "[GMT+08:00] Irkutsk, Ulaan Bataar",
+    "[GMT+08:00] Kuala Lumpur, Singapore",
+    "[GMT+08:00] Perth",
+    "[GMT+08:00] Taipei",
+    "[GMT+09:00] Osaka, Sapporo, Tokyo",
+    "[GMT+09:00] Seoul",
+    "[GMT+09:00] Yakutsk",
+    "[GMT+09:30] Adelaide",
+    "[GMT+09:30] Darwin",
+    "[GMT+10:00] Brisbane",
+    "[GMT+10:00] Canberra, Melbourne, Sydney",
+    "[GMT+10:00] Guam, Port Moresby",
+    "[GMT+10:00] Hobart",
+    "[GMT+10:00] Vladivostok",
+    "[GMT+11:00] Magadan, Solomon Is., New Caledonia",
+    "[GMT+12:00] Auckland, Wellington",
+    "[GMT+12:00] Fiji, Kamchatka, Marshall Is.",
+    "[GMT+13:00] Nuku'alofa",
+  ];
+
+  //Generate time zone options
+  const timeZoneOptions = [];
+  for (let i = 0; i < timeZones.length; i++) {
+    timeZoneOptions.push(
+      <option key={i} value={timeZones[i]}>
+        {timeZones[i]}
+      </option>
+    );
+  }
+
   const [courses, setCourses] = useState([]);
+
+  const onSwitchChange = (e) => {
+    const name = e.target.name;
+    const currentValue = values[name];
+    setValues({ ...values, [name]: !currentValue });
+    console.log(name, !currentValue);
+  };
+
+  const onCourseTakenChange = (e) => {
+    const course = e.target.value;
+    if (values["coursetaken"].includes(course)) {
+      const index = values["coursetaken"].indexOf(course);
+      values["coursetaken"].splice(index, 1);
+    } else {
+      const newArray = values["coursetaken"];
+      newArray.push(course);
+      values["coursetaken"] = newArray;
+    }
+    console.log(values["coursetaken"]);
+  };
+
+  const onCourseTakingChange = (e) => {
+    const course = e.target.value;
+    if (values["coursetaking"].includes(course)) {
+      const index = values["coursetaking"].indexOf(course);
+      values["coursetaking"].splice(index, 1);
+    } else {
+      const newArray = values["coursetaking"];
+      newArray.push(course);
+      values["coursetaking"] = newArray;
+    }
+    console.log(values["coursetaking"]);
+  };
+
+  const onFormChange = (e, updatedAt) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setValues({ ...values, [name]: value });
+    console.log(name, value);
+  };
 
   const getCourseStats = async () => {
     try {
@@ -45,10 +172,56 @@ export default function EditProfile(props) {
     }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const expectedGraduation =
+        values["expectedGradSemester"] + " " + values["expectedGradYear"];
+      const startSemester = values["startSemester"] + " " + values["startYear"];
+
+      delete values["expectedGradSemester"];
+      delete values["expectedGradYear"];
+      delete values["startSemester"];
+      delete values["startYear"];
+      setValues({ ...values, ["expectedGraduation"]: expectedGraduation });
+      setValues({ ...values, ["startSemester"]: startSemester });
+      console.log(values);
+
+      fetchWrapper
+        .put("/users/", values)
+        .then((data) => console.log("Success", data))
+        .catch((error) => console.error("There was an error!", error));
+    } catch (err) {
+      console.log("Failed to create user");
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     console.log("Getting course stats");
     getCourseStats();
   }, []);
+
+  const [values, setValues] = useState({});
+
+  values["name"] = props.userData.name;
+  values["anonName"] = props.userData.anonName;
+  values["timeZone"] = props.userData.timeZone;
+  values["startYear"] = props.userData.startYear;
+  values["startSemester"] = props.userData.startSemester;
+  values["expectedGradSemester"] = props.userData.expectedGradSemester;
+  values["expectedGradYear"] = props.userData.expectedGradYear;
+  values["industry"] = props.userData.industry;
+  values["workStatus"] = props.userData.workStatus;
+  values["inTurtleClub"] = props.userData.inTurtleClub;
+  values["coursesTaken"] = props.userData.coursesTaken;
+  values["coursesTaking"] = props.userData.coursesTaking;
+  values["mcitEmailNotifications"] = props.userData.mcitEmailNotifications;
+  values["mcitConnectEnable"] = props.userData.mcitConnectEnable;
+  values["mcitConnectEmailNotifications"] =
+    props.userData.mcitConnectEmailNotifications;
+
+  console.log(values);
 
   return (
     <>
@@ -87,8 +260,6 @@ export default function EditProfile(props) {
                 required
                 type="text"
                 defaultValue={props.userData.anonName}
-                disabled
-                readOnly
               />
             </FloatingLabel>
             <TimezonePicker
@@ -98,6 +269,24 @@ export default function EditProfile(props) {
               required
             />
             <Row>
+              <Col>
+                <FloatingLabel
+                  controlId="startSemester"
+                  label="Start Semester"
+                  className="mb-3"
+                >
+                  <Form.Select>
+                    <option key="blankChoice" hidden value="" />
+                    <option
+                      defaultChecked={props.userData.startSemester === "Fall"}
+                    >
+                      Fall
+                    </option>
+                    <option>Spring</option>
+                    <option>Summer</option>
+                  </Form.Select>
+                </FloatingLabel>
+              </Col>
               <Col>
                 <FloatingLabel
                   controlId="startYear"
@@ -167,9 +356,7 @@ export default function EditProfile(props) {
                 name="group1"
                 type="radio"
                 id="2"
-                defaultChecked={
-                  props.userData.workStatus === "currently part time"
-                }
+                defaultChecked={props.userData.workStatus === "Full-Time"}
               />
               <Form.Check
                 inline
@@ -177,7 +364,7 @@ export default function EditProfile(props) {
                 name="group1"
                 type="radio"
                 id="1"
-                defaultChecked={props.userData.workStatus == 1}
+                defaultChecked={props.userData.workStatus === "Part-Time"}
               />
               <Form.Check
                 inline
@@ -185,26 +372,30 @@ export default function EditProfile(props) {
                 name="group1"
                 type="radio"
                 id="0"
-                defaultChecked={props.userData.workStatus == 0}
+                defaultChecked={
+                  props.userData.workStatus === "Full-Time Student"
+                }
               />
             </div>
             <Form.Label>Turtle Club Status</Form.Label>
             <div key={`inline-radio`} className="mb-3">
               <Form.Check
                 inline
-                label="In Turtle Club"
+                label="inTurtleClub"
                 name="group2"
                 type="radio"
                 id="true"
                 defaultChecked={props.userData.inTurtleClub}
+                onChange={onFormChange}
               />
               <Form.Check
                 inline
                 label="Not In Turtle Club"
-                name="group2"
+                name="inTurtleClub"
                 type="radio"
                 id="false"
                 defaultChecked={!props.userData.inTurtleClub}
+                onChange={onFormChange}
               />
             </div>
             <Form.Label>Courses Taken</Form.Label>
@@ -216,12 +407,14 @@ export default function EditProfile(props) {
                     inline
                     key={keyValue}
                     label={course.coursenumber}
-                    name="classesTaken"
+                    name="coursesTaken"
                     type="checkbox"
                     id={course.courseID}
-                    defaultChecked={props.userData.coursetaken.includes(
-                      course.courseID
+                    value={course.coursenumber}
+                    defaultChecked={props.userData.coursesTaken.includes(
+                      course.coursenumber
                     )}
+                    onChange={onCourseTakenChange}
                   />
                 );
               })}
@@ -235,12 +428,13 @@ export default function EditProfile(props) {
                     inline
                     key={keyValue}
                     label={course.coursenumber}
-                    name="classesTaken"
+                    name="coursesTaking"
                     type="checkbox"
                     id={course.courseID}
-                    defaultChecked={props.userData.coursetaking.includes(
-                      course.courseID
+                    defaultChecked={props.userData.coursesTaking.includes(
+                      course.coursenumber
                     )}
+                    onChange={onCourseTakingChange}
                   />
                 );
               })}
@@ -254,18 +448,21 @@ export default function EditProfile(props) {
               id="mcitEmailNotifications"
               label="Enable email notifications from MCITCentral"
               defaultChecked={props.userData.mcitEmailNotifications}
+              onChange={onSwitchChange}
             />
             <Form.Check // prettier-ignore
               type="switch"
               id="mcitConnectEnabled"
               label="Enable MCIT Connect"
               defaultChecked={props.userData.mcitConnectEnable}
+              onChange={onSwitchChange}
             />
             <Form.Check // prettier-ignore
               type="switch"
               id="mcitConnectNotifications"
               label="Enable MCIT Connect email notifications"
               defaultChecked={props.userData.mcitConnectEmailNotifications}
+              onChange={onSwitchChange}
             />
             <br />
             <button>Submit Changes</button>
