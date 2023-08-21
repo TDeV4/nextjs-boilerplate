@@ -15,7 +15,11 @@ export default function EditProfile(props) {
   const startYearOptions = [];
   for (let i = 2018; i <= new Date().getFullYear(); i++) {
     startYearOptions.push(
-      <option key={i} value={i}>
+      <option
+        key={i}
+        value={i}
+        defaultChecked={parseInt(props.userData.startYear) === i}
+      >
         {i}
       </option>
     );
@@ -129,28 +133,28 @@ export default function EditProfile(props) {
 
   const onCourseTakenChange = (e) => {
     const course = e.target.value;
-    if (values["coursetaken"].includes(course)) {
-      const index = values["coursetaken"].indexOf(course);
-      values["coursetaken"].splice(index, 1);
+    if (values["coursesTaken"].includes(course)) {
+      const index = values["coursesTaken"].indexOf(course);
+      values["coursesTaken"].splice(index, 1);
     } else {
-      const newArray = values["coursetaken"];
+      const newArray = values["coursesTaken"];
       newArray.push(course);
-      values["coursetaken"] = newArray;
+      values["coursesTaken"] = newArray;
     }
-    console.log(values["coursetaken"]);
+    console.log(values["coursesTaken"]);
   };
 
   const onCourseTakingChange = (e) => {
     const course = e.target.value;
-    if (values["coursetaking"].includes(course)) {
-      const index = values["coursetaking"].indexOf(course);
-      values["coursetaking"].splice(index, 1);
+    if (values["coursesTaking"].includes(course)) {
+      const index = values["coursesTaking"].indexOf(course);
+      values["coursesTaking"].splice(index, 1);
     } else {
-      const newArray = values["coursetaking"];
+      const newArray = values["coursesTaking"];
       newArray.push(course);
-      values["coursetaking"] = newArray;
+      values["coursesTaking"] = newArray;
     }
-    console.log(values["coursetaking"]);
+    console.log(values["coursesTaking"]);
   };
 
   const onFormChange = (e, updatedAt) => {
@@ -192,7 +196,7 @@ export default function EditProfile(props) {
         .then((data) => console.log("Success", data))
         .catch((error) => console.error("There was an error!", error));
     } catch (err) {
-      console.log("Failed to create user");
+      console.log("Failed to update user");
       console.log(err);
     }
   };
@@ -207,10 +211,11 @@ export default function EditProfile(props) {
   values["name"] = props.userData.name;
   values["anonName"] = props.userData.anonName;
   values["timeZone"] = props.userData.timeZone;
-  values["startYear"] = props.userData.startYear;
-  values["startSemester"] = props.userData.startSemester;
-  values["expectedGradSemester"] = props.userData.expectedGradSemester;
-  values["expectedGradYear"] = props.userData.expectedGradYear;
+  values["startYear"] = props.userData.startSemester.split(" ")[1];
+  values["startSemester"] = props.userData.startSemester.split(" ")[0];
+  values["expectedGradSemester"] =
+    props.userData.expectedGraduation.split(" ")[0];
+  values["expectedGradYear"] = props.userData.expectedGraduation.split(" ")[1];
   values["industry"] = props.userData.industry;
   values["workStatus"] = props.userData.workStatus;
   values["inTurtleClub"] = props.userData.inTurtleClub;
@@ -249,12 +254,14 @@ export default function EditProfile(props) {
                 type="text"
                 placeholder="Name"
                 defaultValue={props.userData.name}
+                name="name"
               />
             </FloatingLabel>
             <FloatingLabel
               controlId="floatingAnonName"
               label="Anonymous Name"
               className="mb-3"
+              name="anonName"
             >
               <Form.Control
                 required
@@ -262,26 +269,33 @@ export default function EditProfile(props) {
                 defaultValue={props.userData.anonName}
               />
             </FloatingLabel>
-            <TimezonePicker
-              absolute={false}
-              defaultValue={props.userData.timeZone}
-              placeholder="Select timezone..."
-              required
-            />
+            <FloatingLabel
+              controlId="Time Zone"
+              label="Time Zone"
+              className="mb-3"
+            >
+              <Form.Select
+                placeholder="Time Zone"
+                name="timeZone"
+                onChange={onFormChange}
+                required
+                defaultValue={values["timeZone"]}
+              >
+                <option key="blankChoice" hidden value="" />
+                {timeZoneOptions}
+              </Form.Select>
+            </FloatingLabel>
             <Row>
               <Col>
                 <FloatingLabel
                   controlId="startSemester"
                   label="Start Semester"
                   className="mb-3"
+                  name="startSemester"
                 >
-                  <Form.Select>
+                  <Form.Select defaultValue={values["startSemester"]}>
                     <option key="blankChoice" hidden value="" />
-                    <option
-                      defaultChecked={props.userData.startSemester === "Fall"}
-                    >
-                      Fall
-                    </option>
+                    <option defaultChecked={true}>Fall</option>
                     <option>Spring</option>
                     <option>Summer</option>
                   </Form.Select>
@@ -292,8 +306,9 @@ export default function EditProfile(props) {
                   controlId="startYear"
                   label="Start Year"
                   className="mb-3"
+                  name="startYear"
                 >
-                  <Form.Select required>
+                  <Form.Select required defaultValue={values["startYear"]}>
                     <option key="blankChoice" hidden value="" />
                     {startYearOptions}
                   </Form.Select>
@@ -301,11 +316,12 @@ export default function EditProfile(props) {
               </Col>
               <Col>
                 <FloatingLabel
-                  controlId="expectedGraduationSemester"
+                  controlId="expectedGradSemester"
                   label="Expected Graduation Semester"
                   className="mb-3"
+                  name="expectedGradSemester"
                 >
-                  <Form.Select>
+                  <Form.Select defaultValue={values["expectedGradSemester"]}>
                     <option key="blankChoice" hidden value="" />
                     <option>Fall</option>
                     <option>Spring</option>
@@ -315,11 +331,15 @@ export default function EditProfile(props) {
               </Col>
               <Col>
                 <FloatingLabel
-                  controlId="expectedGraduationYear"
+                  controlId="expectedGradYear"
                   label="Expected Graduation Year"
                   className="mb-3"
+                  name="expectedGradYear"
                 >
-                  <Form.Select required>
+                  <Form.Select
+                    required
+                    defaultValue={values["expectedGradYear"]}
+                  >
                     <option key="blankChoice" hidden value="" />
                     {endYearOptions}
                   </Form.Select>
@@ -335,6 +355,7 @@ export default function EditProfile(props) {
                 type="text"
                 placeholder="Industry"
                 defaultValue={props.userData.industry}
+                name="industry"
               />
             </FloatingLabel>
             <FloatingLabel
@@ -349,40 +370,38 @@ export default function EditProfile(props) {
               />
             </FloatingLabel>
             <Form.Label>Work Status</Form.Label>
-            <div key={`inline-radio`} className="mb-3">
+            <div key={`inline-radio1`} className="mb-3">
               <Form.Check
                 inline
                 label="Full-Time"
-                name="group1"
+                name="workStatus"
                 type="radio"
                 id="2"
-                defaultChecked={props.userData.workStatus === "Full-Time"}
+                defaultChecked={values["workStatus"] === "Full-Time"}
               />
               <Form.Check
                 inline
                 label="Part-Time"
-                name="group1"
+                name="workStatus"
                 type="radio"
                 id="1"
-                defaultChecked={props.userData.workStatus === "Part-Time"}
+                defaultChecked={values["workStatus"] === "Part-Time"}
               />
               <Form.Check
                 inline
                 label="Full-Time Student"
-                name="group1"
+                name="workStatus"
                 type="radio"
                 id="0"
-                defaultChecked={
-                  props.userData.workStatus === "Full-Time Student"
-                }
+                defaultChecked={values["workStatus"] === "Full-Time Student"}
               />
             </div>
             <Form.Label>Turtle Club Status</Form.Label>
-            <div key={`inline-radio`} className="mb-3">
+            <div key={`inline-radio2`} className="mb-3">
               <Form.Check
                 inline
-                label="inTurtleClub"
-                name="group2"
+                label="In Turtle Club"
+                name="inTurtleClub"
                 type="radio"
                 id="true"
                 defaultChecked={props.userData.inTurtleClub}
@@ -399,7 +418,7 @@ export default function EditProfile(props) {
               />
             </div>
             <Form.Label>Courses Taken</Form.Label>
-            <div key={`inline-checks`} className="mb-3">
+            <div key={`inline-checks1`} className="mb-3">
               {courses.map((course) => {
                 var keyValue = course.courseID + "taken";
                 return (
@@ -409,7 +428,6 @@ export default function EditProfile(props) {
                     label={course.coursenumber}
                     name="coursesTaken"
                     type="checkbox"
-                    id={course.courseID}
                     value={course.coursenumber}
                     defaultChecked={props.userData.coursesTaken.includes(
                       course.coursenumber
@@ -420,7 +438,7 @@ export default function EditProfile(props) {
               })}
             </div>
             <Form.Label>Courses Currently Being Taken</Form.Label>
-            <div key={`inline-checks`} className="mb-3">
+            <div key={`inline-checks2`} className="mb-3">
               {courses.map((course) => {
                 var keyValue = course.courseID + "currentlyTaking";
                 return (
@@ -430,7 +448,7 @@ export default function EditProfile(props) {
                     label={course.coursenumber}
                     name="coursesTaking"
                     type="checkbox"
-                    id={course.courseID}
+                    value={course.coursenumber}
                     defaultChecked={props.userData.coursesTaking.includes(
                       course.coursenumber
                     )}

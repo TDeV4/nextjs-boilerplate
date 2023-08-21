@@ -12,7 +12,7 @@ export default function MyProfileTab(props) {
   const getProfileInfo = async () => {
     try {
       // const fetcher = fetchWrapper();
-      const response = await fetchWrapper.get("/users/2");
+      const response = await fetchWrapper.get("/users/1");
 
       const jsonData = response.data;
       console.log(jsonData);
