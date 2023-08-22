@@ -1,9 +1,12 @@
 import { Button } from "react-bootstrap";
 import styles from "../app/page.module.css";
 import CreateReview from "./CreateReview";
-import React, { Component, useState } from "react";
+// import React, { Component, useState } from "react";
 import ReviewCard from "./ReviewCard";
 import EditReview from "./EditReview";
+import fetchWrapper from "../pages/api/fetchWrapper";
+import { useEffect, useState } from "react";
+
 
 const DUMMY_COURSE_DATA = [
   {
@@ -139,14 +142,78 @@ function findRelevantCoursePairings(reviewID) {
 }
 
 export default function MyReviewsTab(props) {
+  const [user, setUser] = useState([]);
+
+  const getUserID = async () => {
+    try {
+      // const fetcher = fetchWrapper();
+      const response = await fetchWrapper.get("/getuserid");
+
+      const jsonData = response.data;
+      console.log(jsonData);
+      setUser(jsonData);
+      // mark that we got the data
+      // setHasFetchedData(true);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const [profile, setProfile] = useState([]);
+
+  const getProfileInfo = async () => {
+    try {
+      // const fetcher = fetchWrapper();
+      const response = await fetchWrapper.get("/users/1");
+
+      const jsonData = response.data;
+      console.log(jsonData);
+      setProfile(jsonData);
+      // mark that we got the data
+      // setHasFetchedData(true);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+  //const { data: session, status } = useSession();
+  const [reviews, setCourse] = useState([]);
+
+  // get and set the fetched data only once
+  // const [hasFetchedData, setHasFetchedData] = useState(false);
+
+  const getMyReviews = async() => {
+    try{
+      // const fetcher = fetchWrapper();
+      const response = await fetchWrapper.get("/reviews/byuser/1");
+      console.log(response)
+      const jsonData = response.data;
+      
+      setCourse(jsonData);
+      // mark that we got the data
+      // setHasFetchedData(true);
+
+    }catch (err){
+      console.error(err.message);
+    }
+  }
+  
+  useEffect(() => { 
+    console.log("Getting my user id");
+    getUserID();
+    console.log("Getting my user profile");
+    getProfileInfo(); 
+    console.log("Getting my course reviews");
+    getMyReviews();
+  }, []);
+
   const [createReviewIsOpen, setCreateReviewIsOpen] = useState(false);
 
   function createReview() {
     setCreateReviewIsOpen(true);
   }
 
-  var reviewReplyData = DUMMY_REVIEW_REPLY_DATA;
-  var reviewData = DUMMY_REVIEW_DATA;
+  // var reviewReplyData = DUMMY_REVIEW_REPLY_DATA;
+  // var reviewData = DUMMY_REVIEW_DATA;
 
   return (
     <div>
@@ -159,28 +226,28 @@ export default function MyReviewsTab(props) {
           profData={DUMMY_PROF_DATA}
         />
       </div>
-      {reviewReplyData.map((review) => {
+      {reviews.map((review) => {
         if (review.parentID === null) {
-          var reviewDataPassThrough;
-          reviewData.map((reviewData) => {
-            if (review.reviewID === reviewData.reviewID) {
-              reviewDataPassThrough = reviewData;
-            }
-          });
+          // var reviewDataPassThrough;
+          // reviewData.map((reviewData) => {
+          //   if (review.reviewID === reviewData.reviewID) {
+          //     reviewDataPassThrough = reviewData;
+          //   }
+          // });
           return (
             <div key={review.reviewID}>
               <ReviewCard
                 key={review.reviewID}
                 review={review}
-                reviewData={reviewDataPassThrough}
-                userData={props.userData}
-                reviewReplyData={reviewReplyData}
+                reviewData={review}
+                userData={profile}
+                reviewReplyData={reviews}
                 coursePairings={findRelevantCoursePairings(review.reviewID)}
               />
               <div className={styles.rightAlignButton}>
                 <EditReview
                   review={review}
-                  reviewData={reviewDataPassThrough}
+                  reviewData={review}
                   coursePairings={findRelevantCoursePairings(review.reviewID)}
                   courseData={DUMMY_COURSE_DATA}
                 />

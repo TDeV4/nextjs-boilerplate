@@ -158,7 +158,7 @@ export default function EditProfile(props) {
     console.log(values["coursesTaking"]);
   };
 
-  const onFormChange = (e, updatedAt) => {
+  const onFormChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setValues({ ...values, [name]: value });

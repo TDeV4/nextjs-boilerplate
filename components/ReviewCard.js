@@ -27,7 +27,7 @@ export default function ReviewCard(props) {
     <div className={styles.reviewCardContainer}>
       <img src="/Review.png" height={50} width={50} alt="Review Card" />
       <h3 style={{ display: "inline", marginLeft: "10px" }}>
-        {props.reviewData.coursenumber}: {props.reviewData.coursename}
+        {props.reviewData.coursenumber}
       </h3>
       <div>
         Review By:{" "}
@@ -86,7 +86,7 @@ export default function ReviewCard(props) {
                 return;
               }
 
-              if (reply.parentID === props.reviewData.reviewID) {
+              if (parseInt(reply.parentID,10) === parseInt(props.reviewData.reviewID)) {
                 return (
                   <Accordion.Body key={reply.reviewID}>
                     <h5>
