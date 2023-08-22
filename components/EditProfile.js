@@ -319,8 +319,8 @@ export default function EditProfile(props) {
     }));
   }, [props.userData.mcitConnectEmailNotifications]);
 
-  //const userID = userIDData.data.userID;
-  //values["userID"] = userID;
+  const userID = props.userData.userID;
+  values["userID"] = parseInt(userID);
 
   console.log(values);
 
