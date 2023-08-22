@@ -42,7 +42,7 @@ export default function IndividualCourseInfo(props) {
   }
   
   useEffect(() => {  
-      console.log("Getting course stats");
+      console.log("Getting individual course stats");
       getCourseStats();
   }, []);
 

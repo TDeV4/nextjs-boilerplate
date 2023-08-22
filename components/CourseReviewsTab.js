@@ -3,6 +3,8 @@ import styles from "../app/page.module.css";
 import CreateReview from "./CreateReview";
 import React, { Component, useState } from "react";
 import ReviewCard from "./ReviewCard";
+import fetchWrapper from "../pages/api/fetchWrapper";
+import { useEffect, useState } from "react";
 
 const DUMMY_USER_DATA = [
   {
@@ -216,7 +218,35 @@ function findRelevantCoursePairings(reviewID) {
   return coursePairings;
 }
 
-export default function CourseReviewsTab() {
+export default function CourseReviewsTab(props) {
+  //const { data: session, status } = useSession();
+  const [reviews, setCourse] = useState([]);
+
+  // get and set the fetched data only once
+  // const [hasFetchedData, setHasFetchedData] = useState(false);
+
+  const getCourseReviews = async() => {
+    // console.log(props.courseID);
+    try{
+      // const fetcher = fetchWrapper();
+      const response = await fetchWrapper.get("/reviews/bycourse/"+ props.courseID);
+      console.log(response)
+      const jsonData = response.data;
+      
+      setCourse(jsonData);
+      // mark that we got the data
+      // setHasFetchedData(true);
+
+    }catch (err){
+      console.error(err.message);
+    }
+  }
+  
+  useEffect(() => {  
+      console.log("Getting individual course reviews");
+      getCourseReviews();
+  }, []);
+
   const [createReviewIsOpen, setCreateReviewIsOpen] = useState(false);
 
   function createReview() {

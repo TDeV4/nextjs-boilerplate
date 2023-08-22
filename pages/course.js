@@ -148,7 +148,9 @@ export default function coursePage() {
         </div>
         <div class={styles.rightpane}>
           <div class={styles.borderBox}>
-            <CourseReviewsTab/>
+            <CourseReviewsTab
+            courseID = {course}
+            />
           </div>
         </div>
       </div>
