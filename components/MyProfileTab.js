@@ -11,6 +11,10 @@ export default function MyProfileTab(props) {
 
   const getProfileInfo = async () => {
     try {
+      var userIDData = await fetchWrapper.get("/users/getuserid");
+      const userID = userIDData.data.userID;
+
+      const url = "/users/" + userID;
       // const fetcher = fetchWrapper();
       const response = await fetchWrapper.get("/users/1");
 
@@ -63,6 +67,7 @@ export default function MyProfileTab(props) {
         <h7 className={styles.centerText}>AKA (your anonymous name):</h7>
         <h7 className={styles.centerText}>{profile.anonName}</h7>
         <br></br>
+        <p>Bio: {profile.bio}</p>
         <p>Expected Graduation: {profile.expectedGraduation} </p>
         <p>Industry: {profile.industry}</p>
         <p>Work Status: {profile.workStatus}</p>
