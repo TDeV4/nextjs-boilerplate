@@ -255,6 +255,7 @@ export default function EditProfile(props) {
                 placeholder="Name"
                 defaultValue={props.userData.name}
                 name="name"
+                onChange={onFormChange}
               />
             </FloatingLabel>
             <FloatingLabel
@@ -267,6 +268,7 @@ export default function EditProfile(props) {
                 required
                 type="text"
                 defaultValue={props.userData.anonName}
+                onChange={onFormChange}
               />
             </FloatingLabel>
             <FloatingLabel
@@ -293,7 +295,10 @@ export default function EditProfile(props) {
                   className="mb-3"
                   name="startSemester"
                 >
-                  <Form.Select defaultValue={values["startSemester"]}>
+                  <Form.Select
+                    defaultValue={values["startSemester"]}
+                    onChange={onFormChange}
+                  >
                     <option key="blankChoice" hidden value="" />
                     <option defaultChecked={true}>Fall</option>
                     <option>Spring</option>
@@ -308,7 +313,11 @@ export default function EditProfile(props) {
                   className="mb-3"
                   name="startYear"
                 >
-                  <Form.Select required defaultValue={values["startYear"]}>
+                  <Form.Select
+                    required
+                    defaultValue={values["startYear"]}
+                    onChange={onFormChange}
+                  >
                     <option key="blankChoice" hidden value="" />
                     {startYearOptions}
                   </Form.Select>
@@ -321,7 +330,10 @@ export default function EditProfile(props) {
                   className="mb-3"
                   name="expectedGradSemester"
                 >
-                  <Form.Select defaultValue={values["expectedGradSemester"]}>
+                  <Form.Select
+                    defaultValue={values["expectedGradSemester"]}
+                    onChange={onFormChange}
+                  >
                     <option key="blankChoice" hidden value="" />
                     <option>Fall</option>
                     <option>Spring</option>
@@ -339,6 +351,7 @@ export default function EditProfile(props) {
                   <Form.Select
                     required
                     defaultValue={values["expectedGradYear"]}
+                    onChange={onFormChange}
                   >
                     <option key="blankChoice" hidden value="" />
                     {endYearOptions}
@@ -356,6 +369,7 @@ export default function EditProfile(props) {
                 placeholder="Industry"
                 defaultValue={props.userData.industry}
                 name="industry"
+                onChange={onFormChange}
               />
             </FloatingLabel>
             <FloatingLabel
@@ -367,6 +381,7 @@ export default function EditProfile(props) {
                 type="text"
                 placeholder="Education"
                 defaultValue={props.userData.education}
+                onChange={onFormChange}
               />
             </FloatingLabel>
             <Form.Label>Work Status</Form.Label>
@@ -378,6 +393,7 @@ export default function EditProfile(props) {
                 type="radio"
                 id="2"
                 defaultChecked={values["workStatus"] === "Full-Time"}
+                onChange={onFormChange}
               />
               <Form.Check
                 inline
@@ -386,6 +402,7 @@ export default function EditProfile(props) {
                 type="radio"
                 id="1"
                 defaultChecked={values["workStatus"] === "Part-Time"}
+                onChange={onFormChange}
               />
               <Form.Check
                 inline
@@ -394,6 +411,7 @@ export default function EditProfile(props) {
                 type="radio"
                 id="0"
                 defaultChecked={values["workStatus"] === "Full-Time Student"}
+                onChange={onFormChange}
               />
             </div>
             <Form.Label>Turtle Club Status</Form.Label>

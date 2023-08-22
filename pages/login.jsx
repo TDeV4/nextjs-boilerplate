@@ -56,7 +56,7 @@ const Login = () => {
           <TopNavBar />
           <HomeTopBar />
           <div className={styles.borderBox}>
-            <MyProfileTab courseData={[]} currentCourseData={[]} />
+            <MyProfileTab />
             <button onClick={() => signOut()}>Sign out</button>
           </div>
         </main>
