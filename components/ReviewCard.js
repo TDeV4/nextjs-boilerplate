@@ -86,7 +86,7 @@ export default function ReviewCard(props) {
                 return;
               }
 
-              if (reply.parentID === props.reviewData.reviewID) {
+              if (parseInt(reply.parentID,10) === parseInt(props.reviewData.reviewID)) {
                 return (
                   <Accordion.Body key={reply.reviewID}>
                     <h5>

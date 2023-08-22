@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap";
 import styles from "../app/page.module.css";
 import CreateReview from "./CreateReview";
-import React, { Component, useState } from "react";
+// import React, { Component, useState } from "react";
 import ReviewCard from "./ReviewCard";
 import fetchWrapper from "../pages/api/fetchWrapper";
 import { useEffect, useState } from "react";
@@ -52,7 +52,53 @@ const DUMMY_USER_DATA = [
     education: "Bachelor of Science in Business Administration",
     internships: null,
     marketOutcome: null,
-  }
+  },
+  {
+    userID: 3,
+    name: "Alex Quan",
+    anonName: "Green Elephant",
+    timeZone: "PST",
+    expectedGraduation: "Spring 2025",
+    workStatusID: 2,
+    industry: "Accounting",
+    fullTimeStudentStatus: false,
+    inTurtleClub: true,
+    alumniStatus: false,
+    mcitCentralEmailNotifications: true,
+    mcitConnectEmailNotifications: true,
+    commentEmailNotifications: true,
+    MCITConnectEnabled: true,
+    email: "alexquan@seas.upenn.edu",
+    linkedinURL: "https://linkedin.com/in/alex10quan",
+    preferredContactMethod: "slack",
+    bio: "Hello, I am a person who is in the MCIT Program and looking to connect.",
+    education: "Bachelor of Science in Business Administration",
+    internships: null,
+    marketOutcome: null,
+  },
+  {
+    userID: 4,
+    name: "Alex Quan",
+    anonName: "Green Elephant",
+    timeZone: "PST",
+    expectedGraduation: "Spring 2025",
+    workStatusID: 2,
+    industry: "Accounting",
+    fullTimeStudentStatus: false,
+    inTurtleClub: true,
+    alumniStatus: false,
+    mcitCentralEmailNotifications: true,
+    mcitConnectEmailNotifications: true,
+    commentEmailNotifications: true,
+    MCITConnectEnabled: true,
+    email: "alexquan@seas.upenn.edu",
+    linkedinURL: "https://linkedin.com/in/alex10quan",
+    preferredContactMethod: "slack",
+    bio: "Hello, I am a person who is in the MCIT Program and looking to connect.",
+    education: "Bachelor of Science in Business Administration",
+    internships: null,
+    marketOutcome: null,
+  },
 ];
 
 const DUMMY_COURSE_DATA = [
@@ -226,7 +272,6 @@ export default function CourseReviewsTab(props) {
   // const [hasFetchedData, setHasFetchedData] = useState(false);
 
   const getCourseReviews = async() => {
-    // console.log(props.courseID);
     try{
       // const fetcher = fetchWrapper();
       const response = await fetchWrapper.get("/reviews/bycourse/"+ props.courseID);
@@ -252,9 +297,9 @@ export default function CourseReviewsTab(props) {
   function createReview() {
     setCreateReviewIsOpen(true);
   }
-
-  var reviewReplyData = DUMMY_REVIEW_REPLY_DATA;
-  var reviewData = DUMMY_REVIEW_DATA;
+  // console.log(reviews);
+  // var reviewReplyData = DUMMY_REVIEW_REPLY_DATA;
+  // var reviewData = DUMMY_REVIEW_DATA;
   var userData = DUMMY_USER_DATA;
 
   return (
@@ -268,29 +313,29 @@ export default function CourseReviewsTab(props) {
           profData={DUMMY_PROF_DATA}
         />
       </div>
-      {reviewReplyData.map((review) => {
+      {reviews.map((review) => {
         if (review.parentID === null) {
-          var reviewDataPassThrough;
+          // var reviewDataPassThrough;
           var userDataPassThrough;
-          reviewData.map((reviewData) => {
-            if (review.reviewID === reviewData.reviewID) {
-              reviewDataPassThrough = reviewData;
-            }
-          });
+          // reviewData.map((reviewData) => {
+          //   if (review.reviewID === reviewData.reviewID) {
+          //     reviewDataPassThrough = reviewData;
+          //   }
+          // });
           userData.map((userData) => {
-            if (review.userID === userData.userID) {
+            if (parseInt(review.userID,10) === parseInt(userData.userID,10)) {
               userDataPassThrough = userData;
             }
-          });          
+          });      
           //query and get the user data for that review which stored in reviewdatapassthrough, pass that in to userdata
           return (
             <div key={review.reviewID}>
               <ReviewCard
                 key={review.reviewID}
                 review={review}
-                reviewData={reviewDataPassThrough}
+                reviewData={review}
                 userData={userDataPassThrough}
-                reviewReplyData={reviewReplyData}
+                reviewReplyData={reviews}
                 coursePairings={findRelevantCoursePairings(review.reviewID)}
               />
             <br/>           

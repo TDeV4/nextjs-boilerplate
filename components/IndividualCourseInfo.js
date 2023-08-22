@@ -77,7 +77,7 @@ export default function IndividualCourseInfo(props) {
   return (
     <div>
       <div>
-      <h7 className={styles.centerText}>CIT {props.courseData.coursenumber} - {props.courseData.coursename}</h7>
+      <h7 className={styles.centerText}>CIT {course.coursenumber} - {course.coursename}</h7>
         <Table striped bordered hover>
           <thead class={styles.centerText}>
             <tr>
@@ -91,7 +91,7 @@ export default function IndividualCourseInfo(props) {
         <h5 className={styles.centeredHeading}>Quick Facts and Resources</h5>
         <br></br> 
         <p>Description: {course.description}</p>
-        <p>Syllabus: <Link href={props.courseData.syllabus}>Link</Link></p>
+        <p>Syllabus: <Link href={`${course.syllabus}`}>Link</Link></p>
         <p>Prerequisites: {course.prereqid}</p>
         <p>Professors: {course.professor}</p>
         <p>Textbooks: {course.textbooks}</p>
