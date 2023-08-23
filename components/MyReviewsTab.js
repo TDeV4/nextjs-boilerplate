@@ -198,8 +198,8 @@ export default function MyReviewsTab(props) {
   }
   
   useEffect(() => { 
-    console.log("Getting my user id");
-    getUserID();
+    // console.log("Getting my user id");
+    // getUserID();
     console.log("Getting my user profile");
     getProfileInfo(); 
     console.log("Getting my course reviews");
