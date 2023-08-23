@@ -166,6 +166,7 @@ export default function HomePage() {
                 currentCourseData={DUMMY_CURRENT_COURSES_DATA}
               />
             </div>
+            <button onClick={() => signOut()}>Sign out</button>
           </div>
           <div class={styles.rightpane}>
             <div class={styles.borderBox}>
