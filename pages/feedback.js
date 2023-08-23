@@ -4,7 +4,7 @@ import { useSession, getSession } from "next-auth/react";
 import TopNavBar from "@/components/TopNavBar";
 import { Button, Form } from "react-bootstrap";
 import fetchWrapper from "./api/fetchWrapper";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Feedback() {
   const { data: session } = useSession();
