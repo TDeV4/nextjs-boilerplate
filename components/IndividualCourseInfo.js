@@ -64,15 +64,6 @@ export default function IndividualCourseInfo(props) {
     });
     output.push(out);
   });
-  //calculate the averages of all the reviews for a given course
-  const difficulty = props.reviewData.map((review) => review.difficulty);
-  // const diffcultyAvg = difficulty.reduce((sum, current) => sum + current, 0) / difficulty.length;
-
-  // const rating = props.reviewData.map((review) => review.rating);
-  // const ratingAvg = rating.reduce((sum, current) => sum + current, 0) / rating.length;
-
-  // const weeklyHours = props.reviewData.map((review) => review.weeklyHours);
-  // const weeklyHoursAvg = weeklyHours.reduce((sum, current) => sum + current, 0) / weeklyHours.length;
 
   return (
     <div>
@@ -84,7 +75,7 @@ export default function IndividualCourseInfo(props) {
               <th><h9>Difficulty: {course.averageDifficulty}/5.00</h9></th>
               <th><h9>Workload (hours per week): {course.averageWorkload}</h9></th>
               <th><h9>Rating: {course.averageRating}/5.00</h9></th>
-              <th><h9># of Reviews: {difficulty.length}</h9></th>
+              <th><h9># of Reviews: {course.reviewCount}</h9></th>
             </tr>
           </thead>
         </Table>
