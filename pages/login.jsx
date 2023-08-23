@@ -52,6 +52,7 @@ const Login = () => {
           <BrowserRouter>
             <CreateProfile />
           </BrowserRouter>
+          <button onClick={() => signOut()}>Sign out</button>
         </main>
       );
     } else {
