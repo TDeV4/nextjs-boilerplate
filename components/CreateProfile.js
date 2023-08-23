@@ -4,6 +4,7 @@ import styles from "../app/page.module.css";
 import "react-bootstrap-timezone-picker/dist/react-bootstrap-timezone-picker.min.css";
 import fetchWrapper from "../pages/api/fetchWrapper";
 import { useNavigate } from "react-router-dom";
+import { useSession } from "next-auth/react";
 
 export default function CreateProfile(props) {
   const [values, setValues] = useState({
@@ -14,6 +15,7 @@ export default function CreateProfile(props) {
     expectedGradSemester: null,
     expectedGradYear: null,
     industry: null,
+    bio: null,
     workStatus: null,
     inTurtleClub: null,
     coursesTaken: [],
@@ -22,6 +24,8 @@ export default function CreateProfile(props) {
     mcitConnectEnable: false,
     mcitConnectEmailNotifications: false,
   });
+
+  const { data: session } = useSession();
 
   const timeZones = [
     "[GMT-12:00] International Date Line West",
@@ -213,6 +217,7 @@ export default function CreateProfile(props) {
   useEffect(() => {
     console.log("Getting course stats");
     getCourseStats();
+    setValues({ ...values, ["email"]: session.user.email });
   }, []);
 
   return (
@@ -321,12 +326,13 @@ export default function CreateProfile(props) {
             onChange={onFormChange}
           />
         </FloatingLabel>
-        <FloatingLabel
-          controlId="floatingEducation"
-          label="Education"
-          className="mb-3"
-        >
-          <Form.Control type="text" placeholder="Education" name="education" />
+        <FloatingLabel controlId="floatingBio" label="Bio" className="mb-3">
+          <Form.Control
+            type="text"
+            placeholder="Bio"
+            name="bio"
+            onChange={onFormChange}
+          />
         </FloatingLabel>
         <Form.Label>Work Status</Form.Label>
         <div key={`inline-radio1`} className="mb-3">
@@ -335,7 +341,6 @@ export default function CreateProfile(props) {
             label="Full-Time"
             name="workStatus"
             type="radio"
-            id="2"
             value="Full-Time"
             onChange={onFormChange}
           />
@@ -344,7 +349,6 @@ export default function CreateProfile(props) {
             label="Part-Time"
             name="workStatus"
             type="radio"
-            id="1"
             value="Part-Time"
             onChange={onFormChange}
           />
@@ -353,7 +357,6 @@ export default function CreateProfile(props) {
             label="Full-Time Student"
             name="workStatus"
             type="radio"
-            id="0"
             value="Full-Time Student"
             onChange={onFormChange}
           />

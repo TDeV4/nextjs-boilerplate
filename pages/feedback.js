@@ -3,17 +3,41 @@ import Link from "next/link";
 import { getSession } from "next-auth/react";
 import TopNavBar from "@/components/TopNavBar";
 import { Button, Form } from "react-bootstrap";
-
-function onSubmit() {}
+import fetchWrapper from "./api/fetchWrapper";
+import { useState } from "react";
 
 export default function Feedback() {
+  const [values, setValues] = useState({
+    feedback: "",
+  });
+
+  function onSubmit() {
+    setValues({ ...values, ["date"]: new Date.now() });
+    console.log(values);
+    //fetchWrapper.post();
+  }
+
+  const onFormChange = (e, updatedAt) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setValues({ ...values, [name]: value });
+    console.log(name, value);
+  };
+
   return (
     <main className={styles.main}>
       <TopNavBar />
       <h1>Site Feedback</h1>
       <p>*Any feedback is welcome and all feedback is anonymous*</p>
       <Form>
-        <Form.Control as="textarea" rows={10} cols={50} required />
+        <Form.Control
+          as="textarea"
+          rows={10}
+          cols={50}
+          required
+          name="feedback"
+          onChange={onFormChange}
+        />
         <Button type="sumbit" onSubmit={onSubmit}>
           Submit
         </Button>

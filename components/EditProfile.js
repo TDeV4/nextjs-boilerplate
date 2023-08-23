@@ -4,6 +4,7 @@ import styles from "../app/page.module.css";
 import TimezonePicker from "react-bootstrap-timezone-picker";
 import "react-bootstrap-timezone-picker/dist/react-bootstrap-timezone-picker.min.css";
 import fetchWrapper from "../pages/api/fetchWrapper";
+import { useSession } from "next-auth/react";
 
 export default function EditProfile(props) {
   const [show, setShow] = useState(false);
@@ -123,12 +124,13 @@ export default function EditProfile(props) {
   }
 
   const [courses, setCourses] = useState([]);
+  const [values, setValues] = useState({});
 
   const onSwitchChange = (e) => {
     const name = e.target.name;
     const currentValue = values[name];
     setValues({ ...values, [name]: !currentValue });
-    console.log(name, !currentValue);
+    console.log(!currentValue);
   };
 
   const onCourseTakenChange = (e) => {
@@ -157,7 +159,7 @@ export default function EditProfile(props) {
     console.log(values["coursesTaking"]);
   };
 
-  const onFormChange = (e, updatedAt) => {
+  const onFormChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setValues({ ...values, [name]: value });
@@ -171,6 +173,16 @@ export default function EditProfile(props) {
       const jsonData = response.data;
       // console.log(jsonData);
       setCourses(jsonData);
+      var userIDData = await fetchWrapper.get("/users/getuserid");
+
+      const userID = userIDData.data.userID;
+
+      setValues((values) => ({
+        ...values,
+        ["userID"]: parseInt(userID),
+      }));
+
+      console.log(userID);
     } catch (err) {
       console.error(err.message);
     }
@@ -187,12 +199,13 @@ export default function EditProfile(props) {
       delete values["expectedGradYear"];
       delete values["startSemester"];
       delete values["startYear"];
-      setValues({ ...values, ["expectedGraduation"]: expectedGraduation });
-      setValues({ ...values, ["startSemester"]: startSemester });
+      values["expectedGraduation"] = expectedGraduation;
+      values["startSemester"] = startSemester;
+      values["fulltimeStudentStatus"] = false;
       console.log(values);
 
       fetchWrapper
-        .put("/users/", values)
+        .put("/users/updateuser", values)
         .then((data) => console.log("Success", data))
         .catch((error) => console.error("There was an error!", error));
     } catch (err) {
@@ -206,25 +219,112 @@ export default function EditProfile(props) {
     getCourseStats();
   }, []);
 
-  const [values, setValues] = useState({});
+  useEffect(() => {
+    setValues((values) => ({ ...values, ["name"]: props.userData.name }));
+  }, [props.userData.name]);
 
-  values["name"] = props.userData.name;
-  values["anonName"] = props.userData.anonName;
-  values["timeZone"] = props.userData.timeZone;
-  values["startYear"] = props.userData.startSemester.split(" ")[1];
-  values["startSemester"] = props.userData.startSemester.split(" ")[0];
-  values["expectedGradSemester"] =
-    props.userData.expectedGraduation.split(" ")[0];
-  values["expectedGradYear"] = props.userData.expectedGraduation.split(" ")[1];
-  values["industry"] = props.userData.industry;
-  values["workStatus"] = props.userData.workStatus;
-  values["inTurtleClub"] = props.userData.inTurtleClub;
-  values["coursesTaken"] = props.userData.coursesTaken;
-  values["coursesTaking"] = props.userData.coursesTaking;
-  values["mcitEmailNotifications"] = props.userData.mcitEmailNotifications;
-  values["mcitConnectEnable"] = props.userData.mcitConnectEnable;
-  values["mcitConnectEmailNotifications"] =
-    props.userData.mcitConnectEmailNotifications;
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      ["anonName"]: props.userData.anonName,
+    }));
+  }, [props.userData.anonName]);
+
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      ["timeZone"]: props.userData.timeZone,
+    }));
+  }, [props.userData.timeZone]);
+
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      ["startYear"]: props.userData.startSemester.split(" ")[1],
+    }));
+  }, [props.userData.startSemester]);
+
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      ["startSemester"]: props.userData.startSemester.split(" ")[0],
+    }));
+  }, [props.userData.startSemester]);
+
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      ["expectedGradSemester"]: props.userData.expectedGraduation.split(" ")[0],
+    }));
+  }, [props.userData.expectedGraduation]);
+
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      ["expectedGradYear"]: props.userData.expectedGraduation.split(" ")[1],
+    }));
+  }, [props.userData.expectedGraduation]);
+
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      ["industry"]: props.userData.industry,
+    }));
+  }, [props.userData.industry]);
+
+  useEffect(() => {
+    setValues((values) => ({ ...values, ["bio"]: props.userData.bio }));
+  }, [props.userData.bio]);
+
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      ["workStatus"]: props.userData.workStatus,
+    }));
+  }, [props.userData.workStatus]);
+
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      ["inTurtleClub"]: props.userData.inTurtleClub,
+    }));
+  }, [props.userData.inTurtleClub]);
+
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      ["coursesTaken"]: props.userData.coursesTaken,
+    }));
+  }, [props.userData.coursesTaken]);
+
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      ["coursesTaking"]: props.userData.coursesTaking,
+    }));
+  }, [props.userData.coursesTaking]);
+
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      ["mcitEmailNotifications"]: props.userData.mcitEmailNotifications,
+    }));
+  }, [props.userData.mcitEmailNotifications]);
+
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      ["mcitConnectEnable"]: props.userData.mcitConnectEnable,
+    }));
+  }, [props.userData.mcitConnectEnable]);
+
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      ["mcitConnectEmailNotifications"]:
+        props.userData.mcitConnectEmailNotifications,
+    }));
+  }, [props.userData.mcitConnectEmailNotifications]);
 
   console.log(values);
 
@@ -255,6 +355,7 @@ export default function EditProfile(props) {
                 placeholder="Name"
                 defaultValue={props.userData.name}
                 name="name"
+                onChange={onFormChange}
               />
             </FloatingLabel>
             <FloatingLabel
@@ -264,9 +365,12 @@ export default function EditProfile(props) {
               name="anonName"
             >
               <Form.Control
+                disabled
+                readOnly
                 required
                 type="text"
                 defaultValue={props.userData.anonName}
+                onChange={onFormChange}
               />
             </FloatingLabel>
             <FloatingLabel
@@ -291,9 +395,12 @@ export default function EditProfile(props) {
                   controlId="startSemester"
                   label="Start Semester"
                   className="mb-3"
-                  name="startSemester"
                 >
-                  <Form.Select defaultValue={values["startSemester"]}>
+                  <Form.Select
+                    defaultValue={values["startSemester"]}
+                    onChange={onFormChange}
+                    name="startSemester"
+                  >
                     <option key="blankChoice" hidden value="" />
                     <option defaultChecked={true}>Fall</option>
                     <option>Spring</option>
@@ -306,9 +413,13 @@ export default function EditProfile(props) {
                   controlId="startYear"
                   label="Start Year"
                   className="mb-3"
-                  name="startYear"
                 >
-                  <Form.Select required defaultValue={values["startYear"]}>
+                  <Form.Select
+                    required
+                    defaultValue={values["startYear"]}
+                    onChange={onFormChange}
+                    name="startYear"
+                  >
                     <option key="blankChoice" hidden value="" />
                     {startYearOptions}
                   </Form.Select>
@@ -319,9 +430,12 @@ export default function EditProfile(props) {
                   controlId="expectedGradSemester"
                   label="Expected Graduation Semester"
                   className="mb-3"
-                  name="expectedGradSemester"
                 >
-                  <Form.Select defaultValue={values["expectedGradSemester"]}>
+                  <Form.Select
+                    defaultValue={values["expectedGradSemester"]}
+                    onChange={onFormChange}
+                    name="expectedGradSemester"
+                  >
                     <option key="blankChoice" hidden value="" />
                     <option>Fall</option>
                     <option>Spring</option>
@@ -334,11 +448,12 @@ export default function EditProfile(props) {
                   controlId="expectedGradYear"
                   label="Expected Graduation Year"
                   className="mb-3"
-                  name="expectedGradYear"
                 >
                   <Form.Select
                     required
                     defaultValue={values["expectedGradYear"]}
+                    onChange={onFormChange}
+                    name="expectedGradYear"
                   >
                     <option key="blankChoice" hidden value="" />
                     {endYearOptions}
@@ -356,17 +471,16 @@ export default function EditProfile(props) {
                 placeholder="Industry"
                 defaultValue={props.userData.industry}
                 name="industry"
+                onChange={onFormChange}
               />
             </FloatingLabel>
-            <FloatingLabel
-              controlId="floatingEducation"
-              label="Education"
-              className="mb-3"
-            >
+            <FloatingLabel controlId="floatingBio" label="Bio" className="mb-3">
               <Form.Control
                 type="text"
-                placeholder="Education"
-                defaultValue={props.userData.education}
+                placeholder="Bio"
+                defaultValue={props.userData.bio}
+                onChange={onFormChange}
+                name="bio"
               />
             </FloatingLabel>
             <Form.Label>Work Status</Form.Label>
@@ -376,24 +490,27 @@ export default function EditProfile(props) {
                 label="Full-Time"
                 name="workStatus"
                 type="radio"
-                id="2"
+                value="Full-Time"
                 defaultChecked={values["workStatus"] === "Full-Time"}
+                onChange={onFormChange}
               />
               <Form.Check
                 inline
                 label="Part-Time"
                 name="workStatus"
                 type="radio"
-                id="1"
+                value="Part-Time"
                 defaultChecked={values["workStatus"] === "Part-Time"}
+                onChange={onFormChange}
               />
               <Form.Check
                 inline
                 label="Full-Time Student"
                 name="workStatus"
                 type="radio"
-                id="0"
+                value="Full-Time Student"
                 defaultChecked={values["workStatus"] === "Full-Time Student"}
+                onChange={onFormChange}
               />
             </div>
             <Form.Label>Turtle Club Status</Form.Label>
@@ -428,7 +545,7 @@ export default function EditProfile(props) {
                     label={course.coursenumber}
                     name="coursesTaken"
                     type="checkbox"
-                    value={course.coursenumber}
+                    value={course.courseID}
                     defaultChecked={props.userData.coursesTaken.includes(
                       course.coursenumber
                     )}
@@ -448,7 +565,7 @@ export default function EditProfile(props) {
                     label={course.coursenumber}
                     name="coursesTaking"
                     type="checkbox"
-                    value={course.coursenumber}
+                    value={course.courseID}
                     defaultChecked={props.userData.coursesTaking.includes(
                       course.coursenumber
                     )}
@@ -463,21 +580,21 @@ export default function EditProfile(props) {
             </Form.Label>
             <Form.Check // prettier-ignore
               type="switch"
-              id="mcitEmailNotifications"
+              name="mcitEmailNotifications"
               label="Enable email notifications from MCITCentral"
               defaultChecked={props.userData.mcitEmailNotifications}
               onChange={onSwitchChange}
             />
             <Form.Check // prettier-ignore
               type="switch"
-              id="mcitConnectEnabled"
+              name="mcitConnectEnable"
               label="Enable MCIT Connect"
               defaultChecked={props.userData.mcitConnectEnable}
               onChange={onSwitchChange}
             />
             <Form.Check // prettier-ignore
               type="switch"
-              id="mcitConnectNotifications"
+              name="mcitConnectEmailNotifications"
               label="Enable MCIT Connect email notifications"
               defaultChecked={props.userData.mcitConnectEmailNotifications}
               onChange={onSwitchChange}
