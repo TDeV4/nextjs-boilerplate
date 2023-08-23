@@ -209,10 +209,10 @@ export default function CoursePlanningTab(props) {
     values["userID"] = parseInt(profile.userID);
     console.log(values);
 
-    //fetchWrapper
-    //  .put("/coursebuilder/", values)
-    //  .then((data) => console.log("Success", data))
-    //  .catch((error) => console.error("There was an error!", error));
+    fetchWrapper
+      .put("/coursebuilder/", values)
+      .then((data) => console.log("Success", data))
+      .catch((error) => console.error("There was an error!", error));
 
     setData(newDataToUse);
   };

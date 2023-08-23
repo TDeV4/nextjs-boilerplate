@@ -286,7 +286,7 @@ export default function EditProfile(props) {
   useEffect(() => {
     setValues((values) => ({
       ...values,
-      ["courseTaken"]: props.userData.coursesTaken,
+      ["coursesTaken"]: props.userData.coursesTaken,
     }));
   }, [props.userData.coursesTaken]);
 
@@ -361,6 +361,8 @@ export default function EditProfile(props) {
               name="anonName"
             >
               <Form.Control
+                disabled
+                readOnly
                 required
                 type="text"
                 defaultValue={props.userData.anonName}
@@ -540,7 +542,7 @@ export default function EditProfile(props) {
                     type="checkbox"
                     value={course.courseID}
                     defaultChecked={props.userData.coursesTaken.includes(
-                      course.courseID
+                      course.coursenumber
                     )}
                     onChange={onCourseTakenChange}
                   />
