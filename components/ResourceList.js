@@ -256,7 +256,7 @@ export default function ResourceList() {
           <Card.Body>
             <Card.Title>Java Documentation</Card.Title>
             <Card.Text>
-              This is Oracle's official Java documentation.{" "}
+              This is the official Java documentation by Oracle.{" "}
             </Card.Text>
             <Button href="https://docs.oracle.com/en/java/">Visit Site</Button>{" "}
           </Card.Body>
