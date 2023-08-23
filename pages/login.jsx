@@ -39,7 +39,7 @@ const Login = () => {
       console.log("Getting profile");
       getUserInfo();
     }
-  }, [session]);
+  });
 
   if (session) {
     console.log(userID);

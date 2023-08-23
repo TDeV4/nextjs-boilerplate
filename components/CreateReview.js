@@ -55,7 +55,7 @@ export default function CreateReview(props) {
   useEffect(() => {
     //console.log("Getting course stats");
     getCourseStats();
-  }, []);
+  });
 
   var courseProfs = [];
   var otherCourses = [];
