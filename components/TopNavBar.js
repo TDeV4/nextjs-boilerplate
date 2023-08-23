@@ -27,11 +27,11 @@ export default function TopNavBar() {
                 <Nav.Link href="/" className="nav-link link-light">
                   Home
                 </Nav.Link>
-                <Nav.Link href="/resources" className="nav-link link-light">
-                  General Resources
-                </Nav.Link>
                 <Nav.Link href="/courses" className="nav-link link-light">
                   Courses
+                </Nav.Link>
+                <Nav.Link href="/resources" className="nav-link link-light">
+                  General Resources
                 </Nav.Link>
                 <Nav.Link href="/mcitconnect" className="nav-link link-light">
                   MCITConnect
