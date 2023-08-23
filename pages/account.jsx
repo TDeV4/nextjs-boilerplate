@@ -6,6 +6,12 @@ import { useSession, signOut, getSession } from "next-auth/react";
 const Account = () => {
   const { data: session, status } = useSession();
 
+  useEffect(() => {
+    if (session?.error === "Expired Token") {
+      signIn(); // Force sign in to hopefully resolve error
+    }
+  }, [session]);
+
   if (status === "authenticated") {
     return (
       <div>

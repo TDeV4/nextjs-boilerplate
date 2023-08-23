@@ -1,7 +1,6 @@
 import React from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useState, useEffect } from "react";
-
 import styles from "../app/page.module.css";
 import HomeTopBar from "../components/HomeTopBar";
 import TopNavBar from "../components/TopNavBar";

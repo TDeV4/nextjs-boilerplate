@@ -6,7 +6,7 @@ import CoursePlanningTab from "@/components/CoursePlanningTab";
 import MyReviewsTab from "@/components/MyReviewsTab";
 import React from "react";
 import { useSession, signIn, signOut, getSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import fetchWrapper from "../pages/api/fetchWrapper";
 
 const DUMMY_USER_DATA = {
@@ -153,6 +153,13 @@ const DUMMY_ALL_COURSES_DATA = [
 export default function HomePage() {
   const { data: session } = useSession();
   console.log(session);
+
+  useEffect(() => {
+    if (session?.error === "Expired Token") {
+      signIn(); // Force sign in to hopefully resolve error
+    }
+  }, [session]);
+
   if (session) {
     return (
       <main className={styles.main}>

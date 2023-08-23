@@ -10,14 +10,23 @@ export default NextAuth({
     },
     async jwt({ token, account, user}) {
       if (account) {
+        //save the access token and expiration the JWT on the initial login
         token.accessToken = account.access_token;
         token.idToken = account?.id_token;
+        token.expires = Math.floor(Date.now() / 1000 + account.expires_in);
+        token.error = "Token Unexpired";
+      }
+
+      if (token.expires && Date.now() > token.expires * 1000) {
+        token.error = "Token Expired";
       }
       return token;
     },
+
     async session({ session, token, user }) {
       session.accessToken = token.accessToken;
       session.idToken = token.idToken; 
+      session.error = token.error;
       return session;
     },
   },

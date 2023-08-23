@@ -3,8 +3,17 @@ import Link from "next/link";
 import { useSession, signOut, getSession } from "next-auth/react";
 import TopNavBar from "@/components/TopNavBar";
 import ResourceList from "@/components/ResourceList";
+import { useEffect } from "react";
+
 
 export default function Resources() {
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session?.error === "Expired Token") {
+      signIn(); // Force sign in to hopefully resolve error
+    }
+  }, [session]);
   // const { data: session } = useSession();
   // console.log(session.user.email);
   return (
