@@ -3,6 +3,9 @@ import { Badge, Button, Stack, Accordion } from "react-bootstrap";
 import AnonProfileModal from "./AnonProfileModal";
 import AccordionBody from "react-bootstrap/AccordionBody";
 import CommentButton from "./CommentButton";
+import { useState } from "react";
+import { useEffect } from "react";
+import fetchWrapper from "@/pages/api/fetchWrapper";
 
 function checkForFinalGrade(finalGrade) {
   if (finalGrade != null) {
@@ -23,6 +26,32 @@ function checkForFullTimeStatus(fullTimeStatus) {
 }
 
 export default function ReviewCard(props) {
+  const [profile, setProfile] = useState([]);
+
+  const getProfileInfo = async () => {
+    try {
+      const url = "/users/" + props.reviewData.userID;
+      const response = await fetchWrapper.get(url);
+
+      const jsonData = response.data;
+      console.log(jsonData);
+      setProfile(jsonData);
+      // mark that we got the data
+      // setHasFetchedData(true);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    console.log("Getting profile");
+    getProfileInfo();
+  }, [profile.name]);
+
+  if (profile.length < 1) {
+    return <div></div>;
+  }
+
   return (
     <div className={styles.reviewCardContainer}>
       <img src="/Review.png" height={50} width={50} alt="Review Card" />
@@ -32,7 +61,7 @@ export default function ReviewCard(props) {
       <div>
         Review By:{" "}
         <AnonProfileModal
-          userData={props.userData}
+          userData={profile}
           reviewReplyData={props.reviewReplyData}
         />
       </div>
@@ -44,12 +73,12 @@ export default function ReviewCard(props) {
           </Badge>
           <Badge bg="secondary">{props.reviewData.professor}</Badge>
           {checkForFinalGrade(props.reviewData.finalGrade)}
-          {checkForTurtleClubStatus(props.userData.inTurtleClub)}
-          {checkForFullTimeStatus(props.userData.fullTimeStudentStatus)}
+          {checkForTurtleClubStatus(profile.inTurtleClub)}
+          {checkForFullTimeStatus(profile.fullTimeStudentStatus)}
         </Stack>
       </div>
       <br />
-      <div>{props.review.content}</div>
+      <div>{props.reviewData.content}</div>
       <br />
       <div style={{ marginTop: "auto" }}>
         <Stack direction="horizontal" gap={2}>
@@ -59,18 +88,33 @@ export default function ReviewCard(props) {
             </Badge>
             <Badge bg="primary">Rating: {props.reviewData.rating}/5</Badge>
             <Badge bg="primary">
-              Rating: {props.reviewData.weeklyHours} hours per week
+              {props.reviewData.weeklyHours} hours per week
             </Badge>
           </div>
           <div className="p-2 ms-auto">
             Course Pairings:
             {props.coursePairings.map((pairing) => {
               if (pairing.pairingRec == -1) {
-                return <Badge bg="danger"> {pairing.courseID} </Badge>;
+                return (
+                  <Badge key={pairing.courseID} bg="danger">
+                    {" "}
+                    {pairing.courseID}{" "}
+                  </Badge>
+                );
               } else if (pairing.pairingRec == 0) {
-                return <Badge bg="warning"> {pairing.courseID} </Badge>;
+                return (
+                  <Badge key={pairing.courseID} bg="warning">
+                    {" "}
+                    {pairing.courseID}{" "}
+                  </Badge>
+                );
               } else {
-                return <Badge bg="success"> {pairing.courseID} </Badge>;
+                return (
+                  <Badge key={pairing.courseID} bg="success">
+                    {" "}
+                    {pairing.courseID}{" "}
+                  </Badge>
+                );
               }
             })}
           </div>
@@ -86,7 +130,10 @@ export default function ReviewCard(props) {
                 return;
               }
 
-              if (parseInt(reply.parentID,10) === parseInt(props.reviewData.reviewID)) {
+              if (
+                parseInt(reply.parentID, 10) ===
+                parseInt(props.reviewData.reviewID)
+              ) {
                 return (
                   <Accordion.Body key={reply.reviewID}>
                     <h5>

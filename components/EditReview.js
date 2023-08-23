@@ -1,6 +1,7 @@
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
 import { useState } from "react";
 import styles from "../app/page.module.css";
+import { useEffect } from "react";
 
 export default function EditReview(props) {
   const [show, setShow] = useState(false);
@@ -17,6 +18,22 @@ export default function EditReview(props) {
     );
   }
 
+  const onFormChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setValues({ ...values, [name]: value });
+    console.log(name, value);
+  };
+
+  const onFormChangeIntVal = (e) => {
+    const name = e.target.name;
+    const value = parseInt(e.target.value);
+    setValues({ ...values, [name]: value });
+    console.log(name, value);
+  };
+
+  const [values, setValues] = useState({});
+
   var selectedCourseID = props.reviewData.courseID;
 
   var otherCourses = [];
@@ -30,27 +47,12 @@ export default function EditReview(props) {
 
   const [validated, setValidated] = useState(false);
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
-    setValidated(true);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      console.log(values);
+    } catch (err) {}
   };
-
-  var selectedSemester = "";
-  var selectedYear = "";
-  var selectedRating = "";
-  var selectedDifficulty = "";
-  var selectedWorkload = 0;
-
-  const isSemesterSelected = selectedSemester !== "";
-  const isYearSelected = selectedYear !== "";
-  const isRatingSelected = selectedRating !== "";
-  const isDifficultySelected = selectedDifficulty !== "";
-  const isWorkloadSelected = selectedWorkload > 0;
 
   var coursePairing1 = null;
   var coursePairing2 = null;
@@ -68,6 +70,71 @@ export default function EditReview(props) {
     }
   }
 
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      ["course"]: props.reviewData.courseNumber,
+    }));
+  }, [props.reviewData.courseNumber]);
+
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      ["professor"]: props.reviewData.professor,
+    }));
+  }, [props.reviewData.professor]);
+
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      ["semester"]: props.reviewData.semester,
+    }));
+  }, [props.reviewData.semester]);
+
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      ["year"]: props.reviewData.year,
+    }));
+  }, [props.reviewData.year]);
+
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      ["finalGrade"]: props.reviewData.finalGrade,
+    }));
+  }, [props.reviewData.finalGrade]);
+
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      ["difficulty"]: props.reviewData.difficulty,
+    }));
+  }, [props.reviewData.difficulty]);
+
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      ["rating"]: props.reviewData.rating,
+    }));
+  }, [props.reviewData.rating]);
+
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      ["workload"]: props.reviewData.weeklyHours,
+    }));
+  }, [props.reviewData.weeklyHours]);
+
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      ["text"]: props.reviewData.content,
+    }));
+  }, [props.reviewData.content]);
+
+  console.log(values);
+
   return (
     <>
       <Button
@@ -83,7 +150,7 @@ export default function EditReview(props) {
           <Modal.Title>Edit Review</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form noValidate validated={validated} onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit}>
             {/* Course Taken */}
             <Form.Control
               type="course"
@@ -92,10 +159,11 @@ export default function EditReview(props) {
               disabled
               readOnly
               defaultValue={
-                props.reviewData.courseNumber +
+                props.reviewData.coursenumber +
                 ": " +
                 props.reviewData.courseName
               }
+              name="course"
             ></Form.Control>
 
             {/* Semester and Year Course was taken */}
@@ -103,10 +171,11 @@ export default function EditReview(props) {
               <Col>
                 <Form.Select
                   placeholder="selectSemester"
-                  required={!isSemesterSelected}
+                  required
                   aria-label="Semester Taken"
+                  name="semester"
                   defaultValue={props.reviewData.semester}
-                  onChange={(e) => (selectedSemester = e.target.value)}
+                  onChange={onFormChange}
                 >
                   <option key="blankChoice" hidden value="">
                     {" "}
@@ -120,10 +189,11 @@ export default function EditReview(props) {
               <Col>
                 <Form.Select
                   placeholder="selectYear"
-                  required={!isYearSelected}
+                  required
                   aria-label="Year Taken"
                   defaultValue={props.reviewData.year}
-                  onChange={(e) => (selectedYear = e.target.value)}
+                  name="year"
+                  onChange={onFormChange}
                 >
                   <option key="blankChoice" hidden value="">
                     {" "}
@@ -148,6 +218,8 @@ export default function EditReview(props) {
               placeholder="selectGrade"
               aria-label="Final Grade"
               defaultValue={props.reviewData.finalGrade}
+              name="finalGrade"
+              onChange={onFormChange}
             >
               <option key="blankChoice" hidden value="">
                 {" "}
@@ -175,10 +247,11 @@ export default function EditReview(props) {
               <Col>
                 <Form.Select
                   placeholder="courseDifficulty"
-                  required={!isDifficultySelected}
+                  required
                   aria-label="Difficulty of Course"
-                  onChange={(e) => (selectedDifficulty = e.target.value)}
+                  onChange={onFormChangeIntVal}
                   defaultValue={props.reviewData.difficulty}
+                  name="difficulty"
                 >
                   <option key="blankChoice" hidden value="">
                     {" "}
@@ -194,10 +267,11 @@ export default function EditReview(props) {
               <Col>
                 <Form.Select
                   placeholder="courseRating"
-                  required={!isRatingSelected}
+                  required
                   aria-label="courseRating"
-                  onChange={(e) => (selectedRating = e.target.value)}
+                  onChange={onFormChangeIntVal}
                   defaultValue={props.reviewData.rating}
+                  name="rating"
                 >
                   <option key="blankChoice" hidden value="">
                     {" "}
@@ -214,9 +288,10 @@ export default function EditReview(props) {
             <Form.Control
               type="Number"
               placeholder="Workload (hours per week)"
-              required={!isWorkloadSelected}
-              onChange={(e) => (selectedWorkload = parseInt(e.target.value))}
+              required
+              onChange={onFormChangeIntVal}
               defaultValue={props.reviewData.weeklyHours}
+              name="workload"
             />
             <br></br>
             {/* Taken with Courses*/}
@@ -365,7 +440,9 @@ export default function EditReview(props) {
               as="textarea"
               rows={7}
               placeholder="I liked/disliked the course because..."
-              defaultValue={props.review.content}
+              defaultValue={props.reviewData.content}
+              name="text"
+              onChange={onFormChange}
             />
             <br />
             <button>Publish Review</button>

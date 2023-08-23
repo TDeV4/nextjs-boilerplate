@@ -84,7 +84,7 @@ function formatData(courseBuilderData, userData) {
 
   courseBuilderData.map((course) => {
     courses[course.courseID] = course.courseID;
-    columns[course.semesterID]["courseIDs"].push(course.courseID);
+    columns[course.semesterID]["courseIDs"].push(course.courseNumber);
   });
 
   columnOrder.sort(function (a, b) {
@@ -95,20 +95,54 @@ function formatData(courseBuilderData, userData) {
   finalData["columns"] = columns;
   finalData["columnOrder"] = columnOrder;
 
+  console.log(finalData);
+
   return finalData;
 }
 
 export default function CoursePlanningTab(props) {
   const [profile, setProfile] = useState([]);
+  const [courseBuilderData, setCourseBuilderData] = useState([]);
+  const [userID, setUserID] = useState();
 
   const getProfileInfo = async () => {
     try {
       // const fetcher = fetchWrapper();
-      const response = await fetchWrapper.get("/users/2");
+
+      var userIDData = await fetchWrapper.get("/users/getuserid");
+      const userID = userIDData.data.userID;
+      console.log(userID);
+      setUserID(userID);
+
+      const courseBuilderURL = "/coursebuilder/" + userID;
+
+      const courseBuilder = await fetchWrapper.get(courseBuilderURL);
+      const courseJsonData = courseBuilder.data;
+      console.log(courseJsonData);
+      var courseBuilderDataFormatted = [];
+      for (var i = 0; i < courseJsonData.courseID.length; i++) {
+        const courseNumber = courseJsonData.coursenumber[i];
+        const semID = courseJsonData.semesterID[i];
+        const courseID = courseJsonData.courseID[i];
+
+        const newObj = {};
+        newObj["semesterID"] = semID;
+        newObj["courseNumber"] = courseNumber;
+        newObj["courseID"] = courseID;
+        courseBuilderDataFormatted.push(newObj);
+      }
+
+      console.log(courseBuilderDataFormatted);
+      setCourseBuilderData(courseBuilderDataFormatted);
+
+      const url = "/users/" + userID;
+
+      const response = await fetchWrapper.get(url);
 
       const jsonData = response.data;
       console.log(jsonData);
       setProfile(jsonData);
+
       // mark that we got the data
       // setHasFetchedData(true);
     } catch (err) {
@@ -127,7 +161,7 @@ export default function CoursePlanningTab(props) {
     getProfileInfo();
     if (profile.length < 1) {
     } else {
-      dataToUse = formatData(props.courseBuilderData, profile);
+      dataToUse = formatData(courseBuilderData, profile);
       console.log(dataToUse);
       setData(dataToUse);
     }
@@ -174,14 +208,21 @@ export default function CoursePlanningTab(props) {
 
     const values = {};
     values["semesterID"] = parseInt(destination.droppableId);
-    values["courseID"] = parseInt(draggableId);
-    values["userID"] = profile.userID;
+    const courseNumber = draggableId;
+    var courseID;
+    courseBuilderData.map((course) => {
+      if (course.courseNumber === courseNumber) {
+        courseID = course.courseID;
+      }
+    });
+    values["courseID"] = parseInt(courseID);
+    values["userID"] = parseInt(userID);
     console.log(values);
 
-    //fetchWrapper
-    //  .put("/coursebuilder/", values)
-    //  .then((data) => console.log("Success", data))
-    //  .catch((error) => console.error("There was an error!", error));
+    fetchWrapper
+      .put("/coursebuilder/", values)
+      .then((data) => console.log("Success", data))
+      .catch((error) => console.error("There was an error!", error));
 
     setData(newDataToUse);
   };

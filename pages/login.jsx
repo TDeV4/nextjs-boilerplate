@@ -14,16 +14,21 @@ const Login = () => {
   const { data: session } = useSession();
   console.log(session);
 
-  const [userID, setUserID] = useState(null);
+  const [userID, setUserID] = useState({});
+
+  const [gotID, setGotID] = useState(false);
 
   const getUserInfo = async () => {
     try {
+      setGotID(true);
       // const fetcher = fetchWrapper();
+      console.log("REACHING THIS POINT");
       const response = await fetchWrapper.get("/users/getuserid");
 
       const jsonData = response.data;
       console.log(jsonData);
       setUserID(jsonData);
+      console.log(userID);
       // mark that we got the data
       // setHasFetchedData(true);
     } catch (err) {
@@ -32,22 +37,22 @@ const Login = () => {
   };
 
   useEffect(() => {
-    console.log("Getting profile");
-    getUserInfo();
-  }, []);
+    if (session && !gotID) {
+      console.log("Getting profile");
+      getUserInfo();
+    }
+  }, [session]);
 
   if (session) {
-    if (userID === null) {
-      const nullProfileInfo = {
-        coursetaken: [],
-        coursetaking: [],
-      };
+    console.log(userID);
+    if (userID.userID === null) {
       return (
         <main className={styles.main}>
           <h1>Please create your profile to continue: </h1>
           <BrowserRouter>
             <CreateProfile />
           </BrowserRouter>
+          <button onClick={() => signOut()}>Sign out</button>
         </main>
       );
     } else {
@@ -56,7 +61,7 @@ const Login = () => {
           <TopNavBar />
           <HomeTopBar />
           <div className={styles.borderBox}>
-            <MyProfileTab courseData={[]} currentCourseData={[]} />
+            <MyProfileTab />
             <button onClick={() => signOut()}>Sign out</button>
           </div>
         </main>

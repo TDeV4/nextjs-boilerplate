@@ -64,7 +64,7 @@ const DUMMY_COURSE_DATA = {
   summaryReview: null,
 };
 
-//get all the review for that given course id to calculate the averages 
+//get all the review for that given course id to calculate the averages
 const DUMMY_REVIEW_DATA = [
   {
     courseID: 591,
@@ -128,8 +128,8 @@ const DUMMY_USER_COURSE_PAIRING = [
 
 export default function coursePage() {
   //make a fetch request and pass in the course id in the url (get request) to get all the reviews for that course and the course info for that course
-  const router = useRouter();
-  const query = router.query;
+  const UseRouter = useRouter();
+  const query = UseRouter.query;
   const course = query.courseID;
 
   return (
@@ -139,7 +139,7 @@ export default function coursePage() {
         <div class={styles.leftpane}>
           <div class={styles.borderBox}>
             <IndividualCourseInfo
-              courseID = {course}
+              courseID={course}
               reviewData={DUMMY_REVIEW_DATA}
               courseData={DUMMY_NEW_COURSE_DATA}
               coursePairings={DUMMY_USER_COURSE_PAIRING}
@@ -148,9 +148,7 @@ export default function coursePage() {
         </div>
         <div class={styles.rightpane}>
           <div class={styles.borderBox}>
-            <CourseReviewsTab
-            courseID = {course}
-            />
+            <CourseReviewsTab courseID={course} />
           </div>
         </div>
       </div>
