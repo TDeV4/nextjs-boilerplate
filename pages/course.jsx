@@ -127,7 +127,7 @@ const DUMMY_USER_COURSE_PAIRING = [
   },
 ];
 
-export default function course() {
+export default function Course() {
   //make a fetch request and pass in the course id in the url (get request) to get all the reviews for that course and the course info for that course
   const UseRouter = useRouter();
   const query = UseRouter.query;
