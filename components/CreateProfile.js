@@ -394,7 +394,7 @@ export default function CreateProfile(props) {
                 name="coursesTaken"
                 type="checkbox"
                 id={course.courseID}
-                value={course.coursenumber}
+                value={course.courseID}
                 onChange={onCourseTakenChange}
               />
             );
@@ -412,7 +412,7 @@ export default function CreateProfile(props) {
                 name="coursesTaking"
                 type="checkbox"
                 id={course.coursenumber}
-                value={course.coursenumber}
+                value={course.courseID}
                 onChange={onCourseTakingChange}
               />
             );

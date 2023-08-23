@@ -22,7 +22,6 @@ const Login = () => {
     try {
       setGotID(true);
       // const fetcher = fetchWrapper();
-      console.log("REACHING THIS POINT");
       const response = await fetchWrapper.get("/users/getuserid");
 
       const jsonData = response.data;
