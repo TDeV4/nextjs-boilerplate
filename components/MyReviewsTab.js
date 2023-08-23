@@ -169,7 +169,7 @@ export default function MyReviewsTab(props) {
   };
 
   useEffect(() => {
-    console.log("Getting my course reviews");
+    //console.log("Getting my course reviews");
     getMyReviews();
   }, []);
 
@@ -188,10 +188,7 @@ export default function MyReviewsTab(props) {
         My Reviews
       </h1>
       <div style={{ float: "right" }}>
-        <CreateReview
-          courseData={DUMMY_COURSE_DATA}
-          profData={DUMMY_PROF_DATA}
-        />
+        <CreateReview />
       </div>
       {reviews.map((review) => {
         if (review.parentID === null) {

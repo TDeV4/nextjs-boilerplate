@@ -1,6 +1,7 @@
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "../app/page.module.css";
+import fetchWrapper from "@/pages/api/fetchWrapper";
 
 export default function CreateReview(props) {
   const [show, setShow] = useState(false);
@@ -17,66 +18,107 @@ export default function CreateReview(props) {
     );
   }
 
-  var selectedCourseID;
+  const [values, setValues] = useState({
+    courseID: null,
+    professor: null,
+    semester: null,
+    year: null,
+    finalGrade: null,
+    difficulty: null,
+    rating: null,
+    workload: null,
+    text: null,
+    coursePairing1: "",
+    coursePairingRec1: "",
+    coursePairing2: "",
+    coursePairingRec2: "",
+    coursePairing3: "",
+    coursePairingRec3: "",
+  });
+
+  const [courses, setCourses] = useState([]);
+  const getCourseStats = async () => {
+    try {
+      const response = await fetchWrapper.get("/courses/");
+
+      const jsonData = response.data;
+      setCourses(jsonData);
+
+      const userIdData = await fetchWrapper.get("/users/getuserid");
+      const userID = userIdData.data.userID;
+      values["userID"] = userID;
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    //console.log("Getting course stats");
+    getCourseStats();
+  }, []);
+
+  var courseProfs = [];
+  var otherCourses = [];
+
+  const [relevantProfs, setRelevantProfs] = useState(courseProfs);
+  const [otherCourseOptions, setOtherCourseOptions] = useState(otherCourses);
 
   const handleCourseChange = (e) => {
-    selectedCourseID = e.target.value;
-    relevantProfessors();
-    setRelatedProfs(relevantProfs);
-    findOtherCourses();
+    const name = e.target.name;
+    const value = e.target.value;
+    setValues({ ...values, [name]: value });
+    //console.log(name, value);
+
+    otherCourses = [];
+    courseProfs = [];
+    courses.map((course) => {
+      if (course.courseID != value) {
+        otherCourses.push(course);
+      } else if (course.professor != null) {
+        course.professor.map((prof) => {
+          courseProfs.push(prof);
+        });
+      }
+    });
+    setRelevantProfs(courseProfs);
     setOtherCourseOptions(otherCourses);
   };
 
-  var relevantProfs = [];
-
-  function relevantProfessors() {
-    relevantProfs = [];
-    props.profData.map((prof) => {
-      if (prof.courseID == selectedCourseID) {
-        relevantProfs.push(prof.professor);
-      }
-    });
-  }
-
-  var otherCourses = [];
-  function findOtherCourses() {
-    otherCourses = [];
-    props.courseData.map((course) => {
-      if (course.courseID != selectedCourseID) {
-        otherCourses.push(course);
-      }
-    });
-  }
-
-  const [relatedProfs, setRelatedProfs] = useState(relevantProfs);
-  const [otherCourseOptions, setOtherCourseOptions] = useState(otherCourses);
-
-  const [validated, setValidated] = useState(false);
-
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
-    setValidated(true);
+  const onFormChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setValues({ ...values, [name]: value });
+    //console.log(name, value);
   };
 
-  var selectedSemester = "";
-  var selectedYear = "";
-  var selectedProf = "";
-  var selectedRating = "";
-  var selectedDifficulty = "";
-  var selectedWorkload = 0;
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
 
-  const isCourseSelected = selectedCourseID !== "";
-  const isSemesterSelected = selectedSemester !== "";
-  const isYearSelected = selectedYear !== "";
-  const isProfSelected = selectedProf !== "";
-  const isRatingSelected = selectedRating !== "";
-  const isDifficultySelected = selectedDifficulty !== "";
-  const isWorkloadSelected = selectedWorkload > 0;
+    const coursePairings = [];
+    if (values["coursePairing1"] != "" && values["coursePairingRec1"] != "") {
+      coursePairings.push({
+        coursePairing: values["coursePairing1"],
+        courseRec: values["coursePairingRec1"],
+      });
+    }
+    if (values["coursePairing2"] != "" && values["coursePairingRec2"] != "") {
+      coursePairings.push({
+        coursePairing: values["coursePairing2"],
+        courseRec: values["coursePairingRec2"],
+      });
+    }
+    if (values["coursePairing3"] != "" && values["coursePairingRec3"] != "") {
+      coursePairings.push({
+        coursePairing: values["coursePairing3"],
+        courseRec: values["coursePairingRec3"],
+      });
+    }
+
+    values["coursePairings"] = coursePairings;
+
+    console.log(values);
+  };
 
   return (
     <>
@@ -93,20 +135,21 @@ export default function CreateReview(props) {
           <Modal.Title>Create New Review</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form noValidate validated={validated} onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit}>
             {/* Course Taken */}
             <Form.Select
               placeholder="selectCourse"
-              required={isCourseSelected}
+              required
+              name="courseID"
               aria-label="Course Selection"
               onChange={handleCourseChange}
             >
               <option key="blankChoice" hidden value="">
                 Select a Course
               </option>
-              {props.courseData.map((course) => (
+              {courses.map((course) => (
                 <option key={course.courseID} value={course.courseID}>
-                  CIT {course.courseID}: {course.courseName}
+                  CIT {course.coursenumber}: {course.coursename}
                 </option>
               ))}
             </Form.Select>
@@ -116,9 +159,10 @@ export default function CreateReview(props) {
               <Col>
                 <Form.Select
                   placeholder="selectSemester"
-                  required={!isSemesterSelected}
+                  required
+                  name="semester"
                   aria-label="Semester Taken"
-                  onChange={(e) => (selectedSemester = e.target.value)}
+                  onChange={onFormChange}
                 >
                   <option key="blankChoice" hidden value="">
                     {" "}
@@ -132,9 +176,10 @@ export default function CreateReview(props) {
               <Col>
                 <Form.Select
                   placeholder="selectYear"
-                  required={!isYearSelected}
+                  required
                   aria-label="Year Taken"
-                  onChange={(e) => (selectedYear = e.target.value)}
+                  onChange={onFormChange}
+                  name="year"
                 >
                   <option key="blankChoice" hidden value="">
                     {" "}
@@ -149,22 +194,28 @@ export default function CreateReview(props) {
             {/* Professor */}
             <Form.Select
               placeholder="selectProf"
-              required={!isProfSelected}
+              required
               aria-label="Professor Selection"
-              onChange={(e) => (selectedProf = e.target.value)}
-              options={relatedProfs}
+              onChange={onFormChange}
+              options={relevantProfs}
+              name="professor"
             >
               <option key="blankChoice" hidden value="">
                 {" "}
                 Select Professor{" "}
               </option>
-              {relatedProfs.map((prof) => {
+              {relevantProfs.map((prof) => {
                 return <option key={prof}>{prof}</option>;
               })}
             </Form.Select>
 
             {/* Final Grade */}
-            <Form.Select placeholder="selectGrade" aria-label="Final Grade">
+            <Form.Select
+              placeholder="selectGrade"
+              aria-label="Final Grade"
+              name="finalGrade"
+              onChange={onFormChange}
+            >
               <option key="blankChoice" hidden value="">
                 {" "}
                 Final Grade (optional){" "}
@@ -191,27 +242,29 @@ export default function CreateReview(props) {
               <Col>
                 <Form.Select
                   placeholder="courseDifficulty"
-                  required={!isDifficultySelected}
+                  required
                   aria-label="Difficulty of Course"
-                  onChange={(e) => (selectedDifficulty = e.target.value)}
+                  onChange={onFormChange}
+                  name="difficulty"
                 >
                   <option key="blankChoice" hidden value="">
                     {" "}
                     Course Difficulty{" "}
                   </option>
-                  <option>Piece of Cake</option>
-                  <option>Easy</option>
-                  <option>Normal</option>
-                  <option>Hard</option>
-                  <option>Near Impossible</option>
+                  <option value={1}>Piece of Cake</option>
+                  <option value={2}>Easy</option>
+                  <option value={3}>Normal</option>
+                  <option value={4}>Hard</option>
+                  <option value={5}>Near Impossible</option>
                 </Form.Select>
               </Col>
               <Col>
                 <Form.Select
                   placeholder="courseRating"
-                  required={!isRatingSelected}
+                  required
                   aria-label="courseRating"
-                  onChange={(e) => (selectedRating = e.target.value)}
+                  onChange={onFormChange}
+                  name="rating"
                 >
                   <option key="blankChoice" hidden value="">
                     {" "}
@@ -228,8 +281,9 @@ export default function CreateReview(props) {
             <Form.Control
               type="Number"
               placeholder="Workload (hours per week)"
-              required={!isWorkloadSelected}
-              onChange={(e) => (selectedWorkload = parseInt(e.target.value))}
+              required
+              onChange={onFormChange}
+              name="workload"
             />
             <br></br>
             {/* Taken with Courses*/}
@@ -239,6 +293,8 @@ export default function CreateReview(props) {
                   placeholder="selectTakenWithCourse"
                   aria-label="Taken With Course Selection"
                   options={otherCourseOptions}
+                  onChange={onFormChange}
+                  name="coursePairing1"
                 >
                   <option key="blankChoice" value="">
                     {" "}
@@ -246,8 +302,8 @@ export default function CreateReview(props) {
                   </option>
                   {otherCourseOptions.map((course) => {
                     return (
-                      <option key={course.courseID}>
-                        {course.courseID}: {course.courseName}
+                      <option key={course.courseID} value={course.courseID}>
+                        {course.coursenumber}: {course.coursename}
                       </option>
                     );
                   })}
@@ -257,14 +313,16 @@ export default function CreateReview(props) {
                 <Form.Select
                   placeholder="recommendationForPairing"
                   aria-label="Recommendation for Pairing"
+                  onChange={onFormChange}
+                  name="coursePairingRec1"
                 >
-                  <option key="blankChoice" hidden value="">
+                  <option key="blankChoice" value="">
                     {" "}
                     Recommendation{" "}
                   </option>
-                  <option>Recommended</option>
-                  <option>Neutral</option>
-                  <option>Not Recommended</option>
+                  <option value={1}>Recommended</option>
+                  <option value={0}>Neutral</option>
+                  <option value={-1}>Not Recommended</option>
                 </Form.Select>
               </Col>
             </Row>
@@ -274,6 +332,8 @@ export default function CreateReview(props) {
                   placeholder="selectTakenWithCourse"
                   aria-label="Taken With Course Selection"
                   options={otherCourseOptions}
+                  onChange={onFormChange}
+                  name="coursePairing2"
                 >
                   <option key="blankChoice" value="">
                     {" "}
@@ -281,8 +341,8 @@ export default function CreateReview(props) {
                   </option>
                   {otherCourseOptions.map((course) => {
                     return (
-                      <option key={course.courseID}>
-                        {course.courseID}: {course.courseName}
+                      <option key={course.courseID} value={course.courseID}>
+                        {course.coursenumber}: {course.coursename}
                       </option>
                     );
                   })}
@@ -292,14 +352,16 @@ export default function CreateReview(props) {
                 <Form.Select
                   placeholder="recommendationForPairing"
                   aria-label="Recommendation for Pairing"
+                  onChange={onFormChange}
+                  name="coursePairingRec2"
                 >
-                  <option key="blankChoice" hidden value="">
+                  <option key="blankChoice" value="">
                     {" "}
                     Recommendation{" "}
                   </option>
-                  <option>Recommended</option>
-                  <option>Neutral</option>
-                  <option>Not Recommended</option>
+                  <option value={1}>Recommended</option>
+                  <option value={0}>Neutral</option>
+                  <option value={-1}>Not Recommended</option>
                 </Form.Select>
               </Col>
             </Row>
@@ -309,6 +371,8 @@ export default function CreateReview(props) {
                   placeholder="selectTakenWithCourse"
                   aria-label="Taken With Course Selection"
                   options={otherCourseOptions}
+                  onChange={onFormChange}
+                  name="coursePairing3"
                 >
                   <option key="blankChoice" value="">
                     {" "}
@@ -316,8 +380,8 @@ export default function CreateReview(props) {
                   </option>
                   {otherCourseOptions.map((course) => {
                     return (
-                      <option key={course.courseID}>
-                        {course.courseID}: {course.courseName}
+                      <option key={course.courseID} value={course.courseID}>
+                        {course.coursenumber}: {course.coursename}
                       </option>
                     );
                   })}
@@ -327,27 +391,30 @@ export default function CreateReview(props) {
                 <Form.Select
                   placeholder="recommendationForPairing"
                   aria-label="Recommendation for Pairing"
+                  onChange={onFormChange}
+                  name="coursePairingRec3"
                 >
-                  <option key="blankChoice" hidden value="">
+                  <option key="blankChoice" value="">
                     {" "}
                     Recommendation{" "}
                   </option>
-                  <option>Recommended</option>
-                  <option>Neutral</option>
-                  <option>Not Recommended</option>
+                  <option value={1}>Recommended</option>
+                  <option value={0}>Neutral</option>
+                  <option value={-1}>Not Recommended</option>
                 </Form.Select>
               </Col>
             </Row>
             <Form.Text className="text-muted">
               If you mistakenly select a course, you can simply switch the
-              course back to Taken with... and do not need to worry about the
-              Recommendation that is selection.
+              values back to their default: "Taken with..." and "Recommendation"
             </Form.Text>
 
             <Form.Control
               as="textarea"
               rows={7}
               placeholder="I liked/disliked the course because..."
+              name="text"
+              onChange={onFormChange}
             />
             <br />
             <button>Publish Review</button>

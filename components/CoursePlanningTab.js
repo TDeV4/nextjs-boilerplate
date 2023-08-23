@@ -5,45 +5,6 @@ import { Col, Row } from "react-bootstrap";
 import React, { Component, useState, useEffect } from "react";
 import fetchWrapper from "../pages/api/fetchWrapper";
 
-const DUMMY_DATA = [
-  {
-    semesterID: "1",
-    courseID: "591",
-  },
-  {
-    semesterID: "1",
-    courseID: "592",
-  },
-  {
-    semesterID: "2",
-    courseID: "593",
-  },
-  {
-    semesterID: "4",
-    courseID: "595",
-  },
-  {
-    semesterID: "0",
-    courseID: "594",
-  },
-  {
-    semesterID: "0",
-    courseID: "596",
-  },
-  {
-    semesterID: "0",
-    courseID: "521",
-  },
-  {
-    semesterID: "0",
-    courseID: "545",
-  },
-  {
-    semesterID: "0",
-    courseID: "551",
-  },
-];
-
 function formatData(courseBuilderData, userData) {
   var finalData = {};
   var courses = {};
@@ -51,9 +12,7 @@ function formatData(courseBuilderData, userData) {
   var columnOrder = [];
 
   const gradYear = userData.expectedGraduation.slice(-4);
-  console.log(gradYear);
   const startYear = userData.startSemester.slice(-4);
-  console.log(startYear);
 
   for (let i = 0; i < (parseInt(gradYear) - parseInt(startYear)) * 3 + 4; i++) {
     var term;
@@ -95,7 +54,7 @@ function formatData(courseBuilderData, userData) {
   finalData["columns"] = columns;
   finalData["columnOrder"] = columnOrder;
 
-  console.log(finalData);
+  //console.log(finalData);
 
   return finalData;
 }
@@ -111,14 +70,13 @@ export default function CoursePlanningTab(props) {
 
       var userIDData = await fetchWrapper.get("/users/getuserid");
       const userID = userIDData.data.userID;
-      console.log(userID);
       setUserID(userID);
 
       const courseBuilderURL = "/coursebuilder/" + userID;
 
       const courseBuilder = await fetchWrapper.get(courseBuilderURL);
       const courseJsonData = courseBuilder.data;
-      console.log(courseJsonData);
+      //console.log(courseJsonData);
       var courseBuilderDataFormatted = [];
       for (var i = 0; i < courseJsonData.courseID.length; i++) {
         const courseNumber = courseJsonData.coursenumber[i];
@@ -132,7 +90,6 @@ export default function CoursePlanningTab(props) {
         courseBuilderDataFormatted.push(newObj);
       }
 
-      console.log(courseBuilderDataFormatted);
       setCourseBuilderData(courseBuilderDataFormatted);
 
       const url = "/users/" + userID;
@@ -140,7 +97,7 @@ export default function CoursePlanningTab(props) {
       const response = await fetchWrapper.get(url);
 
       const jsonData = response.data;
-      console.log(jsonData);
+      //console.log(jsonData);
       setProfile(jsonData);
 
       // mark that we got the data
@@ -157,12 +114,12 @@ export default function CoursePlanningTab(props) {
   var dataToUse;
 
   useEffect(() => {
-    console.log("Getting profile");
+    //console.log("Getting profile");
     getProfileInfo();
     if (profile.length < 1) {
     } else {
       dataToUse = formatData(courseBuilderData, profile);
-      console.log(dataToUse);
+      //console.log(dataToUse);
       setData(dataToUse);
     }
   }, [profile.name]);

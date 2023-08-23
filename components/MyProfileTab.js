@@ -13,13 +13,13 @@ export default function MyProfileTab(props) {
     try {
       var userIDData = await fetchWrapper.get("/users/getuserid");
       const userID = userIDData.data.userID;
-      console.log(userID);
+      //console.log(userID);
 
       const url = "/users/" + userID;
       const response = await fetchWrapper.get(url);
 
       const jsonData = response.data;
-      console.log(jsonData);
+      //console.log(jsonData);
       setProfile(jsonData);
       // mark that we got the data
       // setHasFetchedData(true);
@@ -29,9 +29,9 @@ export default function MyProfileTab(props) {
   };
 
   useEffect(() => {
-    console.log("Getting profile");
+    //console.log("Getting profile");
     getProfileInfo();
-    console.log("Getting course stats");
+    //console.log("Getting course stats");
     getCourseStats();
   }, []);
 
@@ -42,7 +42,7 @@ export default function MyProfileTab(props) {
       const response = await fetchWrapper.get("/courses/");
 
       const jsonData = response.data;
-      console.log(jsonData);
+      //console.log(jsonData);
       setCourses(jsonData);
     } catch (err) {
       console.error(err.message);
@@ -64,8 +64,8 @@ export default function MyProfileTab(props) {
       </div>
       <div>
         <h5 className={styles.centerText}>Hello, {profile.name}!</h5>
-        <h7 className={styles.centerText}>AKA (your anonymous name):</h7>
-        <h7 className={styles.centerText}>{profile.anonName}</h7>
+        <h6 className={styles.centerText}>AKA (your anonymous name):</h6>
+        <h6 className={styles.centerText}>{profile.anonName}</h6>
         <br></br>
         <p>Bio: {profile.bio}</p>
         <p>Expected Graduation: {profile.expectedGraduation} </p>

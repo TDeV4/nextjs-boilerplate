@@ -152,7 +152,7 @@ const DUMMY_ALL_COURSES_DATA = [
 
 export default function HomePage() {
   const { data: session } = useSession();
-  console.log(session);
+  //console.log(session);
 
   useEffect(() => {
     if (session?.error === "Expired Token") {
