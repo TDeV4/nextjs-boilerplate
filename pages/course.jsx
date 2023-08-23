@@ -11,7 +11,6 @@ import React from "react";
 import CourseReviewsTab from "@/components/CourseReviewsTab";
 import { useEffect } from "react";
 
-
 const DUMMY_USER_DATA = {
   userID: 1,
   name: "Tanner DeVore",
@@ -128,7 +127,7 @@ const DUMMY_USER_COURSE_PAIRING = [
   },
 ];
 
-export default function coursePage() {
+export default function course() {
   //make a fetch request and pass in the course id in the url (get request) to get all the reviews for that course and the course info for that course
   const UseRouter = useRouter();
   const query = UseRouter.query;
