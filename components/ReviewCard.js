@@ -43,9 +43,34 @@ export default function ReviewCard(props) {
     }
   };
 
+  //const { data: session, status } = useSession();
+  const [reviews, setCourse] = useState([]);
+
+  // get and set the fetched data only once
+  // const [hasFetchedData, setHasFetchedData] = useState(false);
+
+  const getAnonReviews = async () => {
+    try {
+      // const fetcher = fetchWrapper();
+      const response = await fetchWrapper.get("/reviews/byuser/"+ props.reviewData.userID);
+      console.log(response);
+      const jsonData = response.data;
+
+      setCourse(jsonData);
+      // mark that we got the data
+      // setHasFetchedData(true);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+
+
   useEffect(() => {
     console.log("Getting profile");
     getProfileInfo();
+    console.log("Getting anon user's course reviews");
+    getAnonReviews();
   }, [profile.name]);
 
   if (profile.length < 1) {
@@ -62,7 +87,7 @@ export default function ReviewCard(props) {
         Review By:{" "}
         <AnonProfileModal
           userData={profile}
-          reviewReplyData={props.reviewReplyData}
+          reviewReplyData={reviews}
         />
       </div>
       <br />

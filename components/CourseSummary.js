@@ -41,6 +41,7 @@ const CourseSummary = () => {
         <tr>
           <th className={styles.centeredHeading}>Course Number</th>
           <th>Course Name</th>
+          <th>Number of Reviews</th>
           <th>Difficulty</th>
           <th>Workload</th>
           <th>Rating</th>
@@ -56,7 +57,7 @@ const CourseSummary = () => {
                 {courseInfo.coursename}
               </Link>
             </td>
-
+            <td>{courseInfo.reviewCount}</td>
             <td>{courseInfo.averageDifficulty}</td>
             <td>{courseInfo.averageWorkload}</td>
             <td>{courseInfo.averageRating}</td>

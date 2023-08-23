@@ -3,12 +3,14 @@ import styles from "app/page.module.css";
 import Link from "next/link";
 import TopNavBar from "../components/TopNavBar";
 import HomeTopBar from "../components/HomeTopBar";
-import { getSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 import MyReviewsTab from "@/components/MyReviewsTab";
 import Table from "react-bootstrap/Table";
 import { useRouter } from "next/router";
 import React from "react";
 import CourseReviewsTab from "@/components/CourseReviewsTab";
+import { useEffect } from "react";
+
 
 const DUMMY_USER_DATA = {
   userID: 1,
@@ -131,6 +133,14 @@ export default function coursePage() {
   const UseRouter = useRouter();
   const query = UseRouter.query;
   const course = query.courseID;
+
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session?.error === "Expired Token") {
+      signIn(); // Force sign in to hopefully resolve error
+    }
+  }, [session]);
 
   return (
     <main className={styles.main}>

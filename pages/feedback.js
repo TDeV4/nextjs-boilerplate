@@ -1,12 +1,20 @@
 import styles from "app/page.module.css";
 import Link from "next/link";
-import { getSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 import TopNavBar from "@/components/TopNavBar";
 import { Button, Form } from "react-bootstrap";
 import fetchWrapper from "./api/fetchWrapper";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Feedback() {
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session?.error === "Expired Token") {
+      signIn(); // Force sign in to hopefully resolve error
+    }
+  }, [session]);
+
   const [values, setValues] = useState({
     feedback: "",
   });

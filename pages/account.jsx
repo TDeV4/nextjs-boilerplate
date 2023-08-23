@@ -1,10 +1,18 @@
 //page that is protect - from client side
 import React from "react";
 import { useSession, signOut, getSession } from "next-auth/react";
+import { useEffect } from "react";
+
 
 //when access account but not signed in, redirect page automatically to sign in page
 const Account = () => {
   const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (session?.error === "Expired Token") {
+      signIn(); // Force sign in to hopefully resolve error
+    }
+  }, [session]);
 
   if (status === "authenticated") {
     return (
