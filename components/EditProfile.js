@@ -124,6 +124,7 @@ export default function EditProfile(props) {
   }
 
   const [courses, setCourses] = useState([]);
+  const [values, setValues] = useState({});
 
   const onSwitchChange = (e) => {
     const name = e.target.name;
@@ -173,12 +174,19 @@ export default function EditProfile(props) {
       // console.log(jsonData);
       setCourses(jsonData);
       var userIDData = await fetchWrapper.get("/users/getuserid");
+
+      const userID = userIDData.data.userID;
+
+      setValues((values) => ({
+        ...values,
+        ["userID"]: parseInt(userID),
+      }));
+
+      console.log(userID);
     } catch (err) {
       console.error(err.message);
     }
   };
-
-  const { data: session } = useSession();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -193,19 +201,18 @@ export default function EditProfile(props) {
       delete values["startYear"];
       values["expectedGraduation"] = expectedGraduation;
       values["startSemester"] = startSemester;
+      values["fulltimeStudentStatus"] = false;
       console.log(values);
 
-      //fetchWrapper
-      //  .put("/users/updateuser", values)
-      //  .then((data) => console.log("Success", data))
-      //  .catch((error) => console.error("There was an error!", error));
+      fetchWrapper
+        .put("/users/updateuser", values)
+        .then((data) => console.log("Success", data))
+        .catch((error) => console.error("There was an error!", error));
     } catch (err) {
       console.log("Failed to update user");
       console.log(err);
     }
   };
-
-  const [values, setValues] = useState({});
 
   useEffect(() => {
     console.log("Getting course stats");
@@ -293,7 +300,7 @@ export default function EditProfile(props) {
   useEffect(() => {
     setValues((values) => ({
       ...values,
-      ["courseTaking"]: props.userData.coursesTaking,
+      ["coursesTaking"]: props.userData.coursesTaking,
     }));
   }, [props.userData.coursesTaking]);
 
@@ -318,9 +325,6 @@ export default function EditProfile(props) {
         props.userData.mcitConnectEmailNotifications,
     }));
   }, [props.userData.mcitConnectEmailNotifications]);
-
-  const userID = props.userData.userID;
-  values["userID"] = parseInt(userID);
 
   console.log(values);
 
@@ -391,11 +395,11 @@ export default function EditProfile(props) {
                   controlId="startSemester"
                   label="Start Semester"
                   className="mb-3"
-                  name="startSemester"
                 >
                   <Form.Select
                     defaultValue={values["startSemester"]}
                     onChange={onFormChange}
+                    name="startSemester"
                   >
                     <option key="blankChoice" hidden value="" />
                     <option defaultChecked={true}>Fall</option>
@@ -409,12 +413,12 @@ export default function EditProfile(props) {
                   controlId="startYear"
                   label="Start Year"
                   className="mb-3"
-                  name="startYear"
                 >
                   <Form.Select
                     required
                     defaultValue={values["startYear"]}
                     onChange={onFormChange}
+                    name="startYear"
                   >
                     <option key="blankChoice" hidden value="" />
                     {startYearOptions}
@@ -426,11 +430,11 @@ export default function EditProfile(props) {
                   controlId="expectedGradSemester"
                   label="Expected Graduation Semester"
                   className="mb-3"
-                  name="expectedGradSemester"
                 >
                   <Form.Select
                     defaultValue={values["expectedGradSemester"]}
                     onChange={onFormChange}
+                    name="expectedGradSemester"
                   >
                     <option key="blankChoice" hidden value="" />
                     <option>Fall</option>
@@ -444,12 +448,12 @@ export default function EditProfile(props) {
                   controlId="expectedGradYear"
                   label="Expected Graduation Year"
                   className="mb-3"
-                  name="expectedGradYear"
                 >
                   <Form.Select
                     required
                     defaultValue={values["expectedGradYear"]}
                     onChange={onFormChange}
+                    name="expectedGradYear"
                   >
                     <option key="blankChoice" hidden value="" />
                     {endYearOptions}
@@ -476,6 +480,7 @@ export default function EditProfile(props) {
                 placeholder="Bio"
                 defaultValue={props.userData.bio}
                 onChange={onFormChange}
+                name="bio"
               />
             </FloatingLabel>
             <Form.Label>Work Status</Form.Label>

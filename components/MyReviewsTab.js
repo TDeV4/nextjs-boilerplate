@@ -7,7 +7,6 @@ import EditReview from "./EditReview";
 import fetchWrapper from "../pages/api/fetchWrapper";
 import { useEffect, useState } from "react";
 
-
 const DUMMY_COURSE_DATA = [
   {
     courseID: 591,
@@ -147,7 +146,7 @@ export default function MyReviewsTab(props) {
   const getUserID = async () => {
     try {
       // const fetcher = fetchWrapper();
-      const response = await fetchWrapper.get("/getuserid");
+      const response = await fetchWrapper.get("/users/getuserid");
 
       const jsonData = response.data;
       console.log(jsonData);
@@ -159,49 +158,30 @@ export default function MyReviewsTab(props) {
     }
   };
 
-  const [profile, setProfile] = useState([]);
-
-  const getProfileInfo = async () => {
-    try {
-      // const fetcher = fetchWrapper();
-      const response = await fetchWrapper.get("/users/1");
-
-      const jsonData = response.data;
-      console.log(jsonData);
-      setProfile(jsonData);
-      // mark that we got the data
-      // setHasFetchedData(true);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
   //const { data: session, status } = useSession();
   const [reviews, setCourse] = useState([]);
 
   // get and set the fetched data only once
   // const [hasFetchedData, setHasFetchedData] = useState(false);
 
-  const getMyReviews = async() => {
-    try{
+  const getMyReviews = async () => {
+    try {
       // const fetcher = fetchWrapper();
       const response = await fetchWrapper.get("/reviews/byuser/1");
-      console.log(response)
+      console.log(response);
       const jsonData = response.data;
-      
+
       setCourse(jsonData);
       // mark that we got the data
       // setHasFetchedData(true);
-
-    }catch (err){
+    } catch (err) {
       console.error(err.message);
     }
-  }
-  
-  useEffect(() => { 
+  };
+
+  useEffect(() => {
     console.log("Getting my user id");
     getUserID();
-    console.log("Getting my user profile");
-    getProfileInfo(); 
     console.log("Getting my course reviews");
     getMyReviews();
   }, []);
@@ -238,15 +218,12 @@ export default function MyReviewsTab(props) {
             <div key={review.reviewID}>
               <ReviewCard
                 key={review.reviewID}
-                review={review}
                 reviewData={review}
-                userData={profile}
                 reviewReplyData={reviews}
                 coursePairings={findRelevantCoursePairings(review.reviewID)}
               />
               <div className={styles.rightAlignButton}>
                 <EditReview
-                  review={review}
                   reviewData={review}
                   coursePairings={findRelevantCoursePairings(review.reviewID)}
                   courseData={DUMMY_COURSE_DATA}

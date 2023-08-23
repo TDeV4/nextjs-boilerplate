@@ -129,7 +129,7 @@ export default function EditReview(props) {
   useEffect(() => {
     setValues((values) => ({
       ...values,
-      ["text"]: props.review.content,
+      ["text"]: props.reviewData.content,
     }));
   }, [props.reviewData.content]);
 
@@ -159,7 +159,7 @@ export default function EditReview(props) {
               disabled
               readOnly
               defaultValue={
-                props.reviewData.courseNumber +
+                props.reviewData.coursenumber +
                 ": " +
                 props.reviewData.courseName
               }
@@ -440,7 +440,7 @@ export default function EditReview(props) {
               as="textarea"
               rows={7}
               placeholder="I liked/disliked the course because..."
-              defaultValue={props.review.content}
+              defaultValue={props.reviewData.content}
               name="text"
               onChange={onFormChange}
             />

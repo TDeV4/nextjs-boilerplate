@@ -126,10 +126,7 @@ export default function AnonProfileModal(props) {
           <h3 className={styles.centerText}>Name: {props.userData.anonName}</h3>
           <div className={styles.borderBox}>
             <h4 className={styles.centerText}>Profile Info</h4>
-            <p>
-              Expected Graduation: {props.userData.graduationSemester}{" "}
-              {props.userData.graduationYear}
-            </p>
+            <p>Expected Graduation: {props.userData.graduation}</p>
             <p>Industry: {props.userData.industry}</p>
             <p>
               Work Status:{" "}

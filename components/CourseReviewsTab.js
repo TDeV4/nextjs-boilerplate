@@ -145,7 +145,6 @@ const DUMMY_PROF_DATA = [
     courseID: 595,
     professor: "Boon Thau Loo",
   },
-
 ];
 
 const DUMMY_REVIEW_DATA = [
@@ -271,25 +270,26 @@ export default function CourseReviewsTab(props) {
   // get and set the fetched data only once
   // const [hasFetchedData, setHasFetchedData] = useState(false);
 
-  const getCourseReviews = async() => {
-    try{
+  const getCourseReviews = async () => {
+    try {
       // const fetcher = fetchWrapper();
-      const response = await fetchWrapper.get("/reviews/bycourse/"+ props.courseID);
-      console.log(response)
+      const response = await fetchWrapper.get(
+        "/reviews/bycourse/" + props.courseID
+      );
+      console.log(response);
       const jsonData = response.data;
-      
+
       setCourse(jsonData);
       // mark that we got the data
       // setHasFetchedData(true);
-
-    }catch (err){
+    } catch (err) {
       console.error(err.message);
     }
-  }
-  
-  useEffect(() => {  
-      console.log("Getting individual course reviews");
-      getCourseReviews();
+  };
+
+  useEffect(() => {
+    console.log("Getting individual course reviews");
+    getCourseReviews();
   }, []);
 
   const [createReviewIsOpen, setCreateReviewIsOpen] = useState(false);
@@ -323,22 +323,22 @@ export default function CourseReviewsTab(props) {
           //   }
           // });
           userData.map((userData) => {
-            if (parseInt(review.userID,10) === parseInt(userData.userID,10)) {
+            if (parseInt(review.userID, 10) === parseInt(userData.userID, 10)) {
               userDataPassThrough = userData;
             }
-          });      
+          });
+          console.log(review);
           //query and get the user data for that review which stored in reviewdatapassthrough, pass that in to userdata
           return (
             <div key={review.reviewID}>
               <ReviewCard
                 key={review.reviewID}
-                review={review}
                 reviewData={review}
                 userData={userDataPassThrough}
                 reviewReplyData={reviews}
                 coursePairings={findRelevantCoursePairings(review.reviewID)}
               />
-            <br/>           
+              <br />
             </div>
           );
         }

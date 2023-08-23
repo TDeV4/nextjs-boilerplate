@@ -103,12 +103,20 @@ function formatData(courseBuilderData, userData) {
 export default function CoursePlanningTab(props) {
   const [profile, setProfile] = useState([]);
   const [courseBuilderData, setCourseBuilderData] = useState([]);
+  const [userID, setUserID] = useState();
 
   const getProfileInfo = async () => {
     try {
       // const fetcher = fetchWrapper();
 
-      const courseBuilder = await fetchWrapper.get("/coursebuilder/1");
+      var userIDData = await fetchWrapper.get("/users/getuserid");
+      const userID = userIDData.data.userID;
+      console.log(userID);
+      setUserID(userID);
+
+      const courseBuilderURL = "/coursebuilder/" + userID;
+
+      const courseBuilder = await fetchWrapper.get(courseBuilderURL);
       const courseJsonData = courseBuilder.data;
       console.log(courseJsonData);
       var courseBuilderDataFormatted = [];
@@ -127,7 +135,9 @@ export default function CoursePlanningTab(props) {
       console.log(courseBuilderDataFormatted);
       setCourseBuilderData(courseBuilderDataFormatted);
 
-      const response = await fetchWrapper.get("/users/1");
+      const url = "/users/" + userID;
+
+      const response = await fetchWrapper.get(url);
 
       const jsonData = response.data;
       console.log(jsonData);
@@ -206,7 +216,7 @@ export default function CoursePlanningTab(props) {
       }
     });
     values["courseID"] = parseInt(courseID);
-    values["userID"] = parseInt(profile.userID);
+    values["userID"] = parseInt(userID);
     console.log(values);
 
     fetchWrapper

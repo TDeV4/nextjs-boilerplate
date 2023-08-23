@@ -13,10 +13,10 @@ export default function MyProfileTab(props) {
     try {
       var userIDData = await fetchWrapper.get("/users/getuserid");
       const userID = userIDData.data.userID;
+      console.log(userID);
 
       const url = "/users/" + userID;
-      // const fetcher = fetchWrapper();
-      const response = await fetchWrapper.get("/users/1");
+      const response = await fetchWrapper.get(url);
 
       const jsonData = response.data;
       console.log(jsonData);
