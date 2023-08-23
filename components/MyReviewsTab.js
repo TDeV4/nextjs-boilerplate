@@ -143,21 +143,6 @@ function findRelevantCoursePairings(reviewID) {
 export default function MyReviewsTab(props) {
   const [user, setUser] = useState([]);
 
-  const getUserID = async () => {
-    try {
-      // const fetcher = fetchWrapper();
-      const response = await fetchWrapper.get("/users/getuserid");
-
-      const jsonData = response.data;
-      console.log(jsonData);
-      setUser(jsonData);
-      // mark that we got the data
-      // setHasFetchedData(true);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
   //const { data: session, status } = useSession();
   const [reviews, setCourse] = useState([]);
 
@@ -166,9 +151,13 @@ export default function MyReviewsTab(props) {
 
   const getMyReviews = async () => {
     try {
+      const userIdResponse = await fetchWrapper.get("/users/getuserid");
+      const userID = userIdResponse.data.userID;
+
+      const url = "/reviews/byuser/" + userID;
+
       // const fetcher = fetchWrapper();
-      const response = await fetchWrapper.get("/reviews/byuser/1");
-      console.log(response);
+      const response = await fetchWrapper.get(url);
       const jsonData = response.data;
 
       setCourse(jsonData);
@@ -180,9 +169,7 @@ export default function MyReviewsTab(props) {
   };
 
   useEffect(() => {
-    console.log("Getting my user id");
-    getUserID();
-    console.log("Getting my course reviews");
+    //console.log("Getting my course reviews");
     getMyReviews();
   }, []);
 
@@ -201,10 +188,7 @@ export default function MyReviewsTab(props) {
         My Reviews
       </h1>
       <div style={{ float: "right" }}>
-        <CreateReview
-          courseData={DUMMY_COURSE_DATA}
-          profData={DUMMY_PROF_DATA}
-        />
+        <CreateReview />
       </div>
       {reviews.map((review) => {
         if (review.parentID === null) {

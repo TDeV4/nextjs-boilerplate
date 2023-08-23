@@ -152,7 +152,7 @@ const DUMMY_ALL_COURSES_DATA = [
 
 export default function HomePage() {
   const { data: session } = useSession();
-  console.log(session);
+  //console.log(session);
 
   useEffect(() => {
     if (session?.error === "Expired Token") {
@@ -173,6 +173,7 @@ export default function HomePage() {
                 currentCourseData={DUMMY_CURRENT_COURSES_DATA}
               />
             </div>
+            <button onClick={() => signOut()}>Sign out</button>
           </div>
           <div class={styles.rightpane}>
             <div class={styles.borderBox}>

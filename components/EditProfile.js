@@ -130,7 +130,6 @@ export default function EditProfile(props) {
     const name = e.target.name;
     const currentValue = values[name];
     setValues({ ...values, [name]: !currentValue });
-    console.log(!currentValue);
   };
 
   const onCourseTakenChange = (e) => {
@@ -143,7 +142,7 @@ export default function EditProfile(props) {
       newArray.push(course);
       values["coursesTaken"] = newArray;
     }
-    console.log(values["coursesTaken"]);
+    //console.log(values["coursesTaken"]);
   };
 
   const onCourseTakingChange = (e) => {
@@ -163,7 +162,7 @@ export default function EditProfile(props) {
     const name = e.target.name;
     const value = e.target.value;
     setValues({ ...values, [name]: value });
-    console.log(name, value);
+    //console.log(name, value);
   };
 
   const getCourseStats = async () => {
@@ -181,8 +180,6 @@ export default function EditProfile(props) {
         ...values,
         ["userID"]: parseInt(userID),
       }));
-
-      console.log(userID);
     } catch (err) {
       console.error(err.message);
     }
@@ -215,7 +212,7 @@ export default function EditProfile(props) {
   };
 
   useEffect(() => {
-    console.log("Getting course stats");
+    //console.log("Getting course stats");
     getCourseStats();
   }, []);
 
@@ -326,7 +323,7 @@ export default function EditProfile(props) {
     }));
   }, [props.userData.mcitConnectEmailNotifications]);
 
-  console.log(values);
+  //console.log(values);
 
   return (
     <>

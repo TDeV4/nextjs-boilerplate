@@ -32,20 +32,36 @@ export default function EditReview(props) {
     console.log(name, value);
   };
 
+  const [otherCourseOptions, setOtherCourseOptions] = useState(otherCourses);
+
+  const [courses, setCourses] = useState([]);
+  const getCourseStats = async () => {
+    try {
+      const response = await fetchWrapper.get("/courses/");
+
+      const jsonData = response.data;
+      console.log(jsonData);
+      setCourses(jsonData);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    console.log("Getting course stats");
+    getCourseStats();
+  }, []);
+
   const [values, setValues] = useState({});
 
   var selectedCourseID = props.reviewData.courseID;
 
   var otherCourses = [];
-  props.courseData.map((course) => {
-    if (course.courseID != selectedCourseID) {
+  courses.map((course) => {
+    if (course.courseID != props.reviewData.courseNumber) {
       otherCourses.push(course);
     }
   });
-
-  const [otherCourseOptions, setOtherCourseOptions] = useState(otherCourses);
-
-  const [validated, setValidated] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -73,7 +89,7 @@ export default function EditReview(props) {
   useEffect(() => {
     setValues((values) => ({
       ...values,
-      ["course"]: props.reviewData.courseNumber,
+      ["courseID"]: props.reviewData.courseNumber,
     }));
   }, [props.reviewData.courseNumber]);
 
