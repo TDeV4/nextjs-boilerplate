@@ -126,7 +126,7 @@ export default function AnonProfileModal(props) {
           <h3 className={styles.centerText}>Name: {props.userData.anonName}</h3>
           <div className={styles.borderBox}>
             <h4 className={styles.centerText}>Profile Info</h4>
-            <p>Expected Graduation: {props.userData.graduation}</p>
+            <p>Expected Graduation: {props.userData.expectedGraduation}</p>
             <p>Industry: {props.userData.industry}</p>
             <p>
               Work Status:{" "}
@@ -134,7 +134,7 @@ export default function AnonProfileModal(props) {
             </p>
             <p>
               Turtle or Non-turtle:{" "}
-              {props.userData.inTurtleClub == true ? "Turle" : "Non-Turtle"}
+              {props.userData.inTurtleClub == true ? "Turtle" : "Non-Turtle"}
             </p>
             <div>
               Courses Completed:
