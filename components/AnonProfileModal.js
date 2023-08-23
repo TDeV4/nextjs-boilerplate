@@ -155,18 +155,11 @@ export default function AnonProfileModal(props) {
           <div>
             {reviewReplyData.map((review) => {
               if (review.parentID === null) {
-                var reviewDataPassThrough;
-                reviewData.map((reviewData) => {
-                  if (review.reviewID === reviewData.reviewID) {
-                    reviewDataPassThrough = reviewData;
-                  }
-                });
                 return (
                   <div key={review.reviewID}>
                     <ReviewCard
                       key={review.reviewID}
-                      review={review}
-                      reviewData={reviewDataPassThrough}
+                      reviewData={review}
                       userData={props.userData}
                       reviewReplyData={props.reviewReplyData}
                       coursePairings={pairingData}
