@@ -287,7 +287,7 @@ export default function CreateReview(props) {
               placeholder="Workload (hours per week)"
               required
               onChange={onFormChange}
-              name="workload"
+              name="weeklyHours"
             />
             <br></br>
             {/* Taken with Courses*/}
