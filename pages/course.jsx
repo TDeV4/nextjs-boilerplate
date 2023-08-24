@@ -8,6 +8,7 @@ import CourseReviewsTab from "@/components/CourseReviewsTab";
 import { useEffect, useState } from "react";
 import CreateProfile from "@/components/CreateProfile";
 import { BrowserRouter } from "react-router-dom";
+import fetchWrapper from "./api/fetchWrapper";
 
 export default function Course() {
   const [userID, setUserID] = useState({});
@@ -21,9 +22,9 @@ export default function Course() {
       const response = await fetchWrapper.get("/users/getuserid");
 
       const jsonData = response.data;
-      console.log(jsonData);
+      //console.log(jsonData);
       setUserID(jsonData);
-      console.log(userID);
+
       // mark that we got the data
       // setHasFetchedData(true);
     } catch (err) {
@@ -59,14 +60,14 @@ export default function Course() {
       return (
         <main className={styles.main}>
           <TopNavBar />
-          <div class={styles.container}>
-            <div class={styles.leftpane}>
-              <div class={styles.borderBox}>
+          <div className={styles.container}>
+            <div className={styles.leftpane}>
+              <div className={styles.borderBox}>
                 <IndividualCourseInfo courseID={course} />
               </div>
             </div>
-            <div class={styles.rightpane}>
-              <div class={styles.borderBox}>
+            <div className={styles.rightpane}>
+              <div className={styles.borderBox}>
                 <CourseReviewsTab courseID={course} />
               </div>
             </div>

@@ -40,7 +40,7 @@ export default function CourseReviewsTab(props) {
 
   useEffect(() => {
     getCourseReviews();
-  }, []);
+  });
 
   const [createReviewIsOpen, setCreateReviewIsOpen] = useState(false);
 
@@ -54,7 +54,7 @@ export default function CourseReviewsTab(props) {
         Reviews
       </h1>
       <div style={{ float: "right" }}>
-        <CreateReview/>
+        <CreateReview />
       </div>
       {reviews.map((review) => {
         if (review.parentID === null) {

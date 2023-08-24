@@ -23,14 +23,14 @@ export default function EditReview(props) {
     const name = e.target.name;
     const value = e.target.value;
     setValues({ ...values, [name]: value });
-    console.log(name, value);
+    //(name, value);
   };
 
   const onFormChangeIntVal = (e) => {
     const name = e.target.name;
     const value = parseInt(e.target.value);
     setValues({ ...values, [name]: value });
-    console.log(name, value);
+    //console.log(name, value);
   };
 
   const [courses, setCourses] = useState([]);
@@ -39,7 +39,7 @@ export default function EditReview(props) {
       const response = await fetchWrapper.get("/courses/");
 
       const jsonData = response.data;
-      console.log(jsonData);
+      //console.log(jsonData);
       setCourses(jsonData);
     } catch (err) {
       console.error(err.message);
@@ -97,7 +97,7 @@ export default function EditReview(props) {
         .then((data) => console.log("Success", data))
         .catch((error) => console.error("There was an error!", error));
 
-      console.log(values);
+      //console.log(values);
       window.location.reload();
     } catch (err) {}
   };
@@ -119,7 +119,7 @@ export default function EditReview(props) {
       courseID: [props.reviewData.coursepairingID[0]],
       pairingRec: [props.reviewData.pairingrec[0]],
     };
-    console.log(coursePairing1);
+
     if (numOfCoursePairings > 1) {
       coursePairing2 = {
         courseID: [props.reviewData.coursepairingID[1]],
@@ -160,7 +160,7 @@ export default function EditReview(props) {
         ["coursePairing1"]: props.reviewData.coursepairingID[0].toString(),
         ["coursePairingRec1"]: props.reviewData.pairingrec[0].toString(),
       }));
-      console.log(coursePairing1);
+
       if (numOfCoursePairings > 1) {
         setValues((values) => ({
           ...values,
@@ -234,7 +234,7 @@ export default function EditReview(props) {
     }));
   }, [props.reviewData.content]);
 
-  console.log(values);
+  //console.log(values);
 
   return (
     <>

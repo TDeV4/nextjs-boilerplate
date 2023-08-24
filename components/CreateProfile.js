@@ -170,7 +170,7 @@ export default function CreateProfile(props) {
 
       console.log(values);
 
-      await fetchWrapper
+      fetchWrapper
         .post("/users/", values)
         .then((data) => console.log("Success", data))
         .catch((error) => console.error("There was an error!", error));
@@ -218,7 +218,7 @@ export default function CreateProfile(props) {
     console.log("Getting course stats");
     getCourseStats();
     setValues({ ...values, ["email"]: session.user.email });
-  }, []);
+  }, [session.user.email]);
 
   return (
     <>

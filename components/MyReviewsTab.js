@@ -66,7 +66,7 @@ export default function MyReviewsTab(props) {
           //     reviewDataPassThrough = reviewData;
           //   }
           // });
-          console.log(review);
+
           return (
             <div key={review.reviewID}>
               <ReviewCard

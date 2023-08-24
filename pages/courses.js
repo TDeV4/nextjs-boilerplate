@@ -21,9 +21,9 @@ export default function CoursesHome() {
       const response = await fetchWrapper.get("/users/getuserid");
 
       const jsonData = response.data;
-      console.log(jsonData);
+      //console.log(jsonData);
       setUserID(jsonData);
-      console.log(userID);
+
       // mark that we got the data
       // setHasFetchedData(true);
     } catch (err) {
@@ -53,7 +53,7 @@ export default function CoursesHome() {
       return (
         <main className={styles.main}>
           <TopNavBar />
-          <div class={styles.container}></div>
+          <div className={styles.container}></div>
           <br></br>
           <CourseSummary />
         </main>

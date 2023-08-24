@@ -109,7 +109,7 @@ export default function ResourceList() {
         </Card>
         <Card>
           <Link href="https://upenn.joinhandshake.com/login">
-            <div style={{ "background-color": "#1569e0" }}>
+            <div style={{ backgroundColor: "#1569e0" }}>
               <Card.Img variant="top" src="\Handshake.svg" />
             </div>
           </Link>

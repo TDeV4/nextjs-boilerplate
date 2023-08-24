@@ -18,14 +18,17 @@ export default function Feedback() {
   function onSubmit() {
     setValues({ ...values, ["date"]: new Date.now() });
     console.log(values);
-    //fetchWrapper.post();
+    fetchWrapper
+      .post("/feedback/", values)
+      .then((data) => console.log("Success", data))
+      .catch((error) => console.error("There was an error!", error));
   }
 
   const onFormChange = (e, updatedAt) => {
     const name = e.target.name;
     const value = e.target.value;
     setValues({ ...values, [name]: value });
-    console.log(name, value);
+    //console.log(name, value);
   };
 
   const [userID, setUserID] = useState({});
@@ -35,13 +38,12 @@ export default function Feedback() {
   const getUserInfo = async () => {
     try {
       setGotID(true);
-      // const fetcher = fetchWrapper();
       const response = await fetchWrapper.get("/users/getuserid");
 
       const jsonData = response.data;
-      console.log(jsonData);
+      //console.log(jsonData);
       setUserID(jsonData);
-      console.log(userID);
+
       // mark that we got the data
       // setHasFetchedData(true);
     } catch (err) {

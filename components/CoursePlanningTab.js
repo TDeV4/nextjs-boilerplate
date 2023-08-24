@@ -197,7 +197,7 @@ export default function CoursePlanningTab(props) {
     <div>
       <h2>Course Planning</h2>
       <DragDropContext onDragEnd={(result) => onDragEnd(result, dataToUse)}>
-        <Row>
+        <Row xs={3} sm={5}>
           {data["columnOrder"].map((columnId) => {
             const column = data["columns"][columnId];
             const courses = column["courseIDs"];

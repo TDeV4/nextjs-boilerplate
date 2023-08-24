@@ -6,6 +6,7 @@ import ResourceList from "@/components/ResourceList";
 import { useEffect, useState } from "react";
 import CreateProfile from "@/components/CreateProfile";
 import { BrowserRouter } from "react-router-dom";
+import fetchWrapper from "../pages/api/fetchWrapper";
 
 export default function Resources() {
   const { data: session } = useSession();
@@ -21,9 +22,9 @@ export default function Resources() {
       const response = await fetchWrapper.get("/users/getuserid");
 
       const jsonData = response.data;
-      console.log(jsonData);
+      //console.log(jsonData);
       setUserID(jsonData);
-      console.log(userID);
+
       // mark that we got the data
       // setHasFetchedData(true);
     } catch (err) {

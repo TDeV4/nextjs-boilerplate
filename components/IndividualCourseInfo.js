@@ -101,23 +101,23 @@ export default function IndividualCourseInfo(props) {
   return (
     <div>
       <div>
-        <h7 className={styles.centerText}>
+        <h4 className={styles.centerText}>
           CIT {course.coursenumber} - {course.coursename}
-        </h7>
+        </h4>
         <Table striped bordered hover>
-          <thead class={styles.centerText}>
+          <thead className={styles.centerText}>
             <tr>
               <th>
-                <h9>Difficulty: {course.averageDifficulty}/5.00</h9>
+                <p>Difficulty: {course.averageDifficulty}/5.00</p>
               </th>
               <th>
-                <h9>Workload (hours per week): {course.averageWorkload}</h9>
+                <p>Workload (hours per week): {course.averageWorkload}</p>
               </th>
               <th>
-                <h9>Rating: {course.averageRating}/5.00</h9>
+                <p>Rating: {course.averageRating}/5.00</p>
               </th>
               <th>
-                <h9># of Reviews: {course.reviewCount}</h9>
+                <p># of Reviews: {course.reviewCount}</p>
               </th>
             </tr>
           </thead>
@@ -128,16 +128,12 @@ export default function IndividualCourseInfo(props) {
         <p>
           Syllabus: <Link href={`${course.syllabus}`}>Link</Link>
         </p>
-        <p>Prerequisites:
+        <p>
+          Prerequisites:
           {course.prereqcoursenumber?.map((pairing) => {
-            return (
-              <Badge>
-                {" "}
-                {pairing}{" "}
-              </Badge>
-            );
+            return <Badge> {pairing} </Badge>;
           })}
-          </p>
+        </p>
         <p>Professors: {course.professor}</p>
         <p>Textbooks: {course.textbooks}</p>
         <p>
