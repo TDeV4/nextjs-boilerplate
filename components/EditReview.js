@@ -57,6 +57,31 @@ export default function EditReview(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      values["semester"] = values["sem"] + " " + values["year"];
+
+      const coursePairings = [];
+      const courseRecs = [];
+      if (values["coursePairing1"] != "" && values["coursePairingRec1"] != "") {
+        coursePairings.push(values["coursePairing1"]);
+        courseRecs.push(values["coursePairingRec1"]);
+      }
+      if (values["coursePairing2"] != "" && values["coursePairingRec2"] != "") {
+        coursePairings.push(values["coursePairing2"]);
+        courseRecs.push(values["coursePairingRec2"]);
+      }
+      if (values["coursePairing3"] != "" && values["coursePairingRec3"] != "") {
+        coursePairings.push(values["coursePairing3"]);
+        courseRecs.push(values["coursePairingRec3"]);
+      }
+
+      values["coursepairing"] = coursePairings;
+      values["pairingrec"] = courseRecs;
+
+      //await fetchWrapper
+      //  .put("/reviews/newreview", values)
+      //  .then((data) => console.log("Success", data))
+      //  .catch((error) => console.error("There was an error!", error));
+
       console.log(values);
     } catch (err) {}
   };
@@ -105,9 +130,9 @@ export default function EditReview(props) {
   useEffect(() => {
     setValues((values) => ({
       ...values,
-      ["professor"]: props.reviewData.professor,
+      ["reviewID"]: props.reviewData.reviewID,
     }));
-  }, [props.reviewData.professor]);
+  }, [props.reviewData.semester]);
 
   useEffect(() => {
     setValues((values) => ({
@@ -147,9 +172,9 @@ export default function EditReview(props) {
   useEffect(() => {
     setValues((values) => ({
       ...values,
-      ["workload"]: props.reviewData.workload,
+      ["weeklyHours"]: props.reviewData.weeklyHours,
     }));
-  }, [props.reviewData.workload]);
+  }, [props.reviewData.weeklyHours]);
 
   useEffect(() => {
     setValues((values) => ({
@@ -188,7 +213,7 @@ export default function EditReview(props) {
                 ": " +
                 props.reviewData.coursename
               }
-              name="course"
+              name="courseID"
             ></Form.Control>
 
             {/* Semester and Year Course was taken */}
@@ -216,7 +241,7 @@ export default function EditReview(props) {
                   placeholder="selectYear"
                   required
                   aria-label="Year Taken"
-                  defaultValue={props.reviewData.year}
+                  defaultValue={parseInt(props.reviewData.year)}
                   name="year"
                   onChange={onFormChange}
                 >
@@ -315,8 +340,8 @@ export default function EditReview(props) {
               placeholder="Workload (hours per week)"
               required
               onChange={onFormChangeIntVal}
-              defaultValue={props.reviewData.workload}
-              name="workload"
+              defaultValue={parseInt(props.reviewData.weeklyHours)}
+              name="weeklyHours"
             />
             <br></br>
             {/* Taken with Courses*/}
@@ -326,6 +351,7 @@ export default function EditReview(props) {
                   placeholder="selectTakenWithCourse"
                   aria-label="Taken With Course Selection"
                   options={otherCourseOptions}
+                  name="coursePairing1"
                   defaultValue={
                     !Object.is(coursePairing1, null)
                       ? coursePairing1.courseID
@@ -354,6 +380,7 @@ export default function EditReview(props) {
                       ? coursePairing1.pairingRec
                       : null
                   }
+                  name="coursePairingRec1"
                 >
                   <option key="blankChoice" hidden value="">
                     {" "}
@@ -376,6 +403,7 @@ export default function EditReview(props) {
                       ? coursePairing2.courseID
                       : null
                   }
+                  name="coursePairing2"
                 >
                   <option key="blankChoice" value="">
                     {" "}
@@ -399,6 +427,7 @@ export default function EditReview(props) {
                       ? coursePairing2.pairingRec
                       : null
                   }
+                  name="coursePairingRec2"
                 >
                   <option key="blankChoice" hidden value="">
                     {" "}
@@ -421,6 +450,7 @@ export default function EditReview(props) {
                       ? coursePairing3.courseID
                       : null
                   }
+                  name="coursePairing3"
                 >
                   <option key="blankChoice" value="">
                     {" "}
@@ -444,6 +474,7 @@ export default function EditReview(props) {
                       ? coursePairing3.pairingRec
                       : null
                   }
+                  name="coursePairingRec3"
                 >
                   <option key="blankChoice" hidden value="">
                     {" "}

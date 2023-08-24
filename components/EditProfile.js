@@ -398,6 +398,7 @@ export default function EditProfile(props) {
                     defaultValue={values["startSemester"]}
                     onChange={onFormChange}
                     name="startSemester"
+                    required
                   >
                     <option key="blankChoice" hidden value="" />
                     <option defaultChecked={true}>Fall</option>
@@ -433,6 +434,7 @@ export default function EditProfile(props) {
                     defaultValue={values["expectedGradSemester"]}
                     onChange={onFormChange}
                     name="expectedGradSemester"
+                    required
                   >
                     <option key="blankChoice" hidden value="" />
                     <option>Fall</option>

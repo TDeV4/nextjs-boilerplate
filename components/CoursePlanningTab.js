@@ -14,7 +14,12 @@ function formatData(courseBuilderData, userData) {
   const gradYear = userData.expectedGraduation.slice(-4);
   const startYear = userData.startSemester.slice(-4);
 
-  for (let i = 0; i < (parseInt(gradYear) - parseInt(startYear)) * 3 + 4; i++) {
+  var num = parseInt(gradYear) - parseInt(startYear);
+  if (num === 0) {
+    num = 1;
+  }
+
+  for (let i = 0; i < num * 3 + 4; i++) {
     var term;
     if (i == 0) {
       term = "Course List";
