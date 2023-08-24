@@ -17,7 +17,7 @@ export default NextAuth({
         token.error = "Token Unexpired";
       }
 
-      if (token.expires && Date.now() > token.expires * 1000) {
+      if (token.expires && (Date.now() / 1000 > token.expires * 1000)) {
         token.error = "Token Expired";
       }
       return token;
