@@ -149,9 +149,6 @@ export default function Course() {
           <div class={styles.borderBox}>
             <IndividualCourseInfo
               courseID={course}
-              reviewData={DUMMY_REVIEW_DATA}
-              courseData={DUMMY_NEW_COURSE_DATA}
-              coursePairings={DUMMY_USER_COURSE_PAIRING}
             />
           </div>
         </div>
