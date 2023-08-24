@@ -121,6 +121,7 @@ export default function CreateReview(props) {
       .catch((error) => console.error("There was an error!", error));
 
     console.log(values);
+    window.location.reload();
   };
 
   return (
@@ -201,6 +202,7 @@ export default function CreateReview(props) {
               onChange={onFormChange}
               options={relevantProfs}
               name="professor"
+              required
             >
               <option key="blankChoice" hidden value="">
                 {" "}

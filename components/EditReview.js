@@ -3,6 +3,7 @@ import { useState } from "react";
 import styles from "../app/page.module.css";
 import { useEffect } from "react";
 import fetchWrapper from "@/pages/api/fetchWrapper";
+import DeleteReviewButton from "./DeleteReviewButton";
 
 export default function EditReview(props) {
   const [show, setShow] = useState(false);
@@ -83,6 +84,7 @@ export default function EditReview(props) {
       //  .catch((error) => console.error("There was an error!", error));
 
       console.log(values);
+      window.location.reload();
     } catch (err) {}
   };
 
@@ -90,7 +92,13 @@ export default function EditReview(props) {
   var coursePairing2 = null;
   var coursePairing3 = null;
 
-  var numOfCoursePairings = props.reviewData.coursepairing.length;
+  var numOfCoursePairings;
+
+  if (props.reviewData.coursepairing === null) {
+    numOfCoursePairings = 0;
+  } else {
+    numOfCoursePairings = props.reviewData.coursepairing.length;
+  }
 
   if (numOfCoursePairings > 0) {
     coursePairing1 = {
