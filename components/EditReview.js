@@ -149,7 +149,7 @@ export default function EditReview(props) {
       ...values,
       ["workload"]: props.reviewData.workload,
     }));
-  }, [props.reviewData.weeklyHours]);
+  }, [props.reviewData.workload]);
 
   useEffect(() => {
     setValues((values) => ({
