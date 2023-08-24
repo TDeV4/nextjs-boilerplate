@@ -165,7 +165,7 @@ UPenn Colors:
 
 .courseColumnContainer {
   flex: 0 0 auto;
-  width: 100%;
+  width: 120%;
   /* Adjust the width of child containers as needed */
   margin-right: 20px;
   padding: 8px;
@@ -176,7 +176,7 @@ UPenn Colors:
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 200px;
+  height: 260px;
 }
 
 .columnSpacer {
