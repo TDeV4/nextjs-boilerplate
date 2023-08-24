@@ -103,7 +103,6 @@ export default function IndividualCourseInfo(props) {
     });
     output.push(out);
   });
-  console.log(output);
 
   return (
     <div>
