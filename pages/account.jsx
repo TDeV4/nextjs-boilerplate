@@ -1,33 +1,8 @@
-//page that is protect - from client side
-import React from "react";
-import { useSession, signOut, getSession } from "next-auth/react";
-import { useEffect } from "react";
-
-
-//when access account but not signed in, redirect page automatically to sign in page
-const Account = () => {
-  const { data: session, status } = useSession();
-
-  if (status === "authenticated") {
-    return (
-      <div>
-        <p>Welcome {session.user.name}.</p>
-        <button onClick={() => signOut()}>Sign out</button>
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <p>You are not signed in.</p>
-      </div>
-    );
-  }
-};
-
-export default Account;
+import { getSession, signOut } from "next-auth/react";
 
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
+
   if (!session) {
     return {
       redirect: {
@@ -35,6 +10,19 @@ export const getServerSideProps = async (context) => {
       },
     };
   }
+
+  // Check if the token is expired
+  if (session.expires && session.expires < Math.floor(Date.now() / 1000)) {
+    // The token is expired, sign out the user
+    await signOut();
+
+    return {
+      redirect: {
+        destination: "/login",
+      },
+    };
+  }
+
   return {
     props: { session },
   };
