@@ -17,7 +17,6 @@ const CourseSummary = () => {
     try{
       // const fetcher = fetchWrapper();
       const response = await fetchWrapper.get("/courses/coursestats");
-      console.log(response)
       const jsonData = response.data;
       
       setCourses(jsonData);
@@ -30,11 +29,9 @@ const CourseSummary = () => {
   }
   
   useEffect(() => {  
-      console.log("Getting course stats");
       getCourseStats();
 }, []);
 
-  // console.log(courses);
   return (
     <Table striped bordered hover>
       <thead>

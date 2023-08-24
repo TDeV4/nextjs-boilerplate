@@ -24,13 +24,11 @@ export default function IndividualCourseInfo(props) {
   // const [hasFetchedData, setHasFetchedData] = useState(false);
 
   const getCourseStats = async () => {
-    // console.log(props.courseID);
     try {
       // const fetcher = fetchWrapper();
       const response = await fetchWrapper.get(
         "/courses/coursestats/" + props.courseID
       );
-      console.log(response);
       const jsonData = response.data;
 
       setCourse(jsonData);
@@ -48,13 +46,11 @@ export default function IndividualCourseInfo(props) {
   // const [hasFetchedData, setHasFetchedData] = useState(false);
 
   const getCourseReviews = async () => {
-    // console.log(props.courseID);
     try {
       // const fetcher = fetchWrapper();
       const response = await fetchWrapper.get(
         "/reviews/bycourse/" + props.courseID
       );
-      console.log(response);
       const jsonData = response.data;
 
       setReviews(jsonData);
@@ -66,9 +62,7 @@ export default function IndividualCourseInfo(props) {
   };
 
   useEffect(() => {
-    console.log("Getting individual course stats");
     getCourseStats();
-    console.log("Getting individual course reviews");
     getCourseReviews();
   }, []);
 
