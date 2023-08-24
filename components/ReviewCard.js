@@ -52,7 +52,9 @@ export default function ReviewCard(props) {
   const getAnonReviews = async () => {
     try {
       // const fetcher = fetchWrapper();
-      const response = await fetchWrapper.get("/reviews/byuser/"+ props.reviewData.userID);
+      const response = await fetchWrapper.get(
+        "/reviews/byuser/" + props.reviewData.userID
+      );
       console.log(response);
       const jsonData = response.data;
 
@@ -63,8 +65,6 @@ export default function ReviewCard(props) {
       console.error(err.message);
     }
   };
-
-
 
   useEffect(() => {
     console.log("Getting profile");
@@ -77,6 +77,16 @@ export default function ReviewCard(props) {
     return <div></div>;
   }
 
+  var numOfPairing = props.reviewData.coursepairing.length;
+  var coursePairings = [];
+
+  for (var i = 0; i < numOfPairing; i++) {
+    coursePairings.push({
+      courseNumber: props.reviewData.coursepairing[i],
+      pairingrec: props.reviewData.pairingrec[i],
+    });
+  }
+
   return (
     <div className={styles.reviewCardContainer}>
       <img src="/Review.png" height={50} width={50} alt="Review Card" />
@@ -85,10 +95,7 @@ export default function ReviewCard(props) {
       </h3>
       <div>
         Review By:{" "}
-        <AnonProfileModal
-          userData={profile}
-          reviewReplyData={reviews}
-        />
+        <AnonProfileModal userData={profile} reviewReplyData={reviews} />
       </div>
       <br />
       <div>
@@ -118,26 +125,26 @@ export default function ReviewCard(props) {
           </div>
           <div className="p-2 ms-auto">
             Course Pairings:
-            {props.coursePairings.map((pairing) => {
-              if (pairing.pairingRec == -1) {
+            {coursePairings.map((pairing) => {
+              if (pairing.pairingrec == -1) {
                 return (
-                  <Badge key={pairing.courseID} bg="danger">
+                  <Badge key={pairing.courseNumber} bg="danger">
                     {" "}
-                    {pairing.courseID}{" "}
+                    {pairing.courseNumber}{" "}
                   </Badge>
                 );
-              } else if (pairing.pairingRec == 0) {
+              } else if (pairing.pairingrec == 0) {
                 return (
-                  <Badge key={pairing.courseID} bg="warning">
+                  <Badge key={pairing.courseNumber} bg="warning">
                     {" "}
-                    {pairing.courseID}{" "}
+                    {pairing.courseNumber}{" "}
                   </Badge>
                 );
               } else {
                 return (
-                  <Badge key={pairing.courseID} bg="success">
+                  <Badge key={pairing.courseNumber} bg="success">
                     {" "}
-                    {pairing.courseID}{" "}
+                    {pairing.courseNumber}{" "}
                   </Badge>
                 );
               }

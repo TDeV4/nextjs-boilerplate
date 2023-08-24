@@ -33,8 +33,6 @@ export default function EditReview(props) {
     console.log(name, value);
   };
 
-  const [otherCourseOptions, setOtherCourseOptions] = useState(otherCourses);
-
   const [courses, setCourses] = useState([]);
   const getCourseStats = async () => {
     try {
@@ -48,21 +46,13 @@ export default function EditReview(props) {
     }
   };
 
+  var [otherCourseOptions, setOtherCourseOptions] = useState([]);
   useEffect(() => {
     console.log("Getting course stats");
     getCourseStats();
   }, []);
 
   const [values, setValues] = useState({});
-
-  var selectedCourseID = props.reviewData.courseID;
-
-  var otherCourses = [];
-  courses.map((course) => {
-    if (course.courseID != props.reviewData.courseNumber) {
-      otherCourses.push(course);
-    }
-  });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -75,14 +65,24 @@ export default function EditReview(props) {
   var coursePairing2 = null;
   var coursePairing3 = null;
 
-  var numOfCoursePairings = Object.keys(props.coursePairings).length;
+  var numOfCoursePairings = props.reviewData.coursepairing.length;
 
   if (numOfCoursePairings > 0) {
-    coursePairing1 = props.coursePairings[0];
+    coursePairing1 = {
+      courseID: [props.reviewData.coursepairing[0]],
+      pairingRec: [props.reviewData.pairingrec[0]],
+    };
+    console.log(coursePairing1);
     if (numOfCoursePairings > 1) {
-      coursePairing2 = props.coursePairings[1];
+      coursePairing2 = {
+        courseID: [props.reviewData.coursepairing[1]],
+        pairingRec: [props.revieweData.pairingrec[1]],
+      };
       if (numOfCoursePairings > 2) {
-        coursePairing3 = props.coursePairings[2];
+        coursePairing1 = {
+          courseID: [props.reviewData.coursepairing[2]],
+          pairingRec: [props.revieweData.pairingrec[2]],
+        };
       }
     }
   }
@@ -90,9 +90,17 @@ export default function EditReview(props) {
   useEffect(() => {
     setValues((values) => ({
       ...values,
-      ["courseID"]: props.reviewData.courseNumber,
+      ["courseID"]: props.reviewData.courseID,
     }));
-  }, [props.reviewData.courseNumber]);
+    var coursePairings = [];
+    courses.map((course) => {
+      if (course.courseID != props.reviewData.courseID) {
+        coursePairings.push(course);
+      }
+    });
+
+    setOtherCourseOptions(coursePairings);
+  }, [courses]);
 
   useEffect(() => {
     setValues((values) => ({
@@ -104,14 +112,14 @@ export default function EditReview(props) {
   useEffect(() => {
     setValues((values) => ({
       ...values,
-      ["semester"]: props.reviewData.semester,
+      ["sem"]: props.reviewData.semester.split(" ")[0],
     }));
   }, [props.reviewData.semester]);
 
   useEffect(() => {
     setValues((values) => ({
       ...values,
-      ["year"]: props.reviewData.year,
+      ["year"]: props.reviewData.semester.split(" ")[1],
     }));
   }, [props.reviewData.year]);
 
@@ -139,7 +147,7 @@ export default function EditReview(props) {
   useEffect(() => {
     setValues((values) => ({
       ...values,
-      ["workload"]: props.reviewData.weeklyHours,
+      ["workload"]: props.reviewData.workload,
     }));
   }, [props.reviewData.weeklyHours]);
 
@@ -178,7 +186,7 @@ export default function EditReview(props) {
               defaultValue={
                 props.reviewData.coursenumber +
                 ": " +
-                props.reviewData.courseName
+                props.reviewData.coursename
               }
               name="course"
             ></Form.Control>
@@ -307,7 +315,7 @@ export default function EditReview(props) {
               placeholder="Workload (hours per week)"
               required
               onChange={onFormChangeIntVal}
-              defaultValue={props.reviewData.weeklyHours}
+              defaultValue={props.reviewData.workload}
               name="workload"
             />
             <br></br>
@@ -331,7 +339,7 @@ export default function EditReview(props) {
                   {otherCourseOptions.map((course) => {
                     return (
                       <option key={course.courseID} value={course.courseID}>
-                        {course.courseID}: {course.courseName}
+                        {course.coursenumber}: {course.coursename}
                       </option>
                     );
                   })}

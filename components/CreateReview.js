@@ -21,7 +21,7 @@ export default function CreateReview(props) {
   const [values, setValues] = useState({
     courseID: null,
     professor: null,
-    semester: null,
+    sem: null,
     year: null,
     finalGrade: null,
     difficulty: null,
@@ -93,7 +93,6 @@ export default function CreateReview(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    event.stopPropagation();
 
     const coursePairings = [];
     const courseRecs = [];
@@ -114,7 +113,12 @@ export default function CreateReview(props) {
     values["pairingrec"] = courseRecs;
     values["parentID"] = null;
 
-    await fetchWrapper.post("/reviews/newreview", values);
+    values["semester"] = values["sem"] + " " + values["year"];
+
+    await fetchWrapper
+      .post("/reviews/newreview", values)
+      .then((data) => console.log("Success", data))
+      .catch((error) => console.error("There was an error!", error));
 
     console.log(values);
   };
@@ -159,7 +163,7 @@ export default function CreateReview(props) {
                 <Form.Select
                   placeholder="selectSemester"
                   required
-                  name="semester"
+                  name="sem"
                   aria-label="Semester Taken"
                   onChange={onFormChange}
                 >
