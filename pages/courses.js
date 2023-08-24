@@ -5,6 +5,7 @@ import CourseSummary from "@/components/CourseSummary";
 import { useEffect, useState } from "react";
 import CreateProfile from "@/components/CreateProfile";
 import { BrowserRouter } from "react-router-dom";
+import fetchWrapper from "./api/fetchWrapper";
 
 export default function CoursesHome() {
   const { data: session } = useSession();
