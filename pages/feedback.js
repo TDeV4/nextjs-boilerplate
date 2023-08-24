@@ -26,6 +26,34 @@ export default function Feedback() {
     console.log(name, value);
   };
 
+  const [userID, setUserID] = useState({});
+
+  const [gotID, setGotID] = useState(false);
+
+  const getUserInfo = async () => {
+    try {
+      setGotID(true);
+      // const fetcher = fetchWrapper();
+      const response = await fetchWrapper.get("/users/getuserid");
+
+      const jsonData = response.data;
+      console.log(jsonData);
+      setUserID(jsonData);
+      console.log(userID);
+      // mark that we got the data
+      // setHasFetchedData(true);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    if (session && !gotID) {
+      console.log("Getting profile");
+      getUserInfo();
+    }
+  });
+
   if (session) {
     if (userID.userID === null) {
       return (

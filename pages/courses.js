@@ -1,11 +1,39 @@
-import styles from 'app/page.module.css'
-import TopNavBar from '../components/TopNavBar';
-import {useSession, getSession} from 'next-auth/react';
-import CourseSummary from '@/components/CourseSummary';
-import { useEffect } from "react";
+import styles from "app/page.module.css";
+import TopNavBar from "../components/TopNavBar";
+import { useSession, getSession } from "next-auth/react";
+import CourseSummary from "@/components/CourseSummary";
+import { useEffect, useState } from "react";
 
 export default function CoursesHome() {
   const { data: session } = useSession();
+
+  const [userID, setUserID] = useState({});
+
+  const [gotID, setGotID] = useState(false);
+
+  const getUserInfo = async () => {
+    try {
+      setGotID(true);
+      // const fetcher = fetchWrapper();
+      const response = await fetchWrapper.get("/users/getuserid");
+
+      const jsonData = response.data;
+      console.log(jsonData);
+      setUserID(jsonData);
+      console.log(userID);
+      // mark that we got the data
+      // setHasFetchedData(true);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    if (session && !gotID) {
+      console.log("Getting profile");
+      getUserInfo();
+    }
+  });
 
   if (session) {
     if (userID.userID === null) {
@@ -20,28 +48,27 @@ export default function CoursesHome() {
       );
     } else {
       return (
-          <main className={styles.main}>
+        <main className={styles.main}>
           <TopNavBar />
-          <div class={styles.container}>
-          </div>
+          <div class={styles.container}></div>
           <br></br>
-          <CourseSummary/>
+          <CourseSummary />
         </main>
-      ) 
+      );
     }
   }
 }
 
 export const getServerSideProps = async (context) => {
-  const session = await getSession(context)
+  const session = await getSession(context);
   if (!session) {
-      return {
-          redirect : {
-              destination : '/login'
-          }
-      }
+    return {
+      redirect: {
+        destination: "/login",
+      },
+    };
   }
   return {
-      props: {session}
-  }
-}
+    props: { session },
+  };
+};

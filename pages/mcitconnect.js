@@ -2,10 +2,37 @@ import styles from "app/page.module.css";
 import Link from "next/link";
 import { useSession, getSession } from "next-auth/react";
 import TopNavBar from "@/components/TopNavBar";
-import { useEffect } from "react";
-
+import { useEffect, useState } from "react";
 
 export default function MCITConnect() {
+  const [userID, setUserID] = useState({});
+
+  const [gotID, setGotID] = useState(false);
+
+  const getUserInfo = async () => {
+    try {
+      setGotID(true);
+      // const fetcher = fetchWrapper();
+      const response = await fetchWrapper.get("/users/getuserid");
+
+      const jsonData = response.data;
+      console.log(jsonData);
+      setUserID(jsonData);
+      console.log(userID);
+      // mark that we got the data
+      // setHasFetchedData(true);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    if (session && !gotID) {
+      console.log("Getting profile");
+      getUserInfo();
+    }
+  });
+
   const { data: session } = useSession();
   if (session) {
     if (userID.userID === null) {

@@ -5,10 +5,36 @@ import { useSession, getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React from "react";
 import CourseReviewsTab from "@/components/CourseReviewsTab";
-import { useEffect } from "react";
-
+import { useEffect, useState } from "react";
 
 export default function Course() {
+  const [userID, setUserID] = useState({});
+
+  const [gotID, setGotID] = useState(false);
+
+  const getUserInfo = async () => {
+    try {
+      setGotID(true);
+      // const fetcher = fetchWrapper();
+      const response = await fetchWrapper.get("/users/getuserid");
+
+      const jsonData = response.data;
+      console.log(jsonData);
+      setUserID(jsonData);
+      console.log(userID);
+      // mark that we got the data
+      // setHasFetchedData(true);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    if (session && !gotID) {
+      console.log("Getting profile");
+      getUserInfo();
+    }
+  });
   //make a fetch request and pass in the course id in the url (get request) to get all the reviews for that course and the course info for that course
   const UseRouter = useRouter();
   const query = UseRouter.query;
@@ -34,9 +60,7 @@ export default function Course() {
           <div class={styles.container}>
             <div class={styles.leftpane}>
               <div class={styles.borderBox}>
-                <IndividualCourseInfo
-                  courseID={course}
-                />
+                <IndividualCourseInfo courseID={course} />
               </div>
             </div>
             <div class={styles.rightpane}>

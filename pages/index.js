@@ -6,7 +6,7 @@ import CoursePlanningTab from "@/components/CoursePlanningTab";
 import MyReviewsTab from "@/components/MyReviewsTab";
 import React from "react";
 import { useSession, signIn, signOut, getSession } from "next-auth/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import fetchWrapper from "../pages/api/fetchWrapper";
 
 const DUMMY_USER_DATA = {
@@ -153,6 +153,34 @@ const DUMMY_ALL_COURSES_DATA = [
 export default function HomePage() {
   const { data: session } = useSession();
   //console.log(session);
+
+  const [userID, setUserID] = useState({});
+
+  const [gotID, setGotID] = useState(false);
+
+  const getUserInfo = async () => {
+    try {
+      setGotID(true);
+      // const fetcher = fetchWrapper();
+      const response = await fetchWrapper.get("/users/getuserid");
+
+      const jsonData = response.data;
+      console.log(jsonData);
+      setUserID(jsonData);
+      console.log(userID);
+      // mark that we got the data
+      // setHasFetchedData(true);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    if (session && !gotID) {
+      console.log("Getting profile");
+      getUserInfo();
+    }
+  });
 
   if (session) {
     if (userID.userID === null) {
