@@ -98,7 +98,7 @@ export default function EditReview(props) {
         .catch((error) => console.error("There was an error!", error));
 
       console.log(values);
-      //window.location.reload();
+      window.location.reload();
     } catch (err) {}
   };
 
