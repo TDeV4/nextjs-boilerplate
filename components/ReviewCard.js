@@ -170,8 +170,12 @@ export default function ReviewCard(props) {
               ) {
                 return (
                   <Accordion.Body key={reply.reviewID}>
-                    <h5>{reply.date.substring(0, 10)}</h5>
+                    {console.log(reply)}
+                    <h4>{reply.anonName}</h4>
                     <p>{reply.content}</p>
+                    <p className={styles.rightAlignButton}>
+                      <i>Commented on {reply.date.substring(0, 10)}</i>
+                    </p>
                   </Accordion.Body>
                 );
               }
