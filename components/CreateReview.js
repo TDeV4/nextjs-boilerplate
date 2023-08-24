@@ -27,7 +27,7 @@ export default function CreateReview(props) {
     difficulty: null,
     rating: null,
     workload: null,
-    text: null,
+    content: null,
     coursePairing1: "",
     coursePairingRec1: "",
     coursePairing2: "",
@@ -91,31 +91,30 @@ export default function CreateReview(props) {
     //console.log(name, value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     event.stopPropagation();
 
     const coursePairings = [];
+    const courseRecs = [];
     if (values["coursePairing1"] != "" && values["coursePairingRec1"] != "") {
-      coursePairings.push({
-        coursePairing: values["coursePairing1"],
-        courseRec: values["coursePairingRec1"],
-      });
+      coursePairings.push(values["coursePairing1"]);
+      courseRecs.push(values["coursePairingRec1"]);
     }
     if (values["coursePairing2"] != "" && values["coursePairingRec2"] != "") {
-      coursePairings.push({
-        coursePairing: values["coursePairing2"],
-        courseRec: values["coursePairingRec2"],
-      });
+      coursePairings.push(values["coursePairing2"]);
+      courseRecs.push(values["coursePairingRec2"]);
     }
     if (values["coursePairing3"] != "" && values["coursePairingRec3"] != "") {
-      coursePairings.push({
-        coursePairing: values["coursePairing3"],
-        courseRec: values["coursePairingRec3"],
-      });
+      coursePairings.push(values["coursePairing3"]);
+      courseRecs.push(values["coursePairingRec3"]);
     }
 
-    values["coursePairings"] = coursePairings;
+    values["coursepairing"] = coursePairings;
+    values["pairingrec"] = courseRecs;
+    values["parentID"] = null;
+
+    await fetchWrapper.post("/reviews/newreview", values);
 
     console.log(values);
   };
@@ -194,7 +193,6 @@ export default function CreateReview(props) {
             {/* Professor */}
             <Form.Select
               placeholder="selectProf"
-              required
               aria-label="Professor Selection"
               onChange={onFormChange}
               options={relevantProfs}
@@ -413,7 +411,7 @@ export default function CreateReview(props) {
               as="textarea"
               rows={7}
               placeholder="I liked/disliked the course because..."
-              name="text"
+              name="content"
               onChange={onFormChange}
             />
             <br />
