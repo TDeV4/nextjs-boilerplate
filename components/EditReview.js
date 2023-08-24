@@ -3,7 +3,6 @@ import { useState } from "react";
 import styles from "../app/page.module.css";
 import { useEffect } from "react";
 import fetchWrapper from "@/pages/api/fetchWrapper";
-import DeleteReviewButton from "./DeleteReviewButton";
 
 export default function EditReview(props) {
   const [show, setShow] = useState(false);
@@ -62,15 +61,30 @@ export default function EditReview(props) {
 
       const coursePairings = [];
       const courseRecs = [];
-      if (values["coursePairing1"] != "" && values["coursePairingRec1"] != "") {
+      if (
+        values["coursePairing1"] != "" &&
+        values["coursePairingRec1"] != "" &&
+        values["coursePairing1"] != undefined &&
+        values["coursePairingRec1"] != undefined
+      ) {
         coursePairings.push(values["coursePairing1"]);
         courseRecs.push(values["coursePairingRec1"]);
       }
-      if (values["coursePairing2"] != "" && values["coursePairingRec2"] != "") {
+      if (
+        values["coursePairing2"] != "" &&
+        values["coursePairingRec2"] != "" &&
+        values["coursePairing2"] != undefined &&
+        values["coursePairingRec2"] != undefined
+      ) {
         coursePairings.push(values["coursePairing2"]);
         courseRecs.push(values["coursePairingRec2"]);
       }
-      if (values["coursePairing3"] != "" && values["coursePairingRec3"] != "") {
+      if (
+        values["coursePairing3"] != "" &&
+        values["coursePairingRec3"] != "" &&
+        values["coursePairing3"] != undefined &&
+        values["coursePairingRec3"] != undefined
+      ) {
         coursePairings.push(values["coursePairing3"]);
         courseRecs.push(values["coursePairingRec3"]);
       }
@@ -78,13 +92,13 @@ export default function EditReview(props) {
       values["coursepairing"] = coursePairings;
       values["pairingrec"] = courseRecs;
 
-      //await fetchWrapper
-      //  .put("/reviews/newreview", values)
-      //  .then((data) => console.log("Success", data))
-      //  .catch((error) => console.error("There was an error!", error));
+      await fetchWrapper
+        .put("/reviews/updatereview", values)
+        .then((data) => console.log("Success", data))
+        .catch((error) => console.error("There was an error!", error));
 
       console.log(values);
-      window.location.reload();
+      //window.location.reload();
     } catch (err) {}
   };
 
@@ -140,7 +154,14 @@ export default function EditReview(props) {
       ...values,
       ["reviewID"]: props.reviewData.reviewID,
     }));
-  }, [props.reviewData.semester]);
+  }, [props.reviewData.reviewID]);
+
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      ["courseID"]: props.reviewData.courseID,
+    }));
+  }, [props.reviewData.courseID]);
 
   useEffect(() => {
     setValues((values) => ({
@@ -232,7 +253,7 @@ export default function EditReview(props) {
                   required
                   aria-label="Semester Taken"
                   name="semester"
-                  defaultValue={props.reviewData.semester}
+                  defaultValue={props.reviewData.semester.split(" ")[0]}
                   onChange={onFormChange}
                 >
                   <option key="blankChoice" hidden value="">
@@ -249,7 +270,9 @@ export default function EditReview(props) {
                   placeholder="selectYear"
                   required
                   aria-label="Year Taken"
-                  defaultValue={parseInt(props.reviewData.year)}
+                  defaultValue={parseInt(
+                    props.reviewData.semester.split(" ")[1]
+                  )}
                   name="year"
                   onChange={onFormChange}
                 >
@@ -505,7 +528,7 @@ export default function EditReview(props) {
               rows={7}
               placeholder="I liked/disliked the course because..."
               defaultValue={props.reviewData.content}
-              name="text"
+              name="content"
               onChange={onFormChange}
             />
             <br />
