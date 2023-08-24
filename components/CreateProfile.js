@@ -1,9 +1,7 @@
 import { Form, Row, Col, FloatingLabel } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import styles from "../app/page.module.css";
 import "react-bootstrap-timezone-picker/dist/react-bootstrap-timezone-picker.min.css";
 import fetchWrapper from "../pages/api/fetchWrapper";
-import { useNavigate } from "react-router-dom";
 import { useSession } from "next-auth/react";
 
 export default function CreateProfile(props) {
@@ -154,8 +152,6 @@ export default function CreateProfile(props) {
     console.log(name, value);
   };
 
-  const navigate = useNavigate();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -174,7 +170,7 @@ export default function CreateProfile(props) {
         .post("/users/", values)
         .then((data) => console.log("Success", data))
         .catch((error) => console.error("There was an error!", error));
-      navigate("/");
+
       window.location.reload();
     } catch (err) {
       console.log("Failed to create user");
