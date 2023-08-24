@@ -9,19 +9,28 @@ import { useEffect } from "react";
 export default function Resources() {
   const { data: session } = useSession();
 
-  useEffect(() => {
-    if (session?.error === "Expired Token") {
-      signIn(); // Force sign in to hopefully resolve error
-    }
-  }, [session]);
   // const { data: session } = useSession();
   // console.log(session.user.email);
-  return (
-    <main className={styles.main}>
-      <TopNavBar />
-      <ResourceList />
-    </main>
-  );
+  if (session) {
+    if (userID.userID === null) {
+      return (
+        <main className={styles.main}>
+          <h1>Please create your profile to continue: </h1>
+          <BrowserRouter>
+            <CreateProfile />
+          </BrowserRouter>
+          <button onClick={() => signOut()}>Sign out</button>
+        </main>
+      );
+    } else {
+      return (
+        <main className={styles.main}>
+          <TopNavBar />
+          <ResourceList />
+        </main>
+      );
+    }
+  }
 }
 
 export const getServerSideProps = async (context) => {

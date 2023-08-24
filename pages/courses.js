@@ -7,20 +7,29 @@ import { useEffect } from "react";
 export default function CoursesHome() {
   const { data: session } = useSession();
 
-  useEffect(() => {
-    if (session?.error === "Expired Token") {
-      signIn(); // Force sign in to hopefully resolve error
-    }
-  }, [session]);
-    return (
+  if (session) {
+    if (userID.userID === null) {
+      return (
         <main className={styles.main}>
-        <TopNavBar />
-        <div class={styles.container}>
-        </div>
-        <br></br>
-        <CourseSummary/>
-      </main>
-    )
+          <h1>Please create your profile to continue: </h1>
+          <BrowserRouter>
+            <CreateProfile />
+          </BrowserRouter>
+          <button onClick={() => signOut()}>Sign out</button>
+        </main>
+      );
+    } else {
+      return (
+          <main className={styles.main}>
+          <TopNavBar />
+          <div class={styles.container}>
+          </div>
+          <br></br>
+          <CourseSummary/>
+        </main>
+      ) 
+    }
+  }
 }
 
 export const getServerSideProps = async (context) => {

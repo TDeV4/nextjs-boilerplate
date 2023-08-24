@@ -9,12 +9,6 @@ import { useEffect, useState } from "react";
 export default function Feedback() {
   const { data: session } = useSession();
 
-  useEffect(() => {
-    if (session?.error === "Expired Token") {
-      signIn(); // Force sign in to hopefully resolve error
-    }
-  }, [session]);
-
   const [values, setValues] = useState({
     feedback: "",
   });
@@ -32,26 +26,40 @@ export default function Feedback() {
     console.log(name, value);
   };
 
-  return (
-    <main className={styles.main}>
-      <TopNavBar />
-      <h1>Site Feedback</h1>
-      <p>*Any feedback is welcome and all feedback is anonymous*</p>
-      <Form>
-        <Form.Control
-          as="textarea"
-          rows={10}
-          cols={50}
-          required
-          name="feedback"
-          onChange={onFormChange}
-        />
-        <Button type="sumbit" onSubmit={onSubmit}>
-          Submit
-        </Button>
-      </Form>
-    </main>
-  );
+  if (session) {
+    if (userID.userID === null) {
+      return (
+        <main className={styles.main}>
+          <h1>Please create your profile to continue: </h1>
+          <BrowserRouter>
+            <CreateProfile />
+          </BrowserRouter>
+          <button onClick={() => signOut()}>Sign out</button>
+        </main>
+      );
+    } else {
+      return (
+        <main className={styles.main}>
+          <TopNavBar />
+          <h1>Site Feedback</h1>
+          <p>*Any feedback is welcome and all feedback is anonymous*</p>
+          <Form>
+            <Form.Control
+              as="textarea"
+              rows={10}
+              cols={50}
+              required
+              name="feedback"
+              onChange={onFormChange}
+            />
+            <Button type="sumbit" onSubmit={onSubmit}>
+              Submit
+            </Button>
+          </Form>
+        </main>
+      );
+    }
+  }
 }
 
 //redirect user to an unaunthenticated page if not authenticated

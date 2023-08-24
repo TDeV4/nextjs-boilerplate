@@ -154,41 +154,47 @@ export default function HomePage() {
   const { data: session } = useSession();
   //console.log(session);
 
-  useEffect(() => {
-    if (session?.error === "Expired Token") {
-      signIn(); // Force sign in to hopefully resolve error
-    }
-  }, [session]);
-
   if (session) {
-    return (
-      <main className={styles.main}>
-        <TopNavBar />
-        <div class={styles.container}>
-          <div class={styles.leftpane}>
-            <div class={styles.borderBox}>
-              <MyProfileTab
-                session={session}
-                courseData={DUMMY_COURSES_TAKEN_DATA}
-                currentCourseData={DUMMY_CURRENT_COURSES_DATA}
-              />
+    if (userID.userID === null) {
+      return (
+        <main className={styles.main}>
+          <h1>Please create your profile to continue: </h1>
+          <BrowserRouter>
+            <CreateProfile />
+          </BrowserRouter>
+          <button onClick={() => signOut()}>Sign out</button>
+        </main>
+      );
+    } else {
+      return (
+        <main className={styles.main}>
+          <TopNavBar />
+          <div class={styles.container}>
+            <div class={styles.leftpane}>
+              <div class={styles.borderBox}>
+                <MyProfileTab
+                  session={session}
+                  courseData={DUMMY_COURSES_TAKEN_DATA}
+                  currentCourseData={DUMMY_CURRENT_COURSES_DATA}
+                />
+              </div>
+              <button onClick={() => signOut()}>Sign out</button>
             </div>
-            <button onClick={() => signOut()}>Sign out</button>
+            <div class={styles.rightpane}>
+              <div class={styles.borderBox}>
+                <CoursePlanningTab
+                  courseBuilderData={DUMMY_COURSE_BUILDER_DATA}
+                  userData={DUMMY_USER_DATA}
+                />
+              </div>
+              <div class={styles.borderBox}>
+                <MyReviewsTab userData={DUMMY_USER_DATA} />
+              </div>
+            </div>
           </div>
-          <div class={styles.rightpane}>
-            <div class={styles.borderBox}>
-              <CoursePlanningTab
-                courseBuilderData={DUMMY_COURSE_BUILDER_DATA}
-                userData={DUMMY_USER_DATA}
-              />
-            </div>
-            <div class={styles.borderBox}>
-              <MyReviewsTab userData={DUMMY_USER_DATA} />
-            </div>
-          </div>
-        </div>
-      </main>
-    );
+        </main>
+      );
+    }
   } else {
     return (
       <main className={styles.main}>

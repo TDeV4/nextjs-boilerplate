@@ -17,16 +17,17 @@ export default NextAuth({
         token.error = "Token Unexpired";
       }
 
-      if (token.expires && (Date.now() / 1000 > token.expires * 1000)) {
-        token.error = "Token Expired";
-      }
+      // if (token.expires && (Date.now() / 1000 > token.expires * 1000)) {
+      //   token.error = "Token Expired";
+      // }
       return token;
     },
 
     async session({ session, token, user }) {
       session.accessToken = token.accessToken;
-      session.idToken = token.idToken; 
-      session.error = token.error;
+      session.idToken = token.idToken;
+      session.expires = token.expires;
+      // session.error = token.error;
       return session;
     },
   },
