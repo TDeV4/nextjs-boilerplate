@@ -48,6 +48,8 @@ function formatData(courseBuilderData, userData) {
 
   courseBuilderData.map((course) => {
     courses[course.courseID] = course.courseID;
+    console.log(course.semesterID);
+    console.log(columns.length);
     if (parseInt(course.semesterID) > columns.length) {
       columns[0]["courseIDs"].push(course.courseNumber);
     } else {
