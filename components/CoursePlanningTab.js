@@ -48,7 +48,11 @@ function formatData(courseBuilderData, userData) {
 
   courseBuilderData.map((course) => {
     courses[course.courseID] = course.courseID;
-    columns[course.semesterID]["courseIDs"].push(course.courseNumber);
+    if (course.semesterID > columns.length) {
+      columns[0]["courseIDs"].push(course.courseNumber);
+    } else {
+      columns[course.semesterID]["courseIDs"].push(course.courseNumber);
+    }
   });
 
   columnOrder.sort(function (a, b) {
