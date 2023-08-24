@@ -64,8 +64,6 @@ export default function ReviewCard(props) {
     }
   };
 
-
-
   useEffect(() => {
     console.log("Getting profile");
     getProfileInfo();
@@ -154,7 +152,6 @@ export default function ReviewCard(props) {
               if (reply.parentID === null) {
                 return;
               }
-
               if (
                 parseInt(reply.parentID, 10) ===
                 parseInt(props.reviewData.reviewID)

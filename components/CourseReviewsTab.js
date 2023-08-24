@@ -308,10 +308,7 @@ export default function CourseReviewsTab(props) {
         Reviews
       </h1>
       <div style={{ float: "right" }}>
-        <CreateReview
-          courseData={DUMMY_COURSE_DATA}
-          profData={DUMMY_PROF_DATA}
-        />
+        <CreateReview/>
       </div>
       {reviews.map((review) => {
         if (review.parentID === null) {
