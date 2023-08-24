@@ -204,14 +204,9 @@ export default function MyReviewsTab(props) {
                 key={review.reviewID}
                 reviewData={review}
                 reviewReplyData={reviews}
-                coursePairings={findRelevantCoursePairings(review.reviewID)}
               />
               <div className={styles.rightAlignButton}>
-                <EditReview
-                  reviewData={review}
-                  coursePairings={findRelevantCoursePairings(review.reviewID)}
-                  courseData={DUMMY_COURSE_DATA}
-                />
+                <EditReview reviewData={review} />
               </div>
               <br />
             </div>

@@ -170,16 +170,14 @@ export default function ReviewCard(props) {
               ) {
                 return (
                   <Accordion.Body key={reply.reviewID}>
-                    <h5>
-                      {reply.userID} - {reply.dateOfReviewReply}
-                    </h5>
+                    <h5>{reply.date.substring(0, 10)}</h5>
                     <p>{reply.content}</p>
                   </Accordion.Body>
                 );
               }
             })}
             <AccordionBody>
-              <CommentButton reviewID={props.reviewData.reviewID} />
+              <CommentButton reviewData={props.reviewData} />
             </AccordionBody>
           </Accordion.Item>
         </Accordion>

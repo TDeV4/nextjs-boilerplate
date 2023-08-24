@@ -1,5 +1,5 @@
 import { Button, Form, FormLabel } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "../app/page.module.css";
 import fetchWrapper from "@/pages/api/fetchWrapper";
 
@@ -17,7 +17,7 @@ export default function CommentButton(props) {
   };
 
   const [values, setValues] = useState({
-    courseID: null,
+    courseID: props.reviewData.courseID,
     professor: null,
     semester: null,
     finalGrade: null,
@@ -27,14 +27,35 @@ export default function CommentButton(props) {
     content: null,
     coursepairing: null,
     pairingrec: null,
-    parentID: props.reviewID,
+    parentID: props.reviewData.reviewID,
   });
+
+  const getUserID = async () => {
+    try {
+      var userIDData = await fetchWrapper.get("/users/getuserid");
+
+      const userID = userIDData.data.userID;
+
+      setValues((values) => ({
+        ...values,
+        ["userID"]: parseInt(userID),
+      }));
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    console.log("Getting course stats");
+    getUserID();
+  }, []);
 
   const handleSubmit = async (event) => {
     await fetchWrapper
       .post("/reviews/newreview", values)
       .then((data) => console.log("Success", data))
       .catch((error) => console.error("There was an error!", error));
+    window.location.reload();
   };
 
   return (
