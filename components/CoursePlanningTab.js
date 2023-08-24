@@ -124,7 +124,7 @@ export default function CoursePlanningTab(props) {
     }
   }, [profile.name]);
 
-  const onDragEnd = (result, dataToUse) => {
+  const onDragEnd = async (result, dataToUse) => {
     const { destination, source, draggableId } = result;
 
     if (!destination) {
@@ -176,7 +176,7 @@ export default function CoursePlanningTab(props) {
     values["userID"] = parseInt(userID);
     console.log(values);
 
-    fetchWrapper
+    await fetchWrapper
       .put("/coursebuilder/", values)
       .then((data) => console.log("Success", data))
       .catch((error) => console.error("There was an error!", error));
