@@ -77,7 +77,10 @@ export default function ReviewCard(props) {
     return <div></div>;
   }
 
-  var numOfPairing = props.reviewData.coursepairing.length;
+  var numOfPairing =
+    props.reviewData.pairingrec === null
+      ? 0
+      : props.reviewData.pairingrec.length;
   var coursePairings = [];
 
   for (var i = 0; i < numOfPairing; i++) {
