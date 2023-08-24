@@ -406,7 +406,7 @@ export default function CreateReview(props) {
             </Row>
             <Form.Text className="text-muted">
               If you mistakenly select a course, you can simply switch the
-              values back to their default: "Taken with..." and "Recommendation"
+              values back to their default: Taken with... and Recommendation
             </Form.Text>
 
             <Form.Control
