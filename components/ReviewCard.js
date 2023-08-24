@@ -34,7 +34,6 @@ export default function ReviewCard(props) {
       const response = await fetchWrapper.get(url);
 
       const jsonData = response.data;
-      console.log(jsonData);
       setProfile(jsonData);
       // mark that we got the data
       // setHasFetchedData(true);
@@ -55,7 +54,6 @@ export default function ReviewCard(props) {
       const response = await fetchWrapper.get(
         "/reviews/byuser/" + props.reviewData.userID
       );
-      console.log(response);
       const jsonData = response.data;
 
       setCourse(jsonData);
@@ -67,9 +65,7 @@ export default function ReviewCard(props) {
   };
 
   useEffect(() => {
-    console.log("Getting profile");
     getProfileInfo();
-    console.log("Getting anon user's course reviews");
     getAnonReviews();
   }, [profile.name]);
 
@@ -170,7 +166,6 @@ export default function ReviewCard(props) {
               ) {
                 return (
                   <Accordion.Body key={reply.reviewID}>
-                    {console.log(reply)}
                     <h4>{reply.anonName}</h4>
                     <p>{reply.content}</p>
                     <p className={styles.rightAlignButton}>
