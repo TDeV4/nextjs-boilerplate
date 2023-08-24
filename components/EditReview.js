@@ -98,7 +98,7 @@ export default function EditReview(props) {
         .catch((error) => console.error("There was an error!", error));
 
       console.log(values);
-      window.location.reload();
+      //window.location.reload();
     } catch (err) {}
   };
 
@@ -154,6 +154,28 @@ export default function EditReview(props) {
       ...values,
       ["reviewID"]: props.reviewData.reviewID,
     }));
+    if (numOfCoursePairings > 0) {
+      setValues((values) => ({
+        ...values,
+        ["coursePairing1"]: props.reviewData.coursepairingID[0].toString(),
+        ["coursePairingRec1"]: props.reviewData.pairingrec[0].toString(),
+      }));
+      console.log(coursePairing1);
+      if (numOfCoursePairings > 1) {
+        setValues((values) => ({
+          ...values,
+          ["coursePairing2"]: props.reviewData.coursepairingID[1].toString(),
+          ["coursePairingRec2"]: props.reviewData.pairingrec[1].toString(),
+        }));
+        if (numOfCoursePairings > 2) {
+          setValues((values) => ({
+            ...values,
+            ["coursePairing3"]: props.reviewData.coursepairingID[2].toString(),
+            ["coursePairingRec3"]: props.reviewData.pairingrec[2].toString(),
+          }));
+        }
+      }
+    }
   }, [props.reviewData.reviewID]);
 
   useEffect(() => {
@@ -208,7 +230,7 @@ export default function EditReview(props) {
   useEffect(() => {
     setValues((values) => ({
       ...values,
-      ["text"]: props.reviewData.content,
+      ["content"]: props.reviewData.content,
     }));
   }, [props.reviewData.content]);
 
@@ -446,7 +468,7 @@ export default function EditReview(props) {
                   {otherCourseOptions.map((course) => {
                     return (
                       <option key={course.courseID} value={course.courseID}>
-                        {course.courseID}: {course.courseName}
+                        {course.coursenumber}: {course.coursename}
                       </option>
                     );
                   })}
@@ -495,7 +517,7 @@ export default function EditReview(props) {
                   {otherCourseOptions.map((course) => {
                     return (
                       <option key={course.courseID} value={course.courseID}>
-                        {course.courseID}: {course.courseName}
+                        {course.coursenumber}: {course.coursename}
                       </option>
                     );
                   })}
