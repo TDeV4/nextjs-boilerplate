@@ -65,6 +65,10 @@ export default function IndividualCourseInfo(props) {
     output.push(out);
   });
 
+  if (course.prereqcoursenumber != null) {
+    const isNotNull = true;
+  };
+
   return (
     <div>
       <div>
@@ -95,7 +99,16 @@ export default function IndividualCourseInfo(props) {
         <p>
           Syllabus: <Link href={`${course.syllabus}`}>Link</Link>
         </p>
-        <p>Prerequisites: {course.prereqid}</p>
+        <p>Prerequisites:
+          {course.prereqcoursenumber?.map((pairing) => {
+            return (
+              <Badge>
+                {" "}
+                {pairing}{" "}
+              </Badge>
+            );
+          })}
+          </p>
         <p>Professors: {course.professor}</p>
         <p>Textbooks: {course.textbooks}</p>
         <p>
