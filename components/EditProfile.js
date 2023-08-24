@@ -205,6 +205,7 @@ export default function EditProfile(props) {
         .put("/users/updateuser", values)
         .then((data) => console.log("Success", data))
         .catch((error) => console.error("There was an error!", error));
+      window.location.reload();
     } catch (err) {
       console.log("Failed to update user");
       console.log(err);
@@ -290,14 +291,14 @@ export default function EditProfile(props) {
   useEffect(() => {
     setValues((values) => ({
       ...values,
-      ["coursesTaken"]: props.userData.coursesTaken,
+      ["coursesTaken"]: props.userData.coursesTakenID,
     }));
   }, [props.userData.coursesTaken]);
 
   useEffect(() => {
     setValues((values) => ({
       ...values,
-      ["coursesTaking"]: props.userData.coursesTaking,
+      ["coursesTaking"]: props.userData.coursesTakingID,
     }));
   }, [props.userData.coursesTaking]);
 
@@ -397,6 +398,7 @@ export default function EditProfile(props) {
                     defaultValue={values["startSemester"]}
                     onChange={onFormChange}
                     name="startSemester"
+                    required
                   >
                     <option key="blankChoice" hidden value="" />
                     <option defaultChecked={true}>Fall</option>
@@ -432,6 +434,7 @@ export default function EditProfile(props) {
                     defaultValue={values["expectedGradSemester"]}
                     onChange={onFormChange}
                     name="expectedGradSemester"
+                    required
                   >
                     <option key="blankChoice" hidden value="" />
                     <option>Fall</option>

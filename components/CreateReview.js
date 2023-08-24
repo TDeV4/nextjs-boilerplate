@@ -55,7 +55,7 @@ export default function CreateReview(props) {
   useEffect(() => {
     //console.log("Getting course stats");
     getCourseStats();
-  });
+  }, [values]);
 
   var courseProfs = [];
   var otherCourses = [];
@@ -121,6 +121,7 @@ export default function CreateReview(props) {
       .catch((error) => console.error("There was an error!", error));
 
     console.log(values);
+    window.location.reload();
   };
 
   return (
@@ -201,6 +202,7 @@ export default function CreateReview(props) {
               onChange={onFormChange}
               options={relevantProfs}
               name="professor"
+              required
             >
               <option key="blankChoice" hidden value="">
                 {" "}
@@ -285,7 +287,7 @@ export default function CreateReview(props) {
               placeholder="Workload (hours per week)"
               required
               onChange={onFormChange}
-              name="workload"
+              name="weeklyHours"
             />
             <br></br>
             {/* Taken with Courses*/}

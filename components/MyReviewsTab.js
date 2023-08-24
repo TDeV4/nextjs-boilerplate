@@ -1,6 +1,7 @@
 import { Button } from "react-bootstrap";
 import styles from "../app/page.module.css";
 import CreateReview from "./CreateReview";
+import DeleteReviewButton from "./DeleteReviewButton";
 // import React, { Component, useState } from "react";
 import ReviewCard from "./ReviewCard";
 import EditReview from "./EditReview";
@@ -73,7 +74,8 @@ export default function MyReviewsTab(props) {
                 reviewReplyData={reviews}
               />
               <div className={styles.rightAlignButton}>
-                <EditReview reviewData={review} />
+                <EditReview reviewData={review} />{" "}
+                <DeleteReviewButton reviewData={review} />
               </div>
               <br />
             </div>
