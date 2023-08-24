@@ -41,14 +41,54 @@ export default function IndividualCourseInfo(props) {
     }
   };
 
+  //const { data: session, status } = useSession();
+  const [reviews, setReviews] = useState([]);
+
+  // get and set the fetched data only once
+  // const [hasFetchedData, setHasFetchedData] = useState(false);
+
+  const getCourseReviews = async () => {
+    // console.log(props.courseID);
+    try {
+      // const fetcher = fetchWrapper();
+      const response = await fetchWrapper.get(
+        "/reviews/bycourse/" + props.courseID
+      );
+      console.log(response);
+      const jsonData = response.data;
+
+      setReviews(jsonData);
+      // mark that we got the data
+      // setHasFetchedData(true);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   useEffect(() => {
     console.log("Getting individual course stats");
     getCourseStats();
+    console.log("Getting individual course reviews");
+    getCourseReviews();
   }, []);
 
-  // console.log(courses);
+  var numOfReviews = reviews.length;
+  var coursePairings = [];
+
+  for (var i = 0; i < numOfReviews; i++) {
+    if (reviews[i].coursepairing != null) {
+      var numOfPairings = reviews[i].coursepairing.length;
+      for (var j = 0; j < numOfPairings; j++) {
+        coursePairings.push({
+          courseNumber: reviews[i].coursepairing[j],
+          pairingrec: reviews[i].pairingrec[j],
+        });
+      }
+    }
+  }
+
   //group by name
-  const grouped = groupBy(props.coursePairings, "coursenumber");
+  const grouped = groupBy(coursePairings, "courseNumber");
   const keys = Object.keys(grouped);
   var output = [];
 
@@ -57,17 +97,13 @@ export default function IndividualCourseInfo(props) {
     //merge using reduce
     const out = grouped[key].reduce((acc, current) => {
       return {
-        courseID: current.courseID,
-        coursenumber: current.coursenumber,
-        pairingRec: acc.pairingRec + current.pairingRec,
+        courseNumber: current.courseNumber,
+        pairingRec: acc.pairingrec + current.pairingrec,
       };
     });
     output.push(out);
   });
-
-  if (course.prereqcoursenumber != null) {
-    const isNotNull = true;
-  };
+  console.log(output);
 
   return (
     <div>
@@ -114,25 +150,25 @@ export default function IndividualCourseInfo(props) {
         <p>
           Course Pairings:
           {output.map((pairing) => {
-            if (pairing.pairingRec < 0) {
+            if (pairing.pairingrec < 0) {
               return (
-                <Badge key={pairing.courseID} bg="danger">
+                <Badge key={pairing.courseNumber} bg="danger">
                   {" "}
-                  {pairing.coursenumber}{" "}
+                  {pairing.courseNumber}{" "}
                 </Badge>
               );
-            } else if (pairing.pairingRec == 0) {
+            } else if (pairing.pairingrec == 0) {
               return (
-                <Badge key={pairing.courseID} bg="warning">
+                <Badge key={pairing.courseNumber} bg="warning">
                   {" "}
-                  {pairing.coursenumber}{" "}
+                  {pairing.courseNumber}{" "}
                 </Badge>
               );
             } else {
               return (
-                <Badge key={pairing.courseID} bg="success">
+                <Badge key={pairing.courseNumber} bg="success">
                   {" "}
-                  {pairing.coursenumber}{" "}
+                  {pairing.courseNumber}{" "}
                 </Badge>
               );
             }
