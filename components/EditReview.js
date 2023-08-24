@@ -76,12 +76,12 @@ export default function EditReview(props) {
     if (numOfCoursePairings > 1) {
       coursePairing2 = {
         courseID: [props.reviewData.coursepairingID[1]],
-        pairingRec: [props.revieweData.pairingrec[1]],
+        pairingRec: [props.reviewData.pairingrec[1]],
       };
       if (numOfCoursePairings > 2) {
         coursePairing1 = {
           courseID: [props.reviewData.coursepairingID[2]],
-          pairingRec: [props.revieweData.pairingrec[2]],
+          pairingRec: [props.reviewData.pairingrec[2]],
         };
       }
     }
