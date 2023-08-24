@@ -229,7 +229,7 @@ export default function ResourceList() {
           </Card.Body>
         </Card>
         <Card>
-          <Link href="https://www.overleaf.com//">
+          <Link href="https://www.overleaf.com/">
             <div>
               <Card.Img variant="top" src="\OverleafLogo.png" />
             </div>
@@ -240,7 +240,7 @@ export default function ResourceList() {
               Overleaf is a latex editor that is useful for scientific and
               mathematical documents (especially proofs).{" "}
             </Card.Text>
-            <Button href="https://www.overleaf.com//">Visit Site</Button>{" "}
+            <Button href="https://www.overleaf.com/">Visit Site</Button>{" "}
           </Card.Body>
         </Card>
       </CardGroup>
