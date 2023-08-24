@@ -170,7 +170,7 @@ export default function CreateProfile(props) {
 
       console.log(values);
 
-      fetchWrapper
+      await fetchWrapper
         .post("/users/", values)
         .then((data) => console.log("Success", data))
         .catch((error) => console.error("There was an error!", error));
