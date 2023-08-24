@@ -48,7 +48,7 @@ function formatData(courseBuilderData, userData) {
 
   courseBuilderData.map((course) => {
     courses[course.courseID] = course.courseID;
-    if (course.semesterID > columns.length) {
+    if (parseInt(course.semesterID) > columns.length) {
       columns[0]["courseIDs"].push(course.courseNumber);
     } else {
       columns[course.semesterID]["courseIDs"].push(course.courseNumber);
