@@ -3,6 +3,8 @@ import TopNavBar from "../components/TopNavBar";
 import { useSession, getSession } from "next-auth/react";
 import CourseSummary from "@/components/CourseSummary";
 import { useEffect, useState } from "react";
+import CreateProfile from "@/components/CreateProfile";
+import { BrowserRouter } from "react-router-dom";
 
 export default function CoursesHome() {
   const { data: session } = useSession();

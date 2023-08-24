@@ -8,6 +8,8 @@ import React from "react";
 import { useSession, signIn, signOut, getSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import fetchWrapper from "../pages/api/fetchWrapper";
+import CreateProfile from "@/components/CreateProfile";
+import { BrowserRouter } from "react-router-dom";
 
 const DUMMY_USER_DATA = {
   userID: "1",

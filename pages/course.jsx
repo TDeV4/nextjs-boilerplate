@@ -6,6 +6,8 @@ import { useRouter } from "next/router";
 import React from "react";
 import CourseReviewsTab from "@/components/CourseReviewsTab";
 import { useEffect, useState } from "react";
+import CreateProfile from "@/components/CreateProfile";
+import { BrowserRouter } from "react-router-dom";
 
 export default function Course() {
   const [userID, setUserID] = useState({});

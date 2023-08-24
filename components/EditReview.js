@@ -98,7 +98,7 @@ export default function EditReview(props) {
         .catch((error) => console.error("There was an error!", error));
 
       console.log(values);
-      window.location.reload();
+      //window.location.reload();
     } catch (err) {}
   };
 
@@ -388,6 +388,7 @@ export default function EditReview(props) {
                       ? coursePairing1.courseID
                       : null
                   }
+                  onChange={onFormChange}
                 >
                   <option key="blankChoice" value="">
                     {" "}
@@ -412,6 +413,7 @@ export default function EditReview(props) {
                       : null
                   }
                   name="coursePairingRec1"
+                  onChange={onFormChange}
                 >
                   <option key="blankChoice" hidden value="">
                     {" "}
@@ -434,6 +436,7 @@ export default function EditReview(props) {
                       ? coursePairing2.courseID
                       : null
                   }
+                  onChange={onFormChange}
                   name="coursePairing2"
                 >
                   <option key="blankChoice" value="">
@@ -458,6 +461,7 @@ export default function EditReview(props) {
                       ? coursePairing2.pairingRec
                       : null
                   }
+                  onChange={onFormChange}
                   name="coursePairingRec2"
                 >
                   <option key="blankChoice" hidden value="">
@@ -481,6 +485,7 @@ export default function EditReview(props) {
                       ? coursePairing3.courseID
                       : null
                   }
+                  onChange={onFormChange}
                   name="coursePairing3"
                 >
                   <option key="blankChoice" value="">
@@ -505,6 +510,7 @@ export default function EditReview(props) {
                       ? coursePairing3.pairingRec
                       : null
                   }
+                  onChange={onFormChange}
                   name="coursePairingRec3"
                 >
                   <option key="blankChoice" hidden value="">

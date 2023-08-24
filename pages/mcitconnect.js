@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useSession, getSession } from "next-auth/react";
 import TopNavBar from "@/components/TopNavBar";
 import { useEffect, useState } from "react";
+import CreateProfile from "@/components/CreateProfile";
+import { BrowserRouter } from "react-router-dom";
 
 export default function MCITConnect() {
   const [userID, setUserID] = useState({});

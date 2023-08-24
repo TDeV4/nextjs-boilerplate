@@ -5,6 +5,8 @@ import TopNavBar from "@/components/TopNavBar";
 import { Button, Form } from "react-bootstrap";
 import fetchWrapper from "./api/fetchWrapper";
 import { useEffect, useState } from "react";
+import CreateProfile from "@/components/CreateProfile";
+import { BrowserRouter } from "react-router-dom";
 
 export default function Feedback() {
   const { data: session } = useSession();
