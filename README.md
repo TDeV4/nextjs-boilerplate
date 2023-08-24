@@ -8,7 +8,6 @@ This is a platform for students to access MCIT information, course reviews and i
 
 ### Project summary
 
-Please provide a short (one paragraph) summary of your project. Consider this your elevator pitch.
 There is currently a lack of organized information and discourse for students to navigate their MCIT experience. MCIT Community Hub provides that opportunity to fill in the gaps. This web application is a one stop platform for students to not only leave and read reviews for courses that they have or plan to take but also engage in a discussion with individuals by leaving comments on reviews. THe platform also includes commonly used resources and the links to each resource for ease of reference.
 
 Include the link to your Devpost project page here: [Devpost](https://...)
@@ -22,12 +21,6 @@ Include the link to your Devpost project page here: [Devpost](https://...)
 ## Usage
 
 This section walks a prospective user through the process of installing and running the project on their local machine. The more detailed and the more accurate, the better. User-friendly instructions will entice prospective users (including judges) to engage more deeply with your project, which could improve your hackathon score.
-
-First,
-Next, run the development server using the following command in a terminal:
-npm run dev
-
-Next, open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ### Prerequisites
 
@@ -43,47 +36,33 @@ Provide code samples in this fenced code block.
 
 Give a step-by-step rundown of how to **install** your project.
 
-State step 1.
 First, you will need to clone the repository from GitHub.
 
 ```
 Provide code samples in this fenced code block.
 ```
 
-State step 2.
 Then open a source-code editor like Visual Studio Code to open and run the workspace.
 
-```
-Provide code samples in this fenced code block.
-```
-
-State step 3.
 Next, open a new terminal, and you can run any dependencies by using the following command in the terminal:
 
 ```
 npm install
 ```
 
-State step 4.
 Next, run the development server using the following command in a terminal:
 
 ```
 npm run dev
 ```
 
-State step 5.
 Lastly, open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-```
-
-```
 
 ### Deployment
 
 Give a step-by-step rundown of how to **use** your project. Including screenshots in this section can be highly effective for highlighting specific features of your project.
 
-State step 1.
-There is a tool bar at the top of each page where the user can navigate to different pages.
+Step 1: There is a tool bar at the top of each page where the user can navigate to different pages.
 We have 4 pages that are currently live as follow:
 Home - Shows the user's profile, reviews, and course planning schedule
 Courses - Shows a list of all courses with course stats on average rating, average workload, and average difficulty compiled from all reviews
@@ -94,8 +73,7 @@ Feedback - Shows a form where the user can provide feedback on MCIT Community Hu
 Provide code samples in this fenced code block.
 ```
 
-State step 2.
-The user can also create a course review, edit his/her existing review, delete review by accessing their home page. The user can also access an individual course page by clicking into a course in the Courses page. From there, they can also create a review.
+Step 2: The user can also create a course review, edit his/her existing review, delete review by accessing their home page. The user can also access an individual course page by clicking into a course in the Courses page. From there, they can also create a review.
 
 From the individual course page, the user can also see all the reviews that were left by other users and click into the anonymous profile of the user to see a few details of the user like their industry, classes taken, and whether or not they are a part time or full time student.
 
@@ -103,8 +81,7 @@ From the individual course page, the user can also see all the reviews that were
 Provide code samples in this fenced code block.
 ```
 
-State step 3.
-Lastly, the user can also use the course planning tool to drag and drop courses into the semester they desire to take that course. This allows the user to be able to see their schedule until their graduation date.
+Step 3: Lastly, the user can also use the course planning tool to drag and drop courses into the semester they desire to take that course. This allows the user to be able to see their schedule until their graduation date.
 
 ```
 Provide code samples in this fenced code block.
