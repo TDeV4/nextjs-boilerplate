@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 //group an array by property
 function groupBy(arr, property) {
-  return arr.reduce(function (memo, x) {
+  return arr.reduce(function(memo, x) {
     if (!memo[x[property]]) {
       memo[x[property]] = [];
     }
@@ -131,7 +131,7 @@ export default function IndividualCourseInfo(props) {
         <p>
           Prerequisites:
           {course.prereqcoursenumber?.map((pairing) => {
-            return <Badge> {pairing} </Badge>;
+            return <Badge key={course.prereqcoursenumber}> {pairing} </Badge>;
           })}
         </p>
         <p>Professors: {course.professor}</p>
