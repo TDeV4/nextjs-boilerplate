@@ -201,7 +201,7 @@ export default function EditProfile(props) {
       values["fulltimeStudentStatus"] = false;
       console.log(values);
 
-      fetchWrapper
+      await fetchWrapper
         .put("/users/updateuser", values)
         .then((data) => console.log("Success", data))
         .catch((error) => console.error("There was an error!", error));

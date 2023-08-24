@@ -2,6 +2,7 @@ import { Modal, Button, Form, Row, Col } from "react-bootstrap";
 import { useState } from "react";
 import styles from "../app/page.module.css";
 import { useEffect } from "react";
+import fetchWrapper from "@/pages/api/fetchWrapper";
 
 export default function EditReview(props) {
   const [show, setShow] = useState(false);
