@@ -53,6 +53,7 @@ export default function MCITConnect() {
           <TopNavBar />
           <h1>MCITConnect</h1>
           <h4>***Coming Soon***</h4>
+          <img src="/MCITConnectConcept.png" alt="MCITConnect Concept Image" />
         </main>
       );
     }
