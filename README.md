@@ -102,7 +102,7 @@ Which frameworks, libraries, or other tools did you use to create your project?
 - [Next.js](https://nextjs.org/) - Web framework used
 - [NextAuth.js](https://next-auth.js.org/) - Open-source authentication solution used
 - [Vercel](https://vercel.com/) - Used to deploy web application
-- [React.js](https://react.dev/) - Used library to build user interface
+- [React](https://react.dev/) - Used library to build user interface
 - [React-Bootstrap](https://react-bootstrap.netlify.app) - Used ready-made templates for building the front-end
 - [PostgreSQL](https://www.postgresql.org/) - Database management system used to store data
 - [SQL](https://www.w3schools.com/sql/) - Lanaugage used to query the database
