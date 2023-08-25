@@ -126,13 +126,11 @@ Use anyone else's code? Inspired by a particular project? List / link here.
 
 ### License
 
-If desired, add a section for your license. Reference sites like https://choosealicense.com can help you choose which license meets your needs.
-
 N/A - We do not have a need for a license at this time.
 
 ### Known Bugs
 
 Below are a couple of known bugs that we plan to fix in the next version of the project.
 
-1 - We have a timer to logout the user when the user's access token expires. This timer becomes inaccurate if you are switching between the different pages frequently.
-2 - THe login and Google authentication does not work if you are using Firefox.
+- We have a timer to logout the user when the user's access token expires. This timer becomes inaccurate if you are switching between the different pages frequently.
+- THe login and Google authentication does not work if you are using Firefox.
