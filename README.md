@@ -81,10 +81,11 @@ Step 2: Next, click sign-in, and you will need to sign-in with a seas.upenn.edu 
 Step 3: Navigate the site, and below is additional information on each page.
 
 There is a tool bar at the top of each page where the user can navigate to different pages. We have 4 pages that are currently live as follows:
-Home - Shows the user's profile, reviews, and course planning schedule
-Courses - Shows a list of all courses with course stats on average rating, average workload, and average difficulty compiled from all reviews
-General Resources - Shows and provides a link to most commmonly used MCIT resources, development tools, documentation/reference material, and collaboration tools
-Feedback - Shows a form where the user can provide feedback on MCIT Community Hub
+
+- Home: Shows the user's profile, reviews, and course planning schedule
+- Courses: Shows a list of all courses with course stats on average rating, average workload, and average difficulty compiled from all reviews
+- General Resources: Shows and provides a link to most commmonly used MCIT resources, development tools, documentation/reference material, and collaboration tools
+- Feedback: Shows a form where the user can provide feedback on MCIT Community Hub
 
 The user can also create a course review, edit his/her existing review, delete review by accessing their home page. The user can also access an individual course page by clicking into a course in the Courses page. From there, they can also create a review.
 
@@ -101,21 +102,21 @@ Which frameworks, libraries, or other tools did you use to create your project?
 - [Next.js](https://nextjs.org/) - Web framework used
 - [NextAuth.js](https://next-auth.js.org/) - Open-source authentication solution used
 - [Vercel](https://vercel.com/) - Used to deploy web application
-- [React.js] (https://react.dev/) - Used library to build user interface
-- [React-Bootstrap] (https://react-bootstrap.netlify.app) - Used ready-made templates for building the front-end
-- [PostgreSQL] (https://www.postgresql.org/) - Database management system used to store data
-- [SQL] (https://www.w3schools.com/sql/) - Lanaugage used to query the database
-- [JavaScript] (https://www.javascript.com/) - Language used in the front-end to create dynamic functionality on the web
-- [CSS] (https://www.w3schools.com/css/) - Language used in the front-end to style web pages
-- [HTML] (https://www.w3schools.com/html/) - Language used in the front-end to create website
-- [Python] (https://www.python.org/)- Language used to populate the database in the back-end
-- [GitHub] (https://github.com/) - Used code hosting platform for version control and collaboration
-- [Docker] (https://www.docker.com/) - Used initially to deploy application in sandbox
-- [Supabase] (https://supabase.com/) - Used database
-- [Render] (https://render.com/) - Used for APIs
-- [Express-NodeJS] (https://expressjs.com/) - Used framework for back-end
-- [OAuth] (https://developers.google.com/identity/protocols/oauth2) - Used to access Google APIs for authentication to the website
-- [Postman] - Used to test the APIs and input data
+- [React.js](https://react.dev/) - Used library to build user interface
+- [React-Bootstrap](https://react-bootstrap.netlify.app) - Used ready-made templates for building the front-end
+- [PostgreSQL](https://www.postgresql.org/) - Database management system used to store data
+- [SQL](https://www.w3schools.com/sql/) - Lanaugage used to query the database
+- [JavaScript](https://www.javascript.com/) - Language used in the front-end to create dynamic functionality on the web
+- [CSS](https://www.w3schools.com/css/) - Language used in the front-end to style web pages
+- [HTML](https://www.w3schools.com/html/) - Language used in the front-end to create website
+- [Python](https://www.python.org/)- Language used to populate the database in the back-end
+- [GitHub](https://github.com/) - Used code hosting platform for version control and collaboration
+- [Docker](https://www.docker.com/) - Used initially to deploy application in sandbox
+- [Supabase](https://supabase.com/) - Used database
+- [Render](https://render.com/) - Used for APIs
+- [Express-NodeJS](https://expressjs.com/) - Used framework for back-end
+- [OAuth](https://developers.google.com/identity/protocols/oauth2) - Used to access Google APIs for authentication to the website
+- [Postman](https://www.postman.com/) - Used to test the APIs and input data
 
 ### Acknowledgments
 
