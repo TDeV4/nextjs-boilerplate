@@ -1,4 +1,4 @@
-# Project Title
+# MCIT Community Hub
 
 ## Overview
 
