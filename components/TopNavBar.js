@@ -15,10 +15,10 @@ export default function TopNavBar() {
           <Container>
             <Navbar.Brand href="/">
               <img
-                src="/MCIT_Central_Logo_White_Text.png"
+                src="/MCIT_CommunityHub_Logo.png"
                 height={100}
                 width={100}
-                alt="MCIT Central Logo"
+                alt="MCIT CommunityHub Logo"
               />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
