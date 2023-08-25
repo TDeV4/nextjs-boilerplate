@@ -12,6 +12,7 @@ import { BrowserRouter } from "react-router-dom";
 const Login = () => {
   const { data: session } = useSession();
   //console.log(session);
+  //console.log(session);
 
   const [userID, setUserID] = useState({});
 
@@ -24,6 +25,7 @@ const Login = () => {
       const response = await fetchWrapper.get("/users/getuserid");
 
       const jsonData = response.data;
+      //console.log(jsonData);
       //console.log(jsonData);
       setUserID(jsonData);
 
@@ -42,7 +44,8 @@ const Login = () => {
   });
 
   if (session) {
-    console.log(userID);
+    //console.log(userID);
+    //console.log(userID);
     if (userID.userID === null) {
       return (
         <main className={styles.main}>
