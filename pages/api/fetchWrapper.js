@@ -3,7 +3,7 @@ import { getSession } from 'next-auth/react';
 
 const ApiClient = () => {
     const instance = axios.create({
-        baseURL: "http://localhost:8888"
+        baseURL: "https://mcitcommunity-express-app.onrender.com"
     });
   
     instance.interceptors.request.use(async (request) => {
