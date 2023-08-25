@@ -42,7 +42,7 @@ const Login = () => {
   });
 
   if (session) {
-    console.log(userID);
+    //console.log(userID);
     if (userID.userID === null) {
       return (
         <main className={styles.main}>
