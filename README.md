@@ -10,7 +10,7 @@ This is a web platform for students to access MCIT information, course informati
 
 There is currently a lack of organized information and discourse for students to navigate their MCIT experience. MCIT Community Hub provides that opportunity to fill in the gaps. This web application is a one stop platform for students to not only leave and read reviews for courses that they have or plan to take but also engage in a discussion with individuals by leaving comments on reviews. The platform also includes commonly used resources and the links to each resource for ease of reference. Because a user creates a profile upon login, students can also see the anonymous profile for each review to help with their course planning process.
 
-Include the link to your Devpost project page here: [Devpost](https://...)
+Youtube Overview: [Youtube](https://www.youtube.com/watch?v=pbeoRCSEcC4)
 
 ### Authors
 
